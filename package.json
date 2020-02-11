@@ -1,5 +1,6 @@
 {
   "name": "moonbucks",
+<<<<<<< HEAD
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -19,5 +20,6 @@
   "devDependencies": {
     "concurrently": "^5.1.0",
     "nodemon": "^2.0.2"
+
   }
 }

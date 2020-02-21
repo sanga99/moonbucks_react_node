@@ -11,7 +11,9 @@ class RegisterContainer extends Component {
             storename:'',
             email:'',
             password:'',
-            password2:''
+            password2:'',
+            stoephone:'',
+            phone:''
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -27,7 +29,7 @@ class RegisterContainer extends Component {
     }
     render() {
         
-        const { username, storename, email, password, password2, handleSubmit, handleChange } = this;
+        const { username, storename, email, password, storephone, phone, password2, handleSubmit, handleChange } = this;
 
         return (
             <RegisterTemplate
@@ -36,6 +38,8 @@ class RegisterContainer extends Component {
                 email={this.email}
                 password={this.password}
                 password2={this.password2}
+                storephone={this.storephone}
+                phone={this.phone}
                 handleSubmit={this.handleSubmit}
                 handleChange={this.handleChange}
             />

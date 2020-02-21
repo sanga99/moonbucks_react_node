@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { LoginPage } from './pages/user';
+import { RegisterPage} from './pages/user/index';
+import { LoginPage } from './pages/user/index';
 import './App.css';
 
 class App extends Component {
@@ -13,7 +14,8 @@ class App extends Component {
         <main> 
           <Router>
             <Switch>
-              <Route exact path="/login" component={ LoginPage }/>
+              <Route path="/login" component={ LoginPage }/>
+              <Route path="/register" component={ RegisterPage }/>
               {/* <Route component={NotFound}/> */}
             </Switch>
           </Router>

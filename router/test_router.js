@@ -13,7 +13,7 @@ const dbConn = require('../mariaDBConn');
         if (err) {
           throw err;
         }
-        return res.json({ data: rows }); // 결과는 rows에 담아 전송
+        return res.json( rows ); // 결과는 rows에 담아 전송
       });
       if(err) throw err;
     });

@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 const HeaderTemplate = () => {
     return(
         <div>
-            여기는 헤더
+            {/* {this.props.user} */}
         </div>
     );
 };

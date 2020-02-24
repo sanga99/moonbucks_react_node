@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
     "server": "nodemon server.js",
-    "client": "cd client && yarn start",
+    "client": "cd frontend && yarn start",
     "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\""
   },
   "author": "",
@@ -15,7 +15,12 @@
   "dependencies": {
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
-    "koa-session": "^5.13.1"
+    "fs": "0.0.1-security",
+    "koa-session": "^5.13.1",
+    "mariadb": "^2.2.0",
+    "react-redux": "^7.2.0",
+    "react-router-dom": "^5.1.2",
+    "redux": "^4.0.5"
   },
   "devDependencies": {
     "concurrently": "^5.1.0",

@@ -1,5 +1,5 @@
 // // Node.js통해 MariaDB사용 커넥터 사용 코드 작성
- const mariadb = require('mariadb/callback');
+const mariadb = require('mariadb/callback');
  const fs = require('fs');
 //  const express = require('express');
 //  const app = express();
@@ -23,16 +23,18 @@
  // */
  const pool = mariadb.createPool({
      host : config.host,
-     user : config.user,
      port : config.port,
+     user : config.user,
      password : config.password,
      database : config.database
     }); 
+
     
 
 
 const getConn = function(callback) {
-   pool.getConnection(function(err, connection) {
+   pool.getConnection(function(err, connection) { 
+          if(err) throw err; 
            callback(err, connection);
      });
  }

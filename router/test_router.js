@@ -5,7 +5,7 @@ const dbConn = require('../mariaDBConn');
 
 
 
-  router.get("/", (req, res) => {
+  router.get("/api", (req, res) => {
     // db select문 수행
     dbConn((err, connection) => {
       connection.query("SELECT * FROM test_user", (err, rows) => {

@@ -8,7 +8,7 @@ const dbConn = require('../mariaDBConn');
   router.get("/api", (req, res) => {
     // db select문 수행
     dbConn((err, connection) => {
-      connection.query("SELECT * FROM test_user", (err, rows) => {
+      connection.query("SELECT * FROM owner", (err, rows) => {
         connection.release(); // 연결세션 반환.
         if (err) {
           throw err;
@@ -19,8 +19,6 @@ const dbConn = require('../mariaDBConn');
     });
   });
   
-
-
 
 
  module.exports = router;

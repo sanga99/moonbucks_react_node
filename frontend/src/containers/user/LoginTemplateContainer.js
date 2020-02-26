@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useCallback } from 'react';
 import LoginTemplate from '../../components/user/LoginTemplate';
 import { connect } from 'react-redux';
 import {loginSuccess, loginFail}  from '../../actions/user.action'
@@ -14,21 +14,37 @@ class LoginTemplateContainer extends Component {
         super(props);
 
         this.state ={
-            username : '',
+            userId : '',
             password : '',
         }
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleChange = this.handleChange.bind(this);
+        this.handleChangeId = this.handleChangeId.bind(this);
+        this.handleChangePw = this.handleChangeIdPw.bind(this);
         this.handleKeyPress = this.handleKeyPress.bind(this);        
     }
 
-
-    handleSubmit(e){
+    const handleSubmit = useCallback((e) => {
         e.preventDefualt();
-        this.props.loginSuccess();
+        dispatch({
+            type: LOGIN_REQUEST,
+            data: {
+                id, password
+            }
+        });
+    }, [id, password]);
+    /* 로그인 버튼을 누루면 콜백함수가 진행되면서
+        LOG_IN_REQUEST 리듀서가 dispatch(진행) 된다
+    */
+    // handleSubmit(e){
+    //     e.preventDefualt();
+    //     this.props.loginSuccess();
+    // }
+
+    handleChangeId(e){
+        e.preventDefualt();
     }
 
-    handleChange(e){
+    handleChangePw(e){
         e.preventDefualt();
     }
 
@@ -40,16 +56,17 @@ class LoginTemplateContainer extends Component {
 
     render() {
 
-        const { username, password,  handleChange, handleKeyPress} = this;
+        const { userId, password,  handleChange, handleKeyPress} = this;
         // action 데이터
         // cosnt { handleSubmit } = this.props.isLoggedIn;
 
         return (
             <LoginTemplate 
-                username={this.username}
+                username={this.userId}
                 password={this.password}
                 handleSubmit={this.handleSubmit}
-                handleChange={this.handleChange}
+                handleChangeId={this.handleChangeId}
+                handleChangePw={this.hadleChangePw}
                 handleKeyPress={this.handleKeyPress}
             /> 
         );

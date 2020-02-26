@@ -13,14 +13,19 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/redux-saga": "^0.10.5",
+    "axios": "^0.19.2",
     "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.4",
     "express": "^4.17.1",
+    "express-session": "^1.17.0",
     "fs": "0.0.1-security",
     "koa-session": "^5.13.1",
     "mariadb": "^2.2.0",
     "react-redux": "^7.2.0",
     "react-router-dom": "^5.1.2",
-    "redux": "^4.0.5"
+    "redux": "^4.0.5",
+    "redux-saga": "^1.1.3"
   },
   "devDependencies": {
     "concurrently": "^5.1.0",

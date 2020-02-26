@@ -4,7 +4,17 @@ const dbConn = require('../mariaDBConn');
 
 console.log('user router server ㅇㅕ기도착');
 
+const dbUserTest = {
+  testId : 'aaaa',
+  testPw : 'bbbb'
+};
 
+
+router.post('/login', (req, res) => {
+    return res.json( dbUserTest);
+});
+
+module.exports router;
 
 // router.post('/login', (req, res, next) => {
 //     passport.authenticate('local', (err, user, info)=> {

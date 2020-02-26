@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { RegisterPage, LoginPage } from './pages/user/index';
-import { AdminHomePage } from './pages/admin/index';
-import { OwnerHomePage } from './pages/owner/index';
+import { NotFoundPage, LoginPage, RegisterPage, AdminHomePage, OwnerHomePage} from './pages';
 import './App.css';
 
 class App extends Component {

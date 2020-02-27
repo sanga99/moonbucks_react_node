@@ -1,4 +1,4 @@
-import { all, fork } from 'reux-saga/effects';
+import { all, fork } from 'redux-saga/effects';
 
 import user from './user';  // index.js 파일이 있어야 옮겨진다.
 // import post from './post';

@@ -1,5 +1,5 @@
 import React from 'react';
-import LoginTemplateContainer  from '../../containers/user/LoginTemplateContainer';
+import LoginTemplateContainer  from '../containers/user/LoginTemplateContainer';
 //import { connect } from 'react-redux';
 //import { bindActionCreators } from 'redux';
 

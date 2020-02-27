@@ -1,10 +1,7 @@
 // reducer을 먼저 만들고 store에 연결해준다
 // store안에 reducer가 들어간다.
+import * as actions from '../actions/user.action';
 
-import * AS actions from '../actions/user.action';
-import { combineReducers} from 'redux';
-import { LOGIN_FAILURE, LOGOUT_SUCCESS, SIGNUP_SUCCESS, SIGNUP_FAILRUE, SIGNUP_REQUEST } from '../actions/user.action';
-// combineReduers은 여러개의 reducer들을 하나로 합쳐준다.
 
 
 // state초기값
@@ -25,9 +22,13 @@ const dbUser = {
     password : 'testpw'
 };
 
-const userReducer = (state= loginInitialState, actions) => {
-    switch(actions.type) {
-        case LOGIN_SUCCESS:
+
+// reducer와 saga는 각기 움직인다.
+// 같은 action을 두곳에서 모두 dispatch하면, 둘다에서 잡힌다.
+const userReducer = (state= InitialState, action) => {
+    const { type, paylod, error } = action;
+    switch(type) {
+        case actions.LOGIN_SUCCESS:
             return {
                 ...state,     // 반드시 새로운 객체를 반환해야 하므로! 기존 state를 복사한다.
                 isLoggedIn : true,
@@ -35,50 +36,51 @@ const userReducer = (state= loginInitialState, actions) => {
                 user : dbUser,
                 // isLoading : false,
             };
-        case LOGIN_FAILURE:
+        case actions.LOGIN_FAILURE:
             return { 
-                ...state
+                ...state,
                 isLoggedIn : false,
                 isLoggingIn : false,
-                logInErrorReason : error,
+                logInErrorReason : 'error',
                 user : null,
             };
-        case LOGIN_REQUEST : 
+        case actions.LOGIN_REQUEST : 
             return {
                 ...state, 
                 isLoggingIn :true,
                 logInErrorReason : '',
             };
-        case LOGOUT_SUCCESS: 
+        case actions.LOGOUT_SUCCESS: 
             return {
                 ...state,
                 isLoggedIn : false,
                 isLoggingOut : false,
-                user : {},
+                user : dbUser,
+                // user : {},
             };
-        case LOGOUT_FAILURE: 
+        case actions.LOGOUT_FAILURE: 
             return {
                 ...state,
                 isLoggingOut : false,
             };
-        case LOGOUT_REQUEST: 
+        case actions.LOGOUT_REQUEST: 
             return {
                 ...state,
                 isLoggingOut : true,
             };
-        case SIGNUP_SUCCESS:
+        case actions.SIGNUP_SUCCESS:
             return{
                 ...state,
                 isSignedUp : true,
                 isSigningUp : false,
             };
-        case SIGNUP_FAILRUE:
+        case actions.SIGNUP_FAILRUE:
             return {
                 ...state,
                 isSigningUp : false,
-                signUpErrorReason : error,
+                signUpErrorReason : 'error',
             };
-        case SIGNUP_REQUEST:
+        case actions.SIGNUP_REQUEST:
             return {
                 ...state,
                 isSigningUp : true,
@@ -89,8 +91,11 @@ const userReducer = (state= loginInitialState, actions) => {
             return state;
     }
 }
+
+
+
 // combindReducer 사용
-// const userReducer = combineReducers({
+// const reducer = combineReducers({
 //     userReducer
 // });
 

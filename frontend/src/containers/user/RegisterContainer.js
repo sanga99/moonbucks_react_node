@@ -29,7 +29,7 @@ class RegisterContainer extends Component {
     }
     render() {
         
-        const { username, storename, email, password, storephone, phone, password2, handleSubmit, handleChange } = this;
+        // const { username, storename, email, password, storephone, phone, password2, handleSubmit, handleChange } = this;
 
         return (
             <RegisterTemplate

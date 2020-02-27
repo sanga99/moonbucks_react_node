@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import HeaderTemplate from '../../components/common/Header'
-
+// import HeaderTemplate from '../../components/common/Header'
+// HeaderTemplate에 연결하기 
 
 class HeaderContainer extends Component {
     constructor(props){

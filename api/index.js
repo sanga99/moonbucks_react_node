@@ -1,4 +1,5 @@
-const app = require('express');
-const user = require('./user');
+// const express = require('express');
+// const router = express.Router();
+// const user = require('./userApi');
 
-app.use('/', user);
+// router.get('/user', user);

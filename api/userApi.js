@@ -5,8 +5,8 @@ const dbConn = require('../mariaDBConn');
 console.log('user router server ㅇㅕ기도착');
 
 const dbUserTest = {
-  testId : 'aaaa',
-  testPw : 'bbbb'
+  stestId : 'aaaa',
+  stestPw : 'bbbb'
 };
 
 
@@ -17,7 +17,8 @@ const dbUserTest = {
     2: there is no user
     3: password is not correct
 */
-router.get('/testUser', (req, res) => {
+router.post('/login', (req, res) => {
+  console.log('server request는'+req);
   return res.json( dbUserTest);
 });
 

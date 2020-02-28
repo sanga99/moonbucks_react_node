@@ -6,7 +6,7 @@ class LoginTemplate extends Component {
     
     
     render() {
-        const { userId, password, handleSubmit, handleChangeId, handleChangePw, handleKeyPress } = this.props;
+        const { userId, password, handleSubmit, handleChangeId, handleChangePw, handleKeyPress, isLoggingIn } = this.props;
 
         return (
             <div className="">
@@ -33,9 +33,9 @@ class LoginTemplate extends Component {
                         />
                     {/* { error && <div className="fail">로그인에 실패하였습니다.</div>} */}
                     <div className="form-group">
-                        <button className="btn-btn-primarty" >Login</button>
+                        {/* <Button type="primary" htmlType="submit" className="btn btn-primary" loading={isLoggingIn}>Login</Button> /> */}
+                        <button className="btn-btn-primarty" isLoggingIn={this.props.isLoggingIn}>Login</button>
                         <button className="btn-btn-link">register</button>
-                        {/* <Button type="primary" htmlType="submit" className="btn btn-primary">Login</Button> /> */}
                         {/* <link to="/register" className="btn btn-link">Register</link> */}
                     </div>
                 

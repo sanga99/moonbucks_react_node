@@ -1,4 +1,5 @@
-import { all, fork, call, put, delay, takeEvery } from 'redux-saga/effects';
+import {  call, put, takeEvery } from 'redux-saga/effects';
+// import { all, fork, call, put, delay, takeEvery } from 'redux-saga/effects';
 import axios from 'axios';
 import * as actions from "../../actions/user.action";
 
@@ -14,7 +15,6 @@ userSaga가 all을 이용해 watchLogin을 등록하고
 -> 다음 성공/실패 여부에 따라 액션을 dispatch 해준다. 
 */
 
-
 // client쪽에서 (쿠키생성 + 입력data)를 server쪽으로 보낸다
 function loginApi(loginData){
     return axios.post('/api/login', loginData,{
@@ -28,11 +28,13 @@ function loginApi(loginData){
 
 */
 function* login( {payload}) {
+    console.log('여기는 사가 payload는'+payload);
     try {
         const { loginData } = payload;
-        console.log('여기는 userSaga의 loginData는'+loginData);
+        console.log('여기는 userSaga의 loginData는'+loginData); 
         // yield call(loginApi
         const { data } = yield call(loginApi, loginData);
+        console.log('여기는 사가 data는'+data);
         // yield delay(2000);  // 2초
         yield put({
             type : actions.LOGIN_SUCCESS,
@@ -72,27 +74,27 @@ function* logout(){
 }
 
 
-function signUpApi(){
-    return axios.post('/signup');
-}
+// function signUpApi(signUpData){
+//     return axios.post('/signup', signUpdata);
+// }
 
-function* signUp( {payload}){
-    try {
-        const { signUpData} = payload;
-        console.log('여기는 userSaga의 signUp data는'+signUpData);
-        yield call(signUpApi, singUpData);
-        // yield delay(2000);
-        yield put({
-            type : actions.SIGNUP_SUCCESS,
-        });
-    }catch(err){
-        console.error('signUp errer'+ err);
-        yield put({
-            type : actions.SIGNUP_SUCCESS,
-            err,
-        });
-    }
-}
+// function* signUp({payload}){
+//     try {
+//         const { signUpData } = payload;
+//         console.log('여기는 userSaga의 signUp data는'+signUpData);
+//         yield call(signUpApi, singUpData);
+//         // yield delay(2000);
+//         yield put({
+//             type : actions.SIGNUP_SUCCESS,
+//         });
+//     }catch(err){
+//         console.error('signUp errer'+ err);
+//         yield put({
+//             type : actions.SIGNUP_SUCCESS,
+//             err,
+//         });
+//     }
+// }
 
 
 /*
@@ -105,9 +107,9 @@ export function* watchLogin(){
     yield takeEvery(actions.LOGOUT_REQUEST, logout);
 }
 
-export function* watchSignUp(){
-    yield takeEvery(actions.SIGNUP_REQUEST, signUp);
-}
+// export function* watchSignUp(){
+//     yield takeEvery(actions.SIGNUP_REQUEST, signUp);
+// }
 
 // export default function* userSaga(){
 //     yield all([

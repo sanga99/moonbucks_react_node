@@ -17,23 +17,23 @@ const InitialState = {
     user : null,               // user정보
 };  
 
-const dbUser = {
-    id : 'testId',
-    password : 'testpw'
-};
+// const dbUser = {
+//     id : 'testId',
+//     password : 'testpw'
+// };
 
 
 // reducer와 saga는 각기 움직인다.
 // 같은 action을 두곳에서 모두 dispatch하면, 둘다에서 잡힌다.
 const userReducer = (state= InitialState, action) => {
-    const { type, paylod, error } = action;
+    const { type, payload, error } = action;
     switch(type) {
         case actions.LOGIN_SUCCESS:
             return {
                 ...state,     // 반드시 새로운 객체를 반환해야 하므로! 기존 state를 복사한다.
                 isLoggedIn : true,
                 isLoggingIn : false,
-                user : dbUser,
+                // user : {},
                 // isLoading : false,
             };
         case actions.LOGIN_FAILURE:
@@ -42,7 +42,7 @@ const userReducer = (state= InitialState, action) => {
                 isLoggedIn : false,
                 isLoggingIn : false,
                 logInErrorReason : 'error',
-                user : null,
+                // user : null,
             };
         case actions.LOGIN_REQUEST : 
             return {
@@ -55,7 +55,6 @@ const userReducer = (state= InitialState, action) => {
                 ...state,
                 isLoggedIn : false,
                 isLoggingOut : false,
-                user : dbUser,
                 // user : {},
             };
         case actions.LOGOUT_FAILURE: 

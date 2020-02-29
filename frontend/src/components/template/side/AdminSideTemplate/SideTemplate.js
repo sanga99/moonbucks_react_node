@@ -5,18 +5,18 @@ const SideTemplate = () => {
     return(
         <div className="side-container">
             <div className="search">
-                검색
+                서치(필터포함)
                 {/* {this.props.search} */}
             </div>
             <div className="main main-content">
                 <div className="rank">
                     <div className="storerank">
                         지점 랭크
-                         {/* {this.props.storerank} */}
+                         {/* {this.props.storeRank} */}
                     </div>
                     <div className="drinkrank">
                         음료 랭크
-                        {/* {this.props.drinkrank} */}
+                        {/* {this.props.drinkRank} */}
                     </div>
                 </div>
             </div>

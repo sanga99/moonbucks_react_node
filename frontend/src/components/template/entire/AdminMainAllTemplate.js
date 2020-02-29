@@ -1,18 +1,30 @@
 import React, { Component } from 'react';
+import SideTemplate from '../side/AdminSideTemplate';
+import Search from '../../search';
+// import StoreRank
+// import DrinkRank
+// import Map
+// import SideStoreInfo
+import MainTemplate from '../main/AdminMainTemplate';
 
-class AdminMainAllTemplate extends Component {
-    render() {   // render를 해야 props를 가져올수 있다. (즉, class형이여야한다.)
-        return (
-            <div className="entire-container">
-              <div className="side">
-                {this.props.side}
-             </div> 
-             <div className="main">
-                 {this.props.main}
-              </div>
-         </div>
-        );
-    }
+const AdminMainAllTemplate = () => {
+    return (
+        <div className="entire-container">
+            <article className="side">
+                <SideTemplate
+                    search={<Search/>}
+                    storeRank={<StoreRank/>}
+                    drinkRank={<DrinkRank/>}
+                />
+            </article> 
+            <main className="main">
+                <MainTemplate
+                    sideStoreInfo={<SideStoreInfo/>}
+                    map={<Map/>}
+                />
+            </main>
+        </div>
+    );
 }
 
 export default AdminMainAllTemplate;

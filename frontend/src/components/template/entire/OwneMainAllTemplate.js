@@ -1,18 +1,30 @@
 import React, { Component } from 'react';
+import SideTemplate from '../side/OwnerSideTemplate';
+import MainTemplate from '../main/OwnerMainTemplage';
+// import DrinkRank
+// import Chhart
 
-class OwnerMainAllTemplate extends Component {
-    render() {   // render를 해야 props를 가져올수 있다. (즉, class형이여야한다.)
-        return (
-            <div className="entire-container">
-              <div className="side">
-                {this.props.side}
-             </div> 
-             <div className="main">
-                 {this.props.main}
-              </div>
-         </div>
-        );
-    }
+
+const OwnerMainAllTemplate = () =>  {
+    return (
+        <div className="entire-container">
+            <article className="side">
+                음식부분(전체)
+                음료부분
+                스넥부분
+                상품부분
+                <SideTemplate
+                    drinkRank={<drinkRank/>}
+                />
+            </article> 
+            <main className="main">
+                <MainTemplate
+                    chart={<Chart/>}
+                />
+            </div>
+        </div>
+    );
+    
 }
 
 export default OwnerMainAllTemplate;

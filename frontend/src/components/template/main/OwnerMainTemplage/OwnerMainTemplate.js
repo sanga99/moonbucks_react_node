@@ -5,8 +5,8 @@ import React from 'react';
 const OwnerMainTemplate = () => {
     return( 
         <div>
-            오너 메인
-             {/* <Chart/> */}
+            오너 메인 - 차트 
+            {/* {this.props.chart} */}
         </div>
     );
 };

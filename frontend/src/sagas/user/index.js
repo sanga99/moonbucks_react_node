@@ -5,7 +5,7 @@ import { watchLogin } from './userSaga';
 
 export default function* userSaga() {
     yield all ([
-        fork(watchLogin),
+        // fork(watchLogin),
         // fork(watchSignUp),
     ])
 }

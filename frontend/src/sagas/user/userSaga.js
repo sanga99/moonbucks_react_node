@@ -16,10 +16,21 @@ userSaga가 all을 이용해 watchLogin을 등록하고
 */
 
 // client쪽에서 (쿠키생성 + 입력data)를 server쪽으로 보낸다
-function loginApi(loginData){
+function loginApi(loginData){    
     return axios.post('/api/login', loginData,{
         withCredentials: true, // 쿠키를 교환하겠다.의미. 
                                // 즉, 인증이 필요한 요청이라는 말이다.
+        /*
+        withCredentials 때문에 
+        서버는 세션/쿠키를 확인하기 위해 passport에서 deserializeUser를 확인한다.
+        (쿠키가 없으면 그냥 패스!)
+        거기서 서버에 저장했녕 세션 아이디를 가지고 디비에 접근해 유저를 찾아낸다.
+        만약 없으면, express router에 req.use가 undefined로 나오는데 이에 따라 맞는 조치를 취해주면 된다.
+        인증이 없ㄷ어도 무관하면 그냥 패스, 인증이 필요하면 에러 메시지를 클라이언트에 보내주어야 한다.
+        
+        즉, 로그인 완료가 되면 그에 맞는 세션/쿠키를 만들고(serializeUser)
+            -> 이를 클라이언트단으로 보내고 -> 추후 클라이언트 단에서 인증이 필요한 요청이 오면 쿠키와 함께 요청이 오게 된다.
+        */
     });
 }
 
@@ -27,7 +38,7 @@ function loginApi(loginData){
  함수에서 인자로준 payload를 통해 액션을 dispatch할 때  parameter를 받는다.
 
 */
-function* login( {payload}) {
+function* login( {payload}) {     // 입력받은 id, pw
     console.log('여기는 사가 payload는'+payload);
     try {
         const { loginData } = payload;

@@ -31,8 +31,9 @@ class LoginTemplateContainer extends Component {
     }
 
     handleKeyPress = (e) => {
+        // e.preventDefault();     // 해놓으면 해당 input="text"에 적히지 않는다.
        if(e.key === 'Enter'){
-           this.props.handleSubmit();
+        //    this.props.handleSubmit();
         }
     }
     
@@ -55,28 +56,29 @@ class LoginTemplateContainer extends Component {
             handleChangeId={this.handleChangeId}          // 단순 input text입력
             handleChangePw={this.handleChangePw}          // 단순 input text입력
             handleKeyPress={this.handleKeyPress}    // Enter 시 submit
-            isLoggingIn={this.props.isLoggingIn}
+            // isLoggingIn={this.props.isLoggingIn}
         /> 
         );
     }
 }
 
     // getStoreState() => props형태로 사용
-    const mapStateToProps = (state) => {    // store의 state(=reducers)값
-        return {
-            isLoggingIn: state.userReducer.isLoggingIn
-            };
-        };
+    // const mapStateToProps = (state) => {    // store의 state(=reducers)값
+    //     return {
+    //         isLoggingIn: state.userReducer.isLoggingIn
+    //         };
+    //     };
         
     // 액션상태를 바꿔준다.(액션 객체는 함수를 반환)
-    const mapDispatchToProps = (dispatch) => {  
-        return {
-            handleSubmit : (userId,password) => dispatch(loginRequestAction(userId,password)),
-        };
-    };
+    const mapDispatchToProps = (dispatch) => ({       
+            handleSubmit : (userId,password) => {           
+                dispatch(loginRequestAction(userId,password))
+            }  
+    });
+    
 
 
-    LoginTemplateContainer = connect(mapStateToProps, mapDispatchToProps)(LoginTemplateContainer);
+    LoginTemplateContainer = connect(undefined, mapDispatchToProps)(LoginTemplateContainer);
     // connect는 react-redux의 내장 aip로, component를 redux Store에 '연결'해준다.
 
 

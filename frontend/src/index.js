@@ -4,8 +4,6 @@ import { Provider } from 'react-redux';
 import App from './App';
 import store from './store/configureStore';    // redux-saga 사용
 // import { createStore } from 'redux'; // ./store/configureStore에서 사용
-
-import rootReducers  from './reducers';
 // import { BrowserRouter } from 'react-router-dom';
 //import './index.css';
 import * as serviceWorker from './serviceWorker';

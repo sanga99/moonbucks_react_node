@@ -6,12 +6,12 @@ class LoginTemplate extends Component {
     
     
     render() {
-        const { userId, password, handleSubmit, handleChangeId, handleChangePw, handleKeyPress, isLoggingIn } = this.props;
+        const { userId, password, handleSubmit, handleChangeId, handleChangePw, handleKeyPress } = this.props;
 
         return (
             <div className="">
                 <h2>Login</h2>
-                <form name="form" onSubmit={handleSubmit}>
+                {/* <form name="form" onSubmit={handleSubmit}> */}
                     <div className="form-group">
                         <label>UserId</label>
                         <input type="text"
@@ -34,13 +34,13 @@ class LoginTemplate extends Component {
                     {/* { error && <div className="fail">로그인에 실패하였습니다.</div>} */}
                     <div className="form-group">
                         {/* <Button type="primary" htmlType="submit" className="btn btn-primary" loading={isLoggingIn}>Login</Button> /> */}
-                        <button className="btn-btn-primarty" isLoggingIn={this.props.isLoggingIn}>Login</button>
+                        <button className="btn-btn-primarty" onClick={handleSubmit} >Login</button>
                         <button className="btn-btn-link">register</button>
                         {/* <link to="/register" className="btn btn-link">Register</link> */}
                     </div>
                 
                     </div>
-                </form>
+                {/* </form> */}
                 
             </div>
         );

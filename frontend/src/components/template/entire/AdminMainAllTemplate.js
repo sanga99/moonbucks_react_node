@@ -3,19 +3,19 @@ import SideTemplate from '../side/AdminSideTemplate';
 import Search from '../../search';
 // import StoreRank
 // import DrinkRank
-// import Map
-// import SideStoreInfo
 import MainTemplate from '../main/AdminMainTemplate';
+import SideStoreInfo from '../../info/Store'
+import Map from '../../map';
 
 const AdminMainAllTemplate = () => {
     return (
         <div className="entire-container">
             <article className="side">
-                <SideTemplate
+                {/* <SideTemplate
                     search={<Search/>}
                     storeRank={<StoreRank/>}
                     drinkRank={<DrinkRank/>}
-                />
+                /> */}
             </article> 
             <main className="main">
                 <MainTemplate

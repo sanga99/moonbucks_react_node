@@ -10,6 +10,10 @@
 # database
 /.database.json
 
+#map
+/.MapApi.text
+
+
 # testing
 /coverage
 

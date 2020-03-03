@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import MapTemplate from '../../components/map'
+
 
 class MapContainer extends Component {
     render() {

@@ -1,0 +1,15 @@
+
+# react-kakao-maps
+인증키 발급
+
+* 다음 지도 인증 
+네이티브 앱 키
+68a3da06e97bba53440d80b789bfeb42
+REST API 키
+e699390068399a0df2b488100654a71c
+JavaScript 키
+4df73cfcb7cfb8177e418e2c44092262    // 사용
+Admin 키
+b8130e8edd9ebdcd83811d78a1a30162
+
+확인) https://developers.kakao.com/apps/404211/created

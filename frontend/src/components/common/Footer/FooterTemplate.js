@@ -3,7 +3,9 @@ import React from 'react';
 
 const FooterTemplate = () => {
     return(
-        <div>여기는 푸터</div>
+        <div>
+            푸터  component
+        </div>
     );
 };
 

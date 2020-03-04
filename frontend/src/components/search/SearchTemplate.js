@@ -4,7 +4,7 @@ const SearchTemplate  =() => {
 
     return (
         <div>
-           <div>검색 모냥</div>
+           <input type="text" />
             <div>필터</div> 
         </div>
         

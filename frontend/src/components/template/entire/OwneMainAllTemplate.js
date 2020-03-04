@@ -13,15 +13,15 @@ const OwnerMainAllTemplate = () =>  {
                 음료부분
                 스넥부분
                 상품부분
-                <SideTemplate
+                {/* <SideTemplate
                     drinkRank={<drinkRank/>}
-                />
+                /> */}
             </article> 
             <main className="main">
-                <MainTemplate
+                {/* <MainTemplate
                     chart={<Chart/>}
-                />
-            </div>
+                /> */}
+            </main>
         </div>
     );
     

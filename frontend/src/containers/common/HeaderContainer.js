@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import HeaderTemplate from '../../components/common/Header'
+import HeaderTemplate from '../../components/common/Header'
 // HeaderTemplate에 연결하기 
 
 class HeaderContainer extends Component {
@@ -29,10 +29,10 @@ class HeaderContainer extends Component {
     }
 
 
-    _callApi = async () =>{
-        const response = await fetch(`/api`);
-        const body = await response.json();
-        return body;
+    _callApi = async () => {
+        // const response = await fetch(`/api`);
+        // const body = await response.json();
+        // return body;
     }
  
     
@@ -41,16 +41,16 @@ class HeaderContainer extends Component {
         // const {result} = this.state;
    
         return (
-            <div>
-                
-                {this.state.data.map(el => (
-                    <div>
-                        {el.id} : {el.name}
-                    </div>
-                ))}
-                {/* {this.state ? this.state.user: "false"} */}
-               
-            </div>
+            
+                <HeaderTemplate/>
+                // {/* {this.state.data.map(el => (
+                //     <div>
+                //         {el.id} : {el.name}
+                //     </div>
+                // ))}
+                //  {this.state ? this.state.user: "false"} 
+                // */}
+            
         );
     }
 }

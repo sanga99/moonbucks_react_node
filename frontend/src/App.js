@@ -20,6 +20,8 @@ class App extends Component {
               <Route path="/not" component={NotFoundPage}/>
               {/* Not Found 파일 이것으로 해결하기
                  <Route component={NotFoundPage}/> */}
+              {/* 아래는 확인용  */}
+              {/* <Route path="/map" component={Map}/> */}
             </Switch>
           </Router>
         </main>

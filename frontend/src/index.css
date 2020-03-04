@@ -3,6 +3,7 @@ body{
   padding : 0;
   box-sizing : border-box;
   background : #f1f1f5;
+  height: 100%;
 }
 
 *, *:before, *:after{

@@ -4,7 +4,7 @@ import AdminMainAllTemplate from '../components/template/entire/AdminMainAllTemp
 
 // import container
 
-const AdminHomezPage = () => {
+const AdminHomePage = () => {
     return(
        <PageTemplate>
             <AdminMainAllTemplate />

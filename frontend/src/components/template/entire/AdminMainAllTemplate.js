@@ -1,25 +1,25 @@
 import React, { Component } from 'react';
 import SideTemplate from '../side/AdminSideTemplate';
-import Search from '../../search';
-// import StoreRank
-// import DrinkRank
+import SearchContainer from '../../../containers/search/SearchContainer';
+import StoreRankContainer from '../../../containers/rank/Store/StoreRankContainer';
+import ProductsRankContainer from '../../../containers/rank/Products/ProductsRankContainer';
 import MainTemplate from '../main/AdminMainTemplate';
-import SideStoreInfo from '../../info/Store'
-import Map from '../../map';
+import SidePopupContainer from '../../../containers/popupInfo/Store/SidePopupContainer';
+import Map from '../../../containers/map/MapContainer';
 
 const AdminMainAllTemplate = () => {
     return (
-        <div className="entire-container">
-            <article className="side">
-                {/* <SideTemplate
-                    search={<Search/>}
-                    storeRank={<StoreRank/>}
-                    drinkRank={<DrinkRank/>}
-                /> */}
+        <div className="entire-container" style={{ display: "flex", justifyContent:"space-between"}}>
+            <article className="side-container" style={{ maxWidth:'25%'}}>
+                <SideTemplate
+                    search={<SearchContainer/>}
+                    storeRank={<StoreRankContainer/>}
+                    productsRank={<ProductsRankContainer/>}
+                />
             </article> 
-            <main className="main">
+            <main className="main-container" style={{ width:'100%'}}>
                 <MainTemplate
-                    sideStoreInfo={<SideStoreInfo/>}
+                    sidePopupStoreInfo={<SidePopupContainer/>}
                     map={<Map/>}
                 />
             </main>

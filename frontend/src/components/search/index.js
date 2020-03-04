@@ -1,1 +1,2 @@
-export { default } from './SearchTemplate';
+export { default } from './AdminSearchTemplate';
+export { default } from './OwnerSearchTemplate';

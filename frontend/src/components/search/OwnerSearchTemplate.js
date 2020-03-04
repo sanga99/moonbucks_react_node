@@ -1,15 +1,15 @@
 import React from 'react';
 
-const SearchTemplate  =() => {
-
+const OwnerSearchTemplate  =() => {
+    
     return (
         <div>
            <input type="text" />
-            <div>필터</div> 
+            <div>owner필터</div> 
         </div>
         
     );
 
 }
 
-export default SearchTemplate;
+export default OwnerSearchTemplate;

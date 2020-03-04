@@ -2,12 +2,12 @@ import React from 'react';
 //css
 
 
-const OwnerMainTemplate = () => {
+const OwnerMainTemplate = (props) => {
     return( 
-        <div>
-            오너 메인 - 차트 
-            {/* {this.props.chart} */}
-        </div>
+        <div className="main" style={{ justifyContent:'space-between'}}>
+            {props.chart}   
+            {/* {props.statistic} */}
+        </div>  
     );
 };
 

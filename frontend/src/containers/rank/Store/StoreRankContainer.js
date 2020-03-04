@@ -5,7 +5,7 @@ class StoreRankContainer extends Component {
     render() {
         return (
             <StoreRankTemplate
-            // [ product rank ]
+            // [ store rank ]
             // one={this.state.one}
             // two={this.state.two}
             // three={this.state.three}

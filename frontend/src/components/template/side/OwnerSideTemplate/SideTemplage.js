@@ -1,20 +1,29 @@
 import React from 'react';
-
 // css
 
-const SideTemplate = () => {
+const SideTemplate = (props) => {
     return(
-        <div className="side-container">
-            <div className="side-content">
-                <div className="rank">
-                    <div className="drinkrank">
-                        오너 음료 랭크(자세히)
-                        {/* {this.props.drinkRank} */}
-                    </div>
+        <div>   
+        <div className="search" >
+            {props.search}
+        </div>
+        <div className="rank rank-content" style={{ display:'contents'}}>
+            <div className="rank">
+                <div className="rank productsrank" sytle={{}}>
+                    {props.productsRank}
+                </div>
+                <div className="rank drinkrank" sytle={{}}>
+                     {props.drnikRank}
+                </div>
+                <div className="rank foodrank" sytle={{}}>
+                     {props.foodRank}
+                </div>
+                <div className="rank goodsrank" sytle={{}}>
+                     {props.goodsRank}
                 </div>
             </div>
-
         </div>
+    </div>
     );
 };
 

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import SideTemplate from '../side/AdminSideTemplate';
 import SearchContainer from '../../../containers/search/SearchContainer';
 import StoreRankContainer from '../../../containers/rank/Store/StoreRankContainer';
@@ -15,6 +15,7 @@ const AdminMainAllTemplate = () => {
                     search={<SearchContainer/>}
                     storeRank={<StoreRankContainer/>}
                     productsRank={<ProductsRankContainer/>}
+                    productRank2={<ProductsRankContainer/>}
                 />
             </article> 
             <main className="main-container" style={{ width:'100%'}}>

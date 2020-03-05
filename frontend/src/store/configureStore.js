@@ -9,16 +9,13 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 const sagaMiddleware = createSagaMiddleware();
 
 
-// 스토어를 만듭니다.
-const store = createStore(
-    rootReducers, composeWithDevTools()
-);
-// const store = createStore(
-//     rootReducers, composeWithDevTools(
-//     applyMiddleware(sagaMiddleware),)
-// );
-// sagaMiddleware.run(rootSaga);
-
 
 // store를 만들고 saga륾 미들웨어로 사용한다.
+const store = createStore(
+    rootReducers, composeWithDevTools(
+    applyMiddleware(sagaMiddleware),)
+);
+sagaMiddleware.run(rootSaga);
+
+
 export default store;

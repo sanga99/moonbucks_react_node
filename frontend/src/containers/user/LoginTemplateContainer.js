@@ -1,9 +1,8 @@
 import React, { Component} from 'react';
-import { connect } from 'react-redux';
-import  { loginRequestAction }  from '../../actions/user.action';
 import LoginTemplate from '../../components/user/LoginTemplate';
-// import React, {useState, useCallback } from 'react';
-// import { useSelector, useDispatch } from 'react-redux';
+import axios from 'axios';
+// import { connect } from 'react-redux';
+// import  { loginRequestAction }  from '../../actions/user.action';
 // import { bidnActionCreators } from 'redux';
 
 
@@ -11,9 +10,9 @@ class LoginTemplateContainer extends Component {
     constructor(props){
         super(props);
         this.state ={
-            userId : '',    // 입력하는 id
-            password : '',  // 입력하는 pw
-        }     
+                userId : '',    // 입력하는 id
+                password : ''  // 입력하는 pw 
+        }
     }
 
     // arror function으로 작성하면 bind(this)를 하지 않아도 된다.
@@ -27,7 +26,7 @@ class LoginTemplateContainer extends Component {
         this.setState({
             password : e.target.value,
         });
-        // console.log('handlePw 는'+ this.state.password);
+        
     }
 
     handleKeyPress = (e) => {
@@ -37,31 +36,48 @@ class LoginTemplateContainer extends Component {
         }
     }
     
-    // handleSubmit = (e) => {
-    //     e.preventDefualt();
-    // }
-    
-  
-        // const { user, error, loginSuccess, loginFailure} = this.props;
-        //  const {loginRquest } = this.state;
-        // const { userId, password,  handleChange, handleKeyPress} = this;
-        // action 데이터
+    handleSubmit = (e) => {
+        // e.preventDefualt();      // 해놓으면 아래 코드가 진행이 안된다..
+        console.log('submit');
+        // const login_lnfo = this.state.login_info;
+        this.login(this.state.userId, this.state.password);
+    }
+
+    login = (userId, password) => {
+        console.log('진입확인');
+        const user = { userId, password };
+        fetch('/api/login', {
+            method : 'POST',
+            headers : {
+                "Content-Type" : "application/json; charset=utf-8"
+            },
+            body : JSON.stringify(user),
+            credentials: true, 
+        })
+    }
+   
+
+
 
     render() {
         return (
             <LoginTemplate 
             userId={this.state.userId}              // 입력하는 id
             password={this.state.password}           // 입력하는 pw
-            handleSubmit={this.props.handleSubmit}
+            handleSubmit={this.handleSubmit}
             handleChangeId={this.handleChangeId}          // 단순 input text입력
             handleChangePw={this.handleChangePw}          // 단순 input text입력
-            handleKeyPress={this.handleKeyPress}    // Enter 시 submit
+            handleKeyPress={this.handleKeyPress}         // Enter 시 submit
+            handleTest={this.handleTest}         // Enter 시 submit
             // isLoggingIn={this.props.isLoggingIn}
         /> 
         );
     }
 }
 
+/*
+
+    * Redux 
     // getStoreState() => props형태로 사용
     // const mapStateToProps = (state) => {    // store의 state(=reducers)값
     //     return {
@@ -72,20 +88,25 @@ class LoginTemplateContainer extends Component {
     // 액션상태를 바꿔준다.(액션 객체는 함수를 반환)
     const mapDispatchToProps = (dispatch) => ({       
             handleSubmit : (userId,password) => {           
-                dispatch(loginRequestAction(userId,password))
-            }  
+                dispatch(loginRequestAction({userId,password}));
+            }
     });
     
 
-
     LoginTemplateContainer = connect(undefined, mapDispatchToProps)(LoginTemplateContainer);
     // connect는 react-redux의 내장 aip로, component를 redux Store에 '연결'해준다.
-
+    
+    */
 
     export default LoginTemplateContainer;
 
+
+
+
+
   /*  
- // hook사용 ( (주의) hook은 class형에서 사용할 수 없다. )
+    * HOOK
+    // hook사용 시 기록 ( (주의) hook은 class형에서 사용할 수 없다. )
     // jsx에서 value값과 handle e.target.value를 가져온다.
     export const useInput = (initValue = null)=> {
         const [value, setter] = useState(initValue);

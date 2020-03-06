@@ -39,7 +39,6 @@ class LoginTemplateContainer extends Component {
     handleSubmit = (e) => {
         // e.preventDefualt();      // 해놓으면 아래 코드가 진행이 안된다..
         console.log('submit');
-        // const login_lnfo = this.state.login_info;
         this.login(this.state.userId, this.state.password);
     }
 
@@ -62,18 +61,22 @@ class LoginTemplateContainer extends Component {
     render() {
         return (
             <LoginTemplate 
-            userId={this.state.userId}              // 입력하는 id
-            password={this.state.password}           // 입력하는 pw
+            userId={this.state.userId}                  // 입력하는 id
+            password={this.state.password}              // 입력하는 pw
             handleSubmit={this.handleSubmit}
-            handleChangeId={this.handleChangeId}          // 단순 input text입력
-            handleChangePw={this.handleChangePw}          // 단순 input text입력
-            handleKeyPress={this.handleKeyPress}         // Enter 시 submit
-            handleTest={this.handleTest}         // Enter 시 submit
+            handleChangeId={this.handleChangeId}        // 단순 input text입력
+            handleChangePw={this.handleChangePw}        // 단순 input text입력
+            handleKeyPress={this.handleKeyPress}        // Enter 시 submit
+            handleTest={this.handleTest}                // Enter 시 submit
             // isLoggingIn={this.props.isLoggingIn}
         /> 
         );
     }
 }
+
+export default LoginTemplateContainer;
+
+
 
 /*
 
@@ -97,8 +100,6 @@ class LoginTemplateContainer extends Component {
     // connect는 react-redux의 내장 aip로, component를 redux Store에 '연결'해준다.
     
     */
-
-    export default LoginTemplateContainer;
 
 
 

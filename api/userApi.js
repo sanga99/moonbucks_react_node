@@ -113,7 +113,8 @@ module.exports = router;
 
 
 /*
-* saga + passport 이용시 saga에서 withCredentials처리 
+* saga + passport 이용 시 
+saga에서 withCredentials처리 
 앞서 saga에서 withCredentials 가지고 왔기 때문에 passport에 deserializeUser 통과한다.
 그러나 쿠키가 없기 때문에 별일 없이 통과는 하는데
 req.user는 값이 없게 된다.

@@ -3,7 +3,8 @@ import SideTemplate from '../side/OwnerSideTemplate';
 import SearchContainer from '../../../containers/search/SearchContainer';
 import ProductsRankContainer from '../../../containers/rank/Products/ProductsRankContainer';
 import MainTemplate from '../main/OwnerMainTemplage';
-import Chart from '../../../containers/chart/ChartContainer';
+import ProductsChart from '../../../containers/chart/ProductsChartContainer';
+import TotalChart from '../../../containers/chart/TotalChartContainer';
 // import StatisticContainer from ''
 
 
@@ -21,8 +22,9 @@ const OwnerMainAllTemplate = () =>  {
         </article> 
         <main className="main-container" style={{ width:'100%'}}>
             <MainTemplate
-                chart={<Chart/>}
-                // statistic={<StatisticContainer/>}
+                    productsChart={<ProductsChart/>}
+                    totalChart={<TotalChart/>}
+                    // statistic={<StatisticContainer/>}
             />
         </main>
     </div>

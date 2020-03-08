@@ -9,7 +9,7 @@ const PageTemplate = ({children}) => {    // children
     return(
         <div style={{ display:'flex', flexDirection:'column'}}>
             <header style={{  height:'50px', width:'100%'}}>
-                <HeaderTemplate/>
+                <HeaderContainer/>
             </header>
             <main style={{ minheight:'100%'}}>
                 {children}

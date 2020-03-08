@@ -1,11 +1,11 @@
 import React from 'react';
 //css
 
-const HeaderTemplate = () => {
+const HeaderTemplate = (props) => {
     return(
         <div>
-            헤더 component
-            {/* {this.props.user} */}
+            헤더 component    
+            {props.name}
         </div>
     );
 };

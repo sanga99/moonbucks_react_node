@@ -11,10 +11,24 @@ class LoginTemplateContainer extends Component {
         super(props);
         this.state ={
                 userId : '',    // 입력하는 id
-                password : ''  // 입력하는 pw 
+                password : '',  // 입력하는 pw 
+                flash : ''          
         }
     }
 
+
+        componentDidMount(){
+         axios.get('api/loginError')
+             .then(res => res.data)  
+             .then(result => {
+                 this.setState({ flash : result})       //  { "error" : "에러 메세지 내용"}
+                 console.log('client'+JSON.stringify(result));
+                })
+             .catch(err => console.log(JSON.stringify(err)))
+          }
+
+ 
+     
     // arror function으로 작성하면 bind(this)를 하지 않아도 된다.
     handleChangeId = (e) => {
         this.setState({
@@ -35,30 +49,12 @@ class LoginTemplateContainer extends Component {
         //    this.props.handleSubmit();
         }
     }
-    
-    handleSubmit = (e) => {
-        // e.preventDefualt();      // 해놓으면 아래 코드가 진행이 안된다..
-        console.log('submit');
-        this.login(this.state.userId, this.state.password);
-    }
 
-    login = (userId, password) => {
-        console.log('진입확인');
-        const user = { userId, password };
-        fetch('/api/login', {
-            method : 'POST',
-            headers : {
-                "Content-Type" : "application/json; charset=utf-8"
-            },
-            body : JSON.stringify(user),
-            credentials: true, 
-        })
-    }
-   
 
 
 
     render() {
+
         return (
             <LoginTemplate 
             userId={this.state.userId}                  // 입력하는 id
@@ -68,6 +64,8 @@ class LoginTemplateContainer extends Component {
             handleChangePw={this.handleChangePw}        // 단순 input text입력
             handleKeyPress={this.handleKeyPress}        // Enter 시 submit
             handleTest={this.handleTest}                // Enter 시 submit
+            error={this.state.flash.error}
+            // alert={this.props.error}
             // isLoggingIn={this.props.isLoggingIn}
         /> 
         );
@@ -137,3 +135,25 @@ export default LoginTemplateContainer;
     }
     export default LoginForm;
 */
+
+
+ /*
+    handleSubmit = (e) => {
+        // e.preventDefualt();      // 해놓으면 아래 코드가 진행이 안된다..
+        console.log('submit');
+        this.login(this.state.userId, this.state.password);
+    }
+
+    login = (userId, password) => {
+        console.log('진입확인');
+        const user = { userId, password };
+        fetch('/api/login', {
+            method : 'POST',
+            headers : {
+                "Content-Type" : "application/json; charset=utf-8"
+            },
+            body : JSON.stringify(user),
+            credentials: true, 
+        })
+    }
+   */

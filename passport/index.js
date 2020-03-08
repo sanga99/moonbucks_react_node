@@ -22,15 +22,16 @@ module.exports = () => {
     console.log('passport index진입-page로딩');
 
     const dbuser ={
-        dbid : 'aaaa',
-        dbpw : 'bbbb'
+        dbid : 'test@google.com',
+        dbpw : 'test01#',
+        name : '홍길동' 
     };
 
     
     // req.login 할 때 실행 (cookie, session에 저장)
     passport.serializeUser((user, done) => {        // Strategy 성공 시 호출됨
         console.log('passport/index serialize - session save'+ JSON.stringify(user));    // DB user
-        done(null, user.dbid);    // 입력한 아이디   // user.id req.session.passport.user에 저장
+        done(null, user);                          // user.dbid req.session.passport.user에 저장
     }); 
     
 
@@ -40,12 +41,12 @@ module.exports = () => {
             console.log('deserialize password session get id', id);
             // db 접근시 await
             // - db 유저 conn
-            done(null, dbuser); // req.user뽑아보기
+            done(null, dbuser); // req.user로 저장한다. 
         }catch(err){
             console.error(err);
             done(err);
         }
-    });
+    });      
 
 
     /*
@@ -79,18 +80,15 @@ module.exports = () => {
             console.log('indexuser확인'+JSON.stringify(req.body))     //{"userId":"입력id","password":"입력pw"}
           // DB 유저와 매칭 확인 
         if(username === dbuser.dbid){
-            console.log(1);
             if(password === dbuser.dbpw){
-                console.log(2)
+            // if(bcrypt.compareSync(password,dbuser.dbpw)){        // 비밀번호 복호화
                 return done(null, dbuser) ;     // -> userApi의 authenticate로 이동
             }else{
-                console.log(3);
                 return done(null, false, {
                         message : '비밀번호가 맞지 않습니다.'
                 });
             }
             }else{
-                console.log(4);
                 return done(null, false, {
                     message : '회원이 아닙니다.'
                 });

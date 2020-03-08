@@ -119,6 +119,33 @@ router.post("/testLogin", (req, res) => {
 });
 */
 
+
+// 회원가입 
+
+// query -> 매장id는 client에서 data삽입 전달
+// insert into owner(ownerId, name, password, phone, storeId)
+// values ('ccc@ccc.com','김일일', 'test01#', '010-000-0000', 0);
+// 회원가입 router
+
+// query : select storeId, name from store;
+router.post('/store', (req, res) => {
+  
+  dbConn((err, connection) => {
+    connection.query("SELECT storeId, name FROM store", (err, rows) => {
+      connection.release(); // 연결세션 반환.
+      if (err) {
+        throw err;
+      }
+      return res.send( rows ); 
+    });
+    if(err) throw err;
+  });
+})
+
+
+
+
+
 module.exports = router;
 
 

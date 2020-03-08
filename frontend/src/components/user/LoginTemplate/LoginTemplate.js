@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import {Link} from 'react-router-dom'
 
 
 class LoginTemplate extends Component {
@@ -36,8 +36,7 @@ class LoginTemplate extends Component {
                         />
                     <div className="form-group">
                         <input  type="submit" value="Login" />
-                        <button className="btn-btn-link">register</button>
-                        {/* <link to="/register" className="btn btn-link">Register</link> */}
+                        <Link to="/register" className="btn btn-link">Register</Link>
                     </div>
                 
                     </div>

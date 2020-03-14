@@ -1,6 +1,7 @@
 /*global kakao*/
 
 import React, { Component } from 'react';
+import axios from 'axios';
 import * as infoTemplate from  './infoWindowTemplate';
 import { markerClickSalesMonth, markerClickSalesTotal, markerClickProduct, markerClickCategory } from './markerClick';
 import './Map.css';
@@ -88,7 +89,7 @@ class Map extends Component {
 
             
                         // 인포윈도우 생성 함수
-                        this.createinfoWindow(stores.name);
+                        this.createinfoWindow(stores);
 
 
 
@@ -96,7 +97,7 @@ class Map extends Component {
                         // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
                         kakao.maps.event.addListener(this.marker, 'mouseover', this.makeOverListener(this.map, this.marker, this.infowindow));
                         kakao.maps.event.addListener(this.marker, 'mouseout', this.makeOutListener(this.infowindow));
-                        kakao.maps.event.addListener(this.marker, 'click', this.makeClickListener(this.map, this.marker, stores.name));
+                        kakao.maps.event.addListener(this.marker, 'click', this.makeClickListener(this.map, this.marker, stores));
                         // kakao.maps.event.addListener(this.marker, 'click', <makeClickListener/>);
                         
 
@@ -141,7 +142,7 @@ class Map extends Component {
            // [ 인포윈도우 ]
           createinfoWindow = (store) => {
             // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능.
-            const iwContent = infoTemplate.infoWindowTemplate()
+            const iwContent = infoTemplate.infoWindowTemplate(store)
                   // ,iwRemoveable = true 
 
 
@@ -175,11 +176,11 @@ class Map extends Component {
                  
 
                  // [ 마크 클릭 시 이벤트 ] => 해당 정보가 옆 side로 나온다. 
-                makeClickListener = (map, marker, storeName) => {
+                makeClickListener = (map, marker, store) => {
  
                   return function (){
 
-                    markerClickSalesMonth(storeName)
+                    markerClickSalesMonth(store.name)
                             .then(res => {
                               let template = 
                               '<div><span>금월매출 : '+res[0].total_sales+'</span></div>'+
@@ -188,14 +189,14 @@ class Map extends Component {
                             });
 
 
-                    markerClickSalesTotal(storeName)
+                    markerClickSalesTotal(store.name)
                             .then(res => {
                               let template = 
                               '<div><span>누적매출 : '+res[0].sum+'</span></div>';
                               document.getElementById('total').innerHTML = JSON.stringify(template);
                             });
 
-                    markerClickProduct(storeName)
+                    markerClickProduct(store.name)
                             .then(res => {
                               let template = 
                               `데이터 삽입 후 변경필요
@@ -204,7 +205,7 @@ class Map extends Component {
                             });
 
 
-                    markerClickCategory(storeName)
+                    markerClickCategory(store.name)
                             .then(res => {
                               console.log('fffffff'+JSON.stringify(res[0].price))
                               let template = 
@@ -217,7 +218,15 @@ class Map extends Component {
    
 
                       let title = document.getElementById('storeName'); 
-                      title.innerHTML = storeName;
+                      title.innerHTML = store.name;
+
+                      let template = document.getElementById('storeInfo'); 
+                      template.innerHTML = 
+                                  `
+                                  <div>주소 : ${store.address}</div>
+                                  <div>manager : ${store.managers_num}</div>
+                                  <div>직원 : ${store.part_time_num}</div>
+                                  `;
 
                       // menuEl = document.getElementById('menu_wrap')
                       // menuEl.scrollTop = 0;

@@ -1,11 +1,8 @@
 /*global kakao*/
 
 import React, { Component } from 'react';
-import axios from 'axios';
 import * as infoTemplate from  './infoWindowTemplate';
-// import * as MarkerClickEvt from  '../../containers/popupInfo/Store/SidePopupContainer';
-// import  sideInfoVisible from  '../popupInfo/Store/PopupStoreInfo';
-// import createMarker from './createMarker';
+import { markerClickSalesMonth, markerClickSalesTotal, markerClickProduct, markerClickCategory } from './markerClick';
 import './Map.css';
 
 
@@ -14,7 +11,7 @@ class Map extends Component {
     // map;
     // marker;
     // infowindow;
-    clicked =  false;
+ 
     constructor(props){
       super(props);
       this.state = {
@@ -22,11 +19,13 @@ class Map extends Component {
         marker :null,
         bounds : [],
         infowindow : null, 
-        stores : []
+        stores : [],
       };
     } 
 
     componentDidMount() {
+
+    
   
 
         axios.post('/api/storeAll')   // => 사용) 1. adress(좌표추출) / sideInfo  / infoWindow
@@ -51,10 +50,6 @@ class Map extends Component {
                 // kakao maps 로드 (여기서 kakao모듈 사용 가능)
             kakao.maps.load(() => {
 
-                
-                // => 검색모듈 바꾸기 /  장소 검색 객체를 생성합니다
-                // this.ps = new kakao.maps.services.Places();
-                
                 const mapContainer = document.getElementById('map');
 
                 // 주소-좌표 변환 객체를 생성
@@ -95,12 +90,15 @@ class Map extends Component {
                         // 인포윈도우 생성 함수
                         this.createinfoWindow(stores.name);
 
+
+
                         // 이벤트 리스너로는 클로저를 만들어 등록
                         // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
                         kakao.maps.event.addListener(this.marker, 'mouseover', this.makeOverListener(this.map, this.marker, this.infowindow));
                         kakao.maps.event.addListener(this.marker, 'mouseout', this.makeOutListener(this.infowindow));
-                        kakao.maps.event.addListener(this.marker, 'click', this.makeClickListener(this.map, this.marker, stores));
-
+                        kakao.maps.event.addListener(this.marker, 'click', this.makeClickListener(this.map, this.marker, stores.name));
+                        // kakao.maps.event.addListener(this.marker, 'click', <makeClickListener/>);
+                        
 
                         // 지도의 중심을 결과값으로 받은 위치로 이동 시킴
                         this.map.setCenter(coords); 
@@ -149,7 +147,7 @@ class Map extends Component {
 
             // 인포윈도우를 생성합니다
             this.infowindow = new kakao.maps.InfoWindow({
-                content: store ,// 인포윈도우에 표시할 내용
+                content: iwContent ,// 인포윈도우에 표시할 내용
                 // content : iwContent, // => api 다른한곳에서 가져오고 여기서는 이곳을 제외한 필요한 부분만 api에서 추출해오기
                 // removable : iwRemoveable     // 닫기
             });
@@ -173,33 +171,64 @@ class Map extends Component {
                     };
                   }
 
+
+                 
+
                  // [ 마크 클릭 시 이벤트 ] => 해당 정보가 옆 side로 나온다. 
-                makeClickListener = (map, marker, store) => {
-                  
-                  return function(){
+                makeClickListener = (map, marker, storeName) => {
+ 
+                  return function (){
 
-                    // 전월 총매출 : { }
-                    
+                    markerClickSalesMonth(storeName)
+                            .then(res => {
+                              let template = 
+                              '<div><span>금월매출 : '+res[0].total_sales+'</span></div>'+
+                              '<div><span>전월매출 :'+res[1].total_sales+'</span></div>';
+                              document.getElementById('sales').innerHTML = JSON.stringify(template);
+                            });
 
 
-                      const template = 
-                            `템플릿 내용 ${store.name}`;
+                    markerClickSalesTotal(storeName)
+                            .then(res => {
+                              let template = 
+                              '<div><span>누적매출 : '+res[0].sum+'</span></div>';
+                              document.getElementById('total').innerHTML = JSON.stringify(template);
+                            });
 
-                      let storeName = document.getElementById('storeName'); 
-                      storeName.innerHTML = store.name;
+                    markerClickProduct(storeName)
+                            .then(res => {
+                              let template = 
+                              `데이터 삽입 후 변경필요
+                              <ul><li>1. ${res[0].name}</li><li>2. ${res[1].name}</li><li>3. ${res[1].name}</li></ul>`;
+                              document.getElementById('rank').innerHTML = JSON.stringify(template);
+                            });
 
-                      let storeInfo = document.getElementById('storeInfo')
-                      storeInfo.innerHTML = template;
-    
-                        // menuEl = document.getElementById('menu_wrap')
-                        // menuEl.scrollTop = 0;
+
+                    markerClickCategory(storeName)
+                            .then(res => {
+                              console.log('fffffff'+JSON.stringify(res[0].price))
+                              let template = 
+                              `데이터 삽입 후 변경 필요
+                              <div><span>Drink : ${res[0].price}</span></div>
+                              <div><span>Food : ${res[0].price}</span></div>
+                              <div><span>Goods : ${res[1].price}</span></div>`;
+                              document.getElementById('rank').innerHTML = JSON.stringify(template);
+                            });
+   
+
+                      let title = document.getElementById('storeName'); 
+                      title.innerHTML = storeName;
+
+                      // menuEl = document.getElementById('menu_wrap')
+                      // menuEl.scrollTop = 0;
                       }
                   }   // end makeClickListener
+                 
 
-   
- 
 
-        render() {
+              
+
+        render(props) {
 
           const style={
               width:'90%', 
@@ -207,7 +236,8 @@ class Map extends Component {
       
           };
       
-        return (           
+        return (  
+               
           <div className="map_wrap">
           <div id="map" style={style}></div>
           <div id="menu_wrap" className="bg_white" > 
@@ -216,16 +246,24 @@ class Map extends Component {
            </div>
            <hr/>
              <ul id="storeInfo" className="storeInfo">
-               해당 매장의 상세한 통계를 보시고 싶으시다면,<br/> 
-               <b className="bord">마크를 클릭</b>해 주세요<br/>
-               이용해 주셔서 감사합니다. 
+               <div className="default">
+                  해당 매장의 상세한 통계를 보시고 싶으시다면,<br/> 
+                  <b className="bord">마크를 클릭</b>해 주세요<br/>
+                   이용해 주셔서 감사합니다. 
+               </div>
+               <div>
+               <div  id="sales" className="sales"></div>
+               <div  id="total" className="total"></div>
+               </div>
+               <div id="rank" className="rank"></div>
+               <div id="category_sales" className="category_sales"></div>
             </ul> 
        </div>
        </div>
+ 
         );
     }
 }
 
+
 export default Map;
-
-

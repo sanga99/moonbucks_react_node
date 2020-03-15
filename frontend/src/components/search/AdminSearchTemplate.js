@@ -1,14 +1,17 @@
 import React from 'react';
 
-const AdminSearchTemplate  =() => {
-
-    // [ 맨아래 랭크 라디오 버튼]
-    //  => [ drink(default) / food / goods ]
+const AdminSearchTemplate  =(props) => {
 
     return (
         <div>
-           <input type="text" />
-            <div>어드민 필터</div> 
+            <div style={{ color : 'gray'}}>* 검색으로 보기</div>
+           <select>
+                <option disabled="disabled" selected="selected">매장선택</option>
+               {
+                   props.stores.map((store, i) => 
+                        <option key={i}>{store}</option>
+                )}
+           </select>
         </div>
         
     );

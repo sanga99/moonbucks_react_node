@@ -1,13 +1,17 @@
 import React from 'react';
 
-const OwnerSearchTemplate  =() => {
+const OwnerSearchTemplate  =(props) => {
     
     return (
         <div>
-           <input type="text" />
-            <div>owner필터</div> 
-        </div>
-        
+        <select>
+                <option disabled="disabled" selected="selected">월 선택</option>
+            {
+                props.month.map((month, i) => 
+                        <option key={i}>{month}</option>
+            )}
+        </select>
+      </div>
     );
 
 }

@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { selectRequestAction } from '../../../actions/select.action';
+import { selectRequestAction  } from '../../../actions/select.action';
+import { radioRequestAction  } from '../../../actions/radio.action';
 import SelectOption from '../../../components/side/option/AdminOption';
 import { SelectDefaultContent } from '../../../components/side/content/AdminSelectContent'; // 해당폴더에 여러 파일 있을 경우 { }중괄호에 넣어준다.
 import TwoMonthSalesContainer from '../../sales/entire/TwoMonthSalesContainer';
 import EntireSalesContainer from '../../sales/entire/EntireSalesContainer';
 import StoreRankContainer from '../../rank/entire/store/StoreRankContainer';
-import ProductsRankContainer from '../../rank/entire/products/ProductsRankContainer';
+import Template from '../../../components/rank/ProductRank';
+
 
 
 class AdminSelectContainer extends Component {
@@ -20,7 +22,6 @@ class AdminSelectContainer extends Component {
             sales : [],
             storesRank : [],
             checkedOption : 'Food', // (임시)
-            checkNameChange : 1,
         }
     }
 
@@ -39,10 +40,12 @@ class AdminSelectContainer extends Component {
                     console.log(err);
                 })
 
-
+                this.props.handleRadioContent(this.state.checkedOption)
     }  
 
-    // select
+   
+
+    // [select Option Change ]
     handleChange = (e) => {
         this.setState({
             value : e.target.value
@@ -50,33 +53,20 @@ class AdminSelectContainer extends Component {
         this.props.handleContent(e.target.value);
     }
 
-    // category radio btn 
+    //  [ category radio btn ]
     handleRadio = (e) => {
+        this.props.handleRadioContent(e.target.value)
+     
+
         this.setState({
             checkedOption : e.target.value
         });
-
-        if(this.state.checkedOption=='Drink'){
-            this.setState({
-               checkNameChange : 0
-            })
-          
-        }else if(this.state.checkedOption=='Food'){
-            this.setState({
-                checkNameChange : 1
-             });
-        }else if(this.state.checkedOption=='Goods'){
-            this.setState({
-                checkNameChange : 2
-             })
-        }
     }
 
 
 
     render() {
         let content = null;
-        console.log('0000');
         if(this.state.value=='choice'){
             content =  <SelectDefaultContent
                             towSales={<TwoMonthSalesContainer/>}
@@ -84,9 +74,9 @@ class AdminSelectContainer extends Component {
                             storeRankContainer={<StoreRankContainer/>}
                             handleRadio={this.handleRadio}
                             checkedOption={this.state.checkedOption}
-                            // ProductsRankContainer={<ProductsRankContainer
-                            //                          checkNameChange={this.state.checkNameChange}
-                            //                       />}
+                            ProductsRankContainer={<Template
+                                                      radiocontent={this.props.radiocontent}
+                                                   />}
                              />
         }else{
             // content =  <SelectContent
@@ -108,15 +98,16 @@ class AdminSelectContainer extends Component {
 }
 
 const mapStateToProps = state => {
-    console.log('maptoprops'+JSON.stringify(state.adminSelected))
     return {
-        content : state.adminSelected
+        content : state.adminSelected,  // reducer(index.js)에서 지정한 네임
+        radiocontent : state.adminRadio.result
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        handleContent : (value) => dispatch(selectRequestAction(value))
+        handleContent : (value) => dispatch(selectRequestAction(value)),
+        handleRadioContent : (value) => dispatch(radioRequestAction(value))
     };
 }
 

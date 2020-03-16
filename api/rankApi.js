@@ -62,8 +62,13 @@ router.post("/StoresRankMonth", (req, res) => {
 
 // [Admin Select Side default]-[이번달 카테고리(d/f/g)별 상품순위]
 router.post("/ProductRank", (req, res) => {
-  console.log('3434'+JSON.stringify(req.body.category)); 
-    let category = req.body.category;   // [ 0(drink)/ 1(food)/ 2(goods)]
+  console.log('3434'+JSON.stringify(req.body.category));
+ 
+  let category = req.body.category;   // [ 0(drink)/ 1(food)/ 2(goods)]
+  if(category=='Drink'){category = 0;}
+  else if(category=='Food'){category = 1;}
+  else if(category=='Goods'){category = 2;}
+
     const sql = `select 
                     pr.name as name, sum(pr.price) as price
                  from 

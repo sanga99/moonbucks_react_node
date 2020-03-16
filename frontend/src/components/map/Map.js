@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import * as infoTemplate from  './infoWindowTemplate';
-import { markerClickSalesMonth, markerClickSalesTotal, markerClickProduct, markerClickCategory } from './markerClick';
+import { markerClickSalesMonth, markerClickSalesTotal, markerClickProduct, markerClickCategory } from '../../containers/map/markerClick';
 import './Map.css';
 
 
@@ -207,7 +207,6 @@ class Map extends Component {
 
                     markerClickCategory(store.name)
                             .then(res => {
-                              console.log('fffffff'+JSON.stringify(res[0].price))
                               let template = 
                               `데이터 삽입 후 변경 필요
                               <div><span>Drink : ${res[0].price}</span></div>
@@ -220,7 +219,7 @@ class Map extends Component {
                       let title = document.getElementById('storeName'); 
                       title.innerHTML = store.name;
 
-                      let template = document.getElementById('storeInfo'); 
+                      let template = document.getElementById('default'); 
                       template.innerHTML = 
                                   `
                                   <div>주소 : ${store.address}</div>
@@ -248,26 +247,26 @@ class Map extends Component {
         return (  
                
           <div className="map_wrap">
-          <div id="map" style={style}></div>
-          <div id="menu_wrap" className="bg_white" > 
-           <div id="storeName" className="storeName">
-              Moobucks 매장
-           </div>
-           <hr/>
-             <ul id="storeInfo" className="storeInfo">
-               <div className="default">
-                  해당 매장의 상세한 통계를 보시고 싶으시다면,<br/> 
-                  <b className="bord">마크를 클릭</b>해 주세요<br/>
-                   이용해 주셔서 감사합니다. 
-               </div>
-               <div>
-               <div  id="sales" className="sales"></div>
-               <div  id="total" className="total"></div>
-               </div>
-               <div id="rank" className="rank"></div>
-               <div id="category_sales" className="category_sales"></div>
-            </ul> 
-       </div>
+            <div id="map" style={style}></div>
+            <div id="menu_wrap" className="bg_white" > 
+              <div id="storeName" className="storeName">
+                  Moobucks 매장
+              </div>
+             <hr/>
+              <ul id="storeInfo" className="storeInfo">
+                  <div id="default" className="default">
+                      해당 매장의 상세한 통계를 보시고 싶으시다면,<br/> 
+                      <b className="bord">마크를 클릭</b>해 주세요<br/>
+                      이용해 주셔서 감사합니다. 
+                  </div>
+                  <div>
+                  <div  id="sales" className="sales"></div>
+                  <div  id="total" className="total"></div>
+                  </div>
+                  <div id="rank" className="rank"></div>
+                  <div id="category_sales" className="category_sales"></div>
+              </ul> 
+        </div>
        </div>
  
         );

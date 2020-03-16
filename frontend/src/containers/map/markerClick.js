@@ -3,8 +3,8 @@ import axios from 'axios';
 
 
  export function markerClickSalesMonth (storeName)  {
-       return axios.post('/api/salesClickMarker', { name : storeName })   
-            .then(res => {
+       return axios.post('/api/salesTwoMonthStore', { name : storeName })
+       .then(res => {
                 return res.data
             })
             .catch(err => console.log(err));
@@ -12,7 +12,7 @@ import axios from 'axios';
 
 
  export function markerClickSalesTotal (storeName)  {
-       return axios.post('/api/totalSalesClickMarker', { name : storeName })   
+       return axios.post('/api/totalSalesStore', { name : storeName })   
             .then(res => {
                 return res.data
             })
@@ -21,7 +21,7 @@ import axios from 'axios';
 
 
  export function markerClickProduct (storeName)  {
-       return axios.post('/api/productClickMarker', { name : storeName })   
+       return axios.post('/api/AllProductRankStore', { name : storeName })   
             .then(res => {
                 return res.data
             })
@@ -29,7 +29,7 @@ import axios from 'axios';
 }
 
  export function markerClickCategory (storeName)  {
-       return axios.post('/api/categorySalesClickMarker', { name : storeName })   
+       return axios.post('/api/categorySalesStroe', { name : storeName })   
             .then(res => {
                 return res.data
             })

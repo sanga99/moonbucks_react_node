@@ -5,7 +5,7 @@ const dbConn = require('../mariaDBConn');
 
 // [ admin ]
 // [ mapMarker 클릭) 금월, 전월(해당매장) ]
-router.post("/productClickMarker", (req, res) => {
+router.post("/AllProductRankStore", (req, res) => {
     let store = req.body.name;
     const sql = `select 
                     pr.name, sum(pr.price) as price
@@ -32,17 +32,62 @@ router.post("/productClickMarker", (req, res) => {
         if(err) throw err;
         });
   });
-/*
 
-// [ 해당매장 금월 product 순위 ]( 매장명, 사장명, manager, 직원 ) 가져올 수 있는데 먼저 보기
-select pr.name, sum(pr.price) as price
-from sales as sa inner join product pr on sa.productId = pr.productId
-inner join store as st on sa.storeId = st.storeId
-where st.name = 'test역삼DT점'
-and month(sa.date)= month(now())
-group by pr.productId
-order by price desc;
-*/
+
+// [Admin Select Side default]-[이번달 매장순위]
+router.post("/StoresRankMonth", (req, res) => {
+    const sql = `select 
+                    st.name, sum(price) as price
+                 from 
+                    sales as sa inner join product pr on sa.productId = pr.productId 
+                    inner join store as st on sa.storeId = st.storeId
+                  where 
+                    month(sa.date)= month(now())
+                  GROUP BY 
+                    st.storeId
+                  order by 
+                    price desc;`;
+        // db select문 수행
+        dbConn((err, connection) => {
+        connection.query( sql, (err, rows) => {
+            connection.release(); // 연결세션 반환.
+            if (err) {
+            throw err;
+            }
+            return res.send( rows );
+        });
+        if(err) throw err;
+        });
+  });
+
+// [Admin Select Side default]-[이번달 카테고리(d/f/g)별 상품순위]
+router.post("/ProductRank", (req, res) => {
+  console.log('3434'+JSON.stringify(req.body.category)); 
+    let category = req.body.category;   // [ 0(drink)/ 1(food)/ 2(goods)]
+    const sql = `select 
+                    pr.name as name, sum(pr.price) as price
+                 from 
+                    sales as sa inner join product pr on sa.productId = pr.productId
+                 where 
+                    month(sa.date)= month(now())
+                 and 
+                    pr.category= ?
+                 group by
+                     pr.productId
+                order by  
+                    price`;
+        // db select문 수행
+        dbConn((err, connection) => {
+        connection.query( sql, category, (err, rows) => {
+            connection.release(); // 연결세션 반환.
+            if (err) {
+            throw err;
+            }
+            return res.send( rows );
+        });
+        if(err) throw err;
+        });
+  });
 
 
 // [ owner ] 

@@ -3,6 +3,12 @@ import { connect } from 'react-redux';
 import { selectRequestActionOwner } from '../../../actions/select.action';
 // Option
 import SelectOption from '../../../components/side/option/ownerOption';
+// Default 
+import { SelectDefaultContent } from '../../../components/side/content/OwnerSelectContent'
+
+// Select Chage
+import { SelectContent } from '../../../components/side/content/OwnerSelectContent'
+
 // import AdminSelectContent from '../../../components/template/side/AdminSideContent';
 // import OwnerSelectOption from '../../../components/select/OwnerSelectOption';
 
@@ -26,7 +32,23 @@ class OwnerSelectContainer extends Component {
     }
 
     render() {
-
+        let templte = null;
+        if(this.state.value=='choice'){
+            templte =  <SelectDefaultContent
+                            // towSales={<TwoMonthSalesContainer/>}
+                            // entireSales={<EntireSalesContainer/>}
+                            // storeRankContainer={<StoreRankContainer/>}
+                            // handleRadio={this.handleRadio}
+                            // checkedOption={this.state.checkedOption}
+                            // ProductsRankContainer={<Template
+                            //                           radiocontent={this.props.radiocontent}
+                            //                        />}
+                             />
+        }else{
+            templte =  <SelectContent
+                             storeData={this.props.content ? this.props.content : ''}
+                        />
+        }
         return (
             <div>
                 <SelectOption
@@ -34,7 +56,8 @@ class OwnerSelectContainer extends Component {
                     value={this.state.value}
                     handleChange={this.handleChange}
                 />
-                <div>{JSON.stringify(this.props.content)}</div>
+                {templte}
+                {/* <div>{JSON.stringify(this.props.content)}</div> */}
             </div>
             
         );

@@ -58,18 +58,28 @@ function* selectAdmin( payload ){
 
 
 // [owner]
-// const totalSalesMonthStore = (month) => {      //  (임시) - 나중에 매장명(name)도 인자로 넘기기
-//      return axios.post('/api/totalSalesMonthStroe', month)
-// }
-function totalSalesMonthStore(month){      //  (임시) - 나중에 매장명(name)도 인자로 넘기기
-     console.log('진입00000'+JSON.stringify(month))
+const totalSalesMonthStore = (month) => {      //  (임시) - 나중에 매장명(name)도 인자로 넘기기
      return axios.post('/api/totalSalesMonthStroe', month)
 }
 
-// function selectOwnerApi(month){
-//      return axios.all([totalSalesMonthStore(month), 
-//                      ])
-//  }
+const drinkRankMonthStore = (month) => {      //  (임시) - 나중에 매장명(name)도 인자로 넘기기
+     return axios.post('/api/drinkRankMonthStore', month)
+}
+
+const foodRankMonthStore = (month) => {      //  (임시) - 나중에 매장명(name)도 인자로 넘기기
+     return axios.post('/api/foodRankMonthStore', month)
+}
+
+const goodsRankMonthStore = (month) => {      //  (임시) - 나중에 매장명(name)도 인자로 넘기기
+     return axios.post('/api/goodsRankMonthStore', month)
+}
+
+// axio all
+function selectOwnerApi(month){
+     return axios.all([totalSalesMonthStore(month), 
+                       drinkRankMonthStore(month), foodRankMonthStore(month), goodsRankMonthStore(month)
+                     ])
+ }
 
 
 
@@ -79,15 +89,12 @@ function* selectOwner( payload ){
         const selected = payload;
         console.log('saga select' + JSON.stringify(selected));
 
-     //    const { data}  = yield call(selectOwnerApi, selected);        
-        const { data}  = yield call(totalSalesMonthStore, selected);        
+        const data  = yield call(selectOwnerApi, selected);        
         console.log('select saga yield call'+JSON.stringify(data))    
 
-     //    yield put(actions.selectSuccessActionOwner(
-     //                // data[0].data
-     //                data
-     //            ));
-        yield put(actions.selectSuccessActionOwner(data));
+        yield put(actions.selectSuccessActionOwner(
+                    data[0].data, data[1].data, data[2].data, data[3].data
+                ));
 
     }catch(error){
         console.error('select saga error'+ error.response);

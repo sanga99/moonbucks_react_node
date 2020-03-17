@@ -18,8 +18,9 @@ router.post("/AllProductRankStore", (req, res) => {
                     month(sa.date)= month(now())
                 group by 
                     pr.productId
-                 order by 
-                    price desc;`;
+                order by 
+                    price desc
+                limit 3;`;
         // db select문 수행
         dbConn((err, connection) => {
         connection.query( sql, store, (err, rows) => {
@@ -201,6 +202,108 @@ router.post("/goodsRankStore", (req, res) => {
 
 
 // [ owner ] 
+// [ Side Select ]- [ 월선택(option) Drink 순위- id매장]
+router.post("/drinkRankMonthStore", (req, res) => {
+
+     let month = req.body.month;   // (임시) -> st.name을 해당 ownerId의 해당하는 매장면 request 인자로 넘기기 
+       const sql = `select 
+                         pr.name as name, sum(pr.price) as price
+                    from 
+                         sales as sa inner join product pr on sa.productId = pr.productId
+                    inner join 
+                         store as st on sa.storeId = st.storeId
+                    where 
+                         st.name = 'test역삼DT점'  
+                    and 
+                         month(sa.date) = ? 
+                    and 
+                         pr.category= 0
+                    group by 
+                         pr.productId
+                    order by 
+                         price desc
+                    limit 3;`;
+           // db select문 수행
+           dbConn((err, connection) => {
+               connection.query( sql, month, (err, rows) => {
+                   connection.release(); // 연결세션 반환.
+                   if (err) {
+                      throw err;
+                   }
+                   return res.send( rows );
+               }); 
+               if(err) throw err;
+               });
+     });
+
+router.post("/foodRankMonthStore", (req, res) => {
+
+     let month = req.body.month;   // (임시) -> st.name을 해당 ownerId의 해당하는 매장면 request 인자로 넘기기 
+       const sql = `select 
+                         pr.name as name, sum(pr.price) as price
+                    from 
+                         sales as sa inner join product pr on sa.productId = pr.productId
+                    inner join 
+                         store as st on sa.storeId = st.storeId
+                    where 
+                         st.name = 'test역삼DT점'  
+                    and 
+                         month(sa.date) = ? 
+                    and 
+                         pr.category= 1
+                    group by 
+                         pr.productId
+                    order by 
+                         price desc
+                    limit 3;`;
+           // db select문 수행
+           dbConn((err, connection) => {
+               connection.query( sql, month, (err, rows) => {
+                   connection.release(); // 연결세션 반환.
+                   if (err) {
+                      throw err;
+                   }
+                   return res.send( rows );
+               }); 
+               if(err) throw err;
+               });
+     });
+
+
+router.post("/goodsRankMonthStore", (req, res) => {
+
+     let month = req.body.month;   // (임시) -> st.name을 해당 ownerId의 해당하는 매장면 request 인자로 넘기기 
+       const sql = `select 
+                         pr.name as name, sum(pr.price) as price
+                    from 
+                         sales as sa inner join product pr on sa.productId = pr.productId
+                    inner join 
+                         store as st on sa.storeId = st.storeId
+                    where 
+                         st.name = 'test역삼DT점'  
+                    and 
+                         month(sa.date) = ? 
+                    and 
+                         pr.category= 2
+                    group by 
+                         pr.productId
+                    order by 
+                         price desc
+                    limit 3;`;
+           // db select문 수행
+           dbConn((err, connection) => {
+               connection.query( sql, month, (err, rows) => {
+                   connection.release(); // 연결세션 반환.
+                   if (err) {
+                      throw err;
+                   }
+                   return res.send( rows );
+               }); 
+               if(err) throw err;
+               });
+     });
+
+
 
 
 module.exports = router;

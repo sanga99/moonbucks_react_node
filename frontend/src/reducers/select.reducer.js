@@ -13,7 +13,7 @@ const selectReducer = (state = InitialState, { type, payload, twoSales, totalSal
                 selected : payload
             }
         case actions.ADMIN_SELECT_SUCCESS:
-            console.log('reducer'+twoSales, totalSales, drinkRank, foodRank, GoodsRank );     // (주의)action(selectSuccessAction)에서 담는 변수명과 같아야한다!!! 
+            // (주의)action(selectSuccessAction)에서 담는 변수명과 같아야한다!!! 
             return {
                 ...state, 
                 result : {
@@ -33,13 +33,12 @@ const selectReducer = (state = InitialState, { type, payload, twoSales, totalSal
                 selected : payload
             }
         case actions.OWNER_SELECT_SUCCESS:
-            // console.log('reducer'+twoSales, totalSales, drinkRank, foodRank, GoodsRank );     // (주의)action(selectSuccessAction)에서 담는 변수명과 같아야한다!!! 
+            // (주의)action(selectSuccessAction)에서 담는 변수명과 같아야한다!!! 
             return {
                 ...state, 
-                // result : {
-                //     twoSales, totalSales, drinkRank, foodRank, GoodsRank 
-                // }
-                result : payload
+                result : {
+                    totalSales, drinkRank, foodRank, GoodsRank
+                }
             }
         case actions.OWNER_SELECT_FAILURE:
             return {

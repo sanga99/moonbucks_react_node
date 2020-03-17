@@ -5,12 +5,12 @@ import { selectRequestActionOwner } from '../../../actions/select.action';
 import SelectOption from '../../../components/side/option/ownerOption';
 // Default 
 import { SelectDefaultContent } from '../../../components/side/content/OwnerSelectContent'
+import EntireSalesContainer from '../../sales/thisStore/EntireSalesContainer';
+import ProductsPankContainer from '../../rank/thisStore/ProductsRankContainer'
 
 // Select Chage
 import { SelectContent } from '../../../components/side/content/OwnerSelectContent'
 
-// import AdminSelectContent from '../../../components/template/side/AdminSideContent';
-// import OwnerSelectOption from '../../../components/select/OwnerSelectOption';
 
 class OwnerSelectContainer extends Component {
 
@@ -35,15 +35,9 @@ class OwnerSelectContainer extends Component {
         let templte = null;
         if(this.state.value=='choice'){
             templte =  <SelectDefaultContent
-                            // towSales={<TwoMonthSalesContainer/>}
-                            // entireSales={<EntireSalesContainer/>}
-                            // storeRankContainer={<StoreRankContainer/>}
-                            // handleRadio={this.handleRadio}
-                            // checkedOption={this.state.checkedOption}
-                            // ProductsRankContainer={<Template
-                            //                           radiocontent={this.props.radiocontent}
-                            //                        />}
-                             />
+                            entireSales={<EntireSalesContainer/>} 
+                            productsPankContainer={<ProductsPankContainer/>}
+                       />
         }else{
             templte =  <SelectContent
                              storeData={this.props.content ? this.props.content : ''}
@@ -57,7 +51,6 @@ class OwnerSelectContainer extends Component {
                     handleChange={this.handleChange}
                 />
                 {templte}
-                {/* <div>{JSON.stringify(this.props.content)}</div> */}
             </div>
             
         );

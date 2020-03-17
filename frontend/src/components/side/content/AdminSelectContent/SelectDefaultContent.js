@@ -27,7 +27,7 @@ const SelectDefaultContent = (props) => {
                                                             onChange={props.handleRadio}/>
                            Goods</label>
                      </div> 
-                  <div>{props.ProductsRankContainer}</div>
+                  <div>{props.productsRankContainer}</div>
                 </div>
         );
   

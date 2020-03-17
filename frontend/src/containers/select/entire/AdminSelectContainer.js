@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { selectRequestAction  } from '../../../actions/select.action';
+import { selectRequestActionAdmin  } from '../../../actions/select.action';
 import { radioRequestAction  } from '../../../actions/radio.action';
 // Option
 import SelectOption from '../../../components/side/option/AdminOption';
@@ -10,7 +10,7 @@ import { SelectDefaultContent } from '../../../components/side/content/AdminSele
 import TwoMonthSalesContainer from '../../sales/entire/TwoMonthSalesContainer';
 import EntireSalesContainer from '../../sales/entire/EntireSalesContainer';
 import StoreRankContainer from '../../rank/entire/store/StoreRankContainer';
-import Template from '../../../components/rank/ProductRank';
+import { OneTemplate }from '../../../components/rank/ProductRank';
 // Select Chage
 import { SelectContent } from '../../../components/side/content/AdminSelectContent'
 
@@ -59,7 +59,6 @@ class AdminSelectContainer extends Component {
     //  [ category radio btn ]
     handleRadio = (e) => {
         this.props.handleRadioContent(e.target.value)
-     
 
         this.setState({
             checkedOption : e.target.value
@@ -77,7 +76,7 @@ class AdminSelectContainer extends Component {
                             storeRankContainer={<StoreRankContainer/>}
                             handleRadio={this.handleRadio}
                             checkedOption={this.state.checkedOption}
-                            ProductsRankContainer={<Template
+                            productsRankContainer={<OneTemplate
                                                       radiocontent={this.props.radiocontent}
                                                    />}
                              />
@@ -102,14 +101,14 @@ class AdminSelectContainer extends Component {
 
 const mapStateToProps = state => {
     return {
-        content : state.adminSelected.result,  // reducer(index.js)에서 지정한 네임
+        content : state.selected.result,  // reducer(index.js)에서 지정한 네임
         radiocontent : state.adminRadio.result
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
-        handleContent : (value) => dispatch(selectRequestAction(value)),
+        handleContent : (value) => dispatch(selectRequestActionAdmin(value)),
         handleRadioContent : (value) => dispatch(radioRequestAction(value))
     };
 }

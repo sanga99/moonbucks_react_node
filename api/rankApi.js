@@ -46,7 +46,8 @@ router.post("/StoresRankMonth", (req, res) => {
                   GROUP BY 
                     st.storeId
                   order by 
-                    price desc;`;
+                    price desc
+                  limit 3;`;
         // db select문 수행
         dbConn((err, connection) => {
         connection.query( sql, (err, rows) => {
@@ -60,10 +61,11 @@ router.post("/StoresRankMonth", (req, res) => {
         });
   });
 
-// [Admin Select Side default]-[이번달 카테고리(d/f/g)별 상품순위]
+
+
+// [Admin Select Side default]-[이번달 전체매장 카테고리(d/f/g)별 상품순위 ]
 router.post("/ProductRank", (req, res) => {
-  console.log('3434'+JSON.stringify(req.body.category));
- 
+
   let category = req.body.category;   // [ 0(drink)/ 1(food)/ 2(goods)]
   if(category=='Drink'){category = 0;}
   else if(category=='Food'){category = 1;}
@@ -80,7 +82,9 @@ router.post("/ProductRank", (req, res) => {
                  group by
                      pr.productId
                 order by  
-                    price`;
+                    price
+                 limit 3;
+                    `;
         // db select문 수행
         dbConn((err, connection) => {
         connection.query( sql, category, (err, rows) => {
@@ -92,6 +96,107 @@ router.post("/ProductRank", (req, res) => {
         });
         if(err) throw err;
         });
+  });
+
+
+// [Admin Select Side Select ]-[이번달 Drink 상품순위]-
+router.post("/drinkRankStore", (req, res) => {
+
+  let store = req.body.name;
+    const sql = `select 
+                      pr.name, sum(pr.price) as price
+                 from 
+                      sales as sa inner join product pr on sa.productId = pr.productId
+                      inner join store as st on sa.storeId = st.storeId
+                 where 
+                      st.name = ?
+                 and 
+                      month(sa.date)= month(now())
+                 and 
+                      pr.category= 0
+                 group by 
+                      pr.productId
+                 order by 
+                      price desc
+                 limit 3
+                      ;`;
+        // db select문 수행
+        dbConn((err, connection) => {
+            connection.query( sql, store, (err, rows) => {
+                connection.release(); // 연결세션 반환.
+                if (err) {
+                   throw err;
+                }
+                return res.send( rows );
+            }); 
+            if(err) throw err;
+            });
+  });
+
+// [Admin Select Side Select ]-[이번달 Food 상품순위]-
+router.post("/foodRankStore", (req, res) => {
+
+  let store = req.body.name;
+    const sql = `select 
+                      pr.name, sum(pr.price) as price
+                 from 
+                      sales as sa inner join product pr on sa.productId = pr.productId
+                      inner join store as st on sa.storeId = st.storeId
+                 where 
+                      st.name = ?
+                 and 
+                      month(sa.date)= month(now())
+                 and 
+                      pr.category= 1
+                 group by 
+                      pr.productId
+                 order by 
+                      price desc
+                 limit 3;`;
+        // db select문 수행
+        dbConn((err, connection) => {
+            connection.query( sql, store, (err, rows) => {
+                connection.release(); // 연결세션 반환.
+                if (err) {
+                   throw err;
+                }
+                return res.send( rows );
+            }); 
+            if(err) throw err;
+            });
+  });
+
+// [Admin Select Side Select ]-[이번달 Drink 상품순위]-
+router.post("/goodsRankStore", (req, res) => {
+
+  let store = req.body.name;
+    const sql = `select 
+                      pr.name, sum(pr.price) as price
+                 from 
+                      sales as sa inner join product pr on sa.productId = pr.productId
+                      inner join store as st on sa.storeId = st.storeId
+                 where 
+                      st.name = ?
+                 and 
+                      month(sa.date)= month(now())
+                 and 
+                      pr.category= 2
+                 group by 
+                      pr.productId
+                 order by 
+                      price desc
+                 limit 3;`;
+        // db select문 수행
+        dbConn((err, connection) => {
+            connection.query( sql, store, (err, rows) => {
+                connection.release(); // 연결세션 반환.
+                if (err) {
+                   throw err;
+                }
+                return res.send( rows );
+            }); 
+            if(err) throw err;
+            });
   });
 
 

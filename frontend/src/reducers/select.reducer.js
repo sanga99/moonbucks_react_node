@@ -4,7 +4,7 @@ const InitialState = {
     selected : ''
 }
 
-const selectReducer = (state = InitialState, { type, payload, error}) => {
+const selectReducer = (state = InitialState, { type, payload, twoSales, totalSales, drinkRank, foodRank, GoodsRank , error}) => {
     switch(type){
         case actions.SELECT_REQUEST:
             return {
@@ -12,10 +12,13 @@ const selectReducer = (state = InitialState, { type, payload, error}) => {
                 selected : payload
             }
         case actions.SELECT_SUCCESS:
-            console.log('reducer'+payload);     // (주의)action(selectSuccessAction)에서 담는 변수명과 같아야한다!!! 
+            console.log('reducer'+twoSales, totalSales, drinkRank, foodRank, GoodsRank );     // (주의)action(selectSuccessAction)에서 담는 변수명과 같아야한다!!! 
             return {
                 ...state, 
-                result : payload
+                result : {
+                    twoSales, totalSales, drinkRank, foodRank, GoodsRank 
+                }
+                // result : payload
             }
         case actions.SELECT_FAILURE:
             return {

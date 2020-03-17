@@ -3,18 +3,60 @@ import axios from 'axios';
 import * as actions from '../../actions/select.action';
 
 
-function selectApi( name ){     // action에서 json key값을 name이라고 줌, 여기는 상관없음(쿼리문 ?인자에서 res.data.name을 찾도록 돼있음)
-    return axios.post('/api/salesTwoMonthStore', name);
+
+// function salesTwoMonthStore( name ){     // action에서 json key값을 name이라고 줌, 여기는 상관없음(쿼리문 ?인자에서 res.data.name을 찾도록 돼있음)
+//      return axios.post('/api/salesTwoMonthStore', name)
+// }
+
+// function totalSalesStore( name ){     
+//      return axios.post('/api/totalSalesStore', name)
+// }
+const TwoMonthSalesStore =( name ) =>{     // action에서 json key값을 name이라고 줌, 여기는 상관없음(쿼리문 ?인자에서 res.data.name을 찾도록 돼있음)
+     return axios.post('/api/salesTwoMonthStore', name)
 }
 
+const totalSalesStore = ( name ) => {     
+     return axios.post('/api/totalSalesStore', name)
+}
+
+const DrinkRankStore = (name) => {     
+     return axios.post('/api/drinkRankStore', name)
+}
+const FoodRankStore = (name) => {     
+     return axios.post('/api/foodRankStore', name)
+}
+const GoodsRankStore = (name) => {     
+     return axios.post('/api/goodsRankStore', name)
+}
+
+function selectApi(name){
+    return axios.all([TwoMonthSalesStore(name), totalSalesStore(name),
+                       DrinkRankStore(name), FoodRankStore(name), GoodsRankStore(name)
+                    ])
+                    // .then(axios.spread((...req) => {
+                    //     const  twoMonthSales = req[0];
+                    //     const  totalSales = req[1];
+
+                    //     console.log('333'+JSON.stringify(twoMonthSales)+ JSON.stringify(totalSales));
+
+                    // })).catch((err) => {
+                    //     console.error(err)
+                    // })
+}
 
 function* select( payload ){
     try{
         const selected = payload;
         console.log('saga select' + JSON.stringify(selected));
-        const { data } = yield call(selectApi, selected);
-        yield put(actions.selectSuccessAction(data));
-        console.log('saga select after call' + JSON.stringify(data));
+
+        // const  { data }  = yield call(selectApi, selected);  // {data}로 감싸면 , status:200 등의 데이터없이 딱 원하는 데이터만 얻을수 있다.
+        const  data   = yield call(selectApi, selected);        // 하지만, axios.all에서 받아오니, {data}로 하면 데이터 안받아옴
+        console.log('select saga yield call'+JSON.stringify(data[0].data))    
+        yield put(actions.selectSuccessAction(
+                    data[0].data, data[1].data, data[2].data, data[3].data, data[4].data 
+                ));
+        
+ 
 
     }catch(error){
         console.error('select saga error'+ error.response);

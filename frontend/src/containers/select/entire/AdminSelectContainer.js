@@ -3,13 +3,16 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { selectRequestAction  } from '../../../actions/select.action';
 import { radioRequestAction  } from '../../../actions/radio.action';
+// Option
 import SelectOption from '../../../components/side/option/AdminOption';
+// Default
 import { SelectDefaultContent } from '../../../components/side/content/AdminSelectContent'; // 해당폴더에 여러 파일 있을 경우 { }중괄호에 넣어준다.
 import TwoMonthSalesContainer from '../../sales/entire/TwoMonthSalesContainer';
 import EntireSalesContainer from '../../sales/entire/EntireSalesContainer';
 import StoreRankContainer from '../../rank/entire/store/StoreRankContainer';
 import Template from '../../../components/rank/ProductRank';
-
+// Select Chage
+import { SelectContent } from '../../../components/side/content/AdminSelectContent'
 
 
 class AdminSelectContainer extends Component {
@@ -66,9 +69,9 @@ class AdminSelectContainer extends Component {
 
 
     render() {
-        let content = null;
+        let templte = null;
         if(this.state.value=='choice'){
-            content =  <SelectDefaultContent
+            templte =  <SelectDefaultContent
                             towSales={<TwoMonthSalesContainer/>}
                             entireSales={<EntireSalesContainer/>}
                             storeRankContainer={<StoreRankContainer/>}
@@ -79,9 +82,9 @@ class AdminSelectContainer extends Component {
                                                    />}
                              />
         }else{
-            // content =  <SelectContent
-            //                 sales={this.props.content}
-            //             />
+            templte =  <SelectContent
+                             storeData={this.props.content ? this.props.content : ''}
+                        />
         }
 
         return (
@@ -91,7 +94,7 @@ class AdminSelectContainer extends Component {
                     value={this.state.value}
                     handleChange={this.handleChange}
                 />
-               {content}
+               {templte}
             </div>
         );
     }
@@ -99,7 +102,7 @@ class AdminSelectContainer extends Component {
 
 const mapStateToProps = state => {
     return {
-        content : state.adminSelected,  // reducer(index.js)에서 지정한 네임
+        content : state.adminSelected.result,  // reducer(index.js)에서 지정한 네임
         radiocontent : state.adminRadio.result
     }
 }

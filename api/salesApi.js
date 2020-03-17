@@ -144,5 +144,35 @@ router.post("/totalSales", (req, res) => {
 
 
 //[owner]
+// [ Owner Select 달 별(option) 총 매출액- id매장]
+router.post("/totalSalesMonthStroe", (req, res) => {
+
+  let month = req.body.month;   // (임시) -> st.name을 해당 ownerId의 해당하는 매장면 request 인자로 넘기기 
+  const sql = `select 
+                    sum(pr.price) as sum
+               from 
+                    sales as sa inner join product pr on sa.productId = pr.productId
+               inner join 
+                    store as st on sa.storeId = st.storeId
+               where 
+                    st.name = 'test역삼DT점' 
+               and 
+                    month(sa.date) = ? 
+              ;`;
+      // db select문 수행
+      dbConn((err, connection) => {
+        connection.query( sql, month, (err, rows) => {
+          connection.release(); // 연결세션 반환.
+          if (err) {
+            throw err;
+          }
+          console.log('결과'+JSON.stringify(rows));
+          return res.send( rows ); // 결과는 rows에 담아 전송
+        });
+        if(err) throw err;
+      });
+    });
+
+
 
 module.exports = router;

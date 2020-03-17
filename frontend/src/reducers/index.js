@@ -7,8 +7,8 @@ import { default as mapReducer } from './map.reducers';
 
 // combineReduers은 여러개의 reducer들을 하나로 합쳐준다.
 const rootReducer = combineReducers({
-    userReducer,        // 마지막 인자에도 꼭 ,(쉼표)를 적어야 한다. 
-    adminSelected : selectReducer,
+    userReducer,                 // component의 (mapStateToProps에서 여기서 정한 객체명 사용)해 데이터를 가져간다.    
+    selected : selectReducer,       
     adminRadio :radioReducer,
     mapReducer
 });

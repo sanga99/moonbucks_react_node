@@ -6,12 +6,13 @@ const InitialState = {
 
 const selectReducer = (state = InitialState, { type, payload, twoSales, totalSales, drinkRank, foodRank, GoodsRank , error}) => {
     switch(type){
-        case actions.SELECT_REQUEST:
+        // [admin]
+        case actions.ADMIN_SELECT_REQUEST:
             return {
                 ...state, 
                 selected : payload
             }
-        case actions.SELECT_SUCCESS:
+        case actions.ADMIN_SELECT_SUCCESS:
             console.log('reducer'+twoSales, totalSales, drinkRank, foodRank, GoodsRank );     // (주의)action(selectSuccessAction)에서 담는 변수명과 같아야한다!!! 
             return {
                 ...state, 
@@ -20,7 +21,27 @@ const selectReducer = (state = InitialState, { type, payload, twoSales, totalSal
                 }
                 // result : payload
             }
-        case actions.SELECT_FAILURE:
+        case actions.ADMIN_SELECT_FAILURE:
+            return {
+                ...state, 
+                error
+            }
+        // [owner]
+        case actions.OWNER_SELECT_REQUEST:
+            return {
+                ...state, 
+                selected : payload
+            }
+        case actions.OWNER_SELECT_SUCCESS:
+            // console.log('reducer'+twoSales, totalSales, drinkRank, foodRank, GoodsRank );     // (주의)action(selectSuccessAction)에서 담는 변수명과 같아야한다!!! 
+            return {
+                ...state, 
+                // result : {
+                //     twoSales, totalSales, drinkRank, foodRank, GoodsRank 
+                // }
+                result : payload
+            }
+        case actions.OWNER_SELECT_FAILURE:
             return {
                 ...state, 
                 error

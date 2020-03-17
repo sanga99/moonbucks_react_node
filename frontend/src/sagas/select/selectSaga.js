@@ -3,14 +3,6 @@ import axios from 'axios';
 import * as actions from '../../actions/select.action';
 
 
-
-// function salesTwoMonthStore( name ){     // action에서 json key값을 name이라고 줌, 여기는 상관없음(쿼리문 ?인자에서 res.data.name을 찾도록 돼있음)
-//      return axios.post('/api/salesTwoMonthStore', name)
-// }
-
-// function totalSalesStore( name ){     
-//      return axios.post('/api/totalSalesStore', name)
-// }
 const TwoMonthSalesStore =( name ) =>{     // action에서 json key값을 name이라고 줌, 여기는 상관없음(쿼리문 ?인자에서 res.data.name을 찾도록 돼있음)
      return axios.post('/api/salesTwoMonthStore', name)
 }
@@ -29,7 +21,7 @@ const GoodsRankStore = (name) => {
      return axios.post('/api/goodsRankStore', name)
 }
 
-function selectApi(name){
+function selectAdminApi(name){
     return axios.all([TwoMonthSalesStore(name), totalSalesStore(name),
                        DrinkRankStore(name), FoodRankStore(name), GoodsRankStore(name)
                     ])
@@ -44,26 +36,66 @@ function selectApi(name){
                     // })
 }
 
-function* select( payload ){
+function* selectAdmin( payload ){
+     console.log('사가 진입'+ JSON.stringify(payload))
+    try{
+        const selected = payload;
+
+        // const  { data }  = yield call(selectApi, selected);  // {data}로 감싸면 , status:200 등의 데이터없이 딱 원하는 데이터만 얻을수 있다.
+        const  data   = yield call(selectAdminApi, selected);        // 하지만, axios.all에서 받아오니, {data}로 하면 데이터 안받아옴
+        console.log('select saga yield call'+JSON.stringify(data[0].data))    
+
+        yield put(actions.selectSuccessActionAdmin(
+                    data[0].data, data[1].data, data[2].data, data[3].data, data[4].data 
+                ));
+
+    }catch(error){
+        console.error('select saga error'+ error.response);
+        yield put(actions.selectFailureActionAdmin(error));       // axios에서 에러
+    }
+}
+
+
+
+// [owner]
+// const totalSalesMonthStore = (month) => {      //  (임시) - 나중에 매장명(name)도 인자로 넘기기
+//      return axios.post('/api/totalSalesMonthStroe', month)
+// }
+function totalSalesMonthStore(month){      //  (임시) - 나중에 매장명(name)도 인자로 넘기기
+     console.log('진입00000'+JSON.stringify(month))
+     return axios.post('/api/totalSalesMonthStroe', month)
+}
+
+// function selectOwnerApi(month){
+//      return axios.all([totalSalesMonthStore(month), 
+//                      ])
+//  }
+
+
+
+function* selectOwner( payload ){
+     console.log('사가 진입'+ JSON.stringify(payload))
     try{
         const selected = payload;
         console.log('saga select' + JSON.stringify(selected));
 
-        // const  { data }  = yield call(selectApi, selected);  // {data}로 감싸면 , status:200 등의 데이터없이 딱 원하는 데이터만 얻을수 있다.
-        const  data   = yield call(selectApi, selected);        // 하지만, axios.all에서 받아오니, {data}로 하면 데이터 안받아옴
-        console.log('select saga yield call'+JSON.stringify(data[0].data))    
-        yield put(actions.selectSuccessAction(
-                    data[0].data, data[1].data, data[2].data, data[3].data, data[4].data 
-                ));
-        
- 
+     //    const { data}  = yield call(selectOwnerApi, selected);        
+        const { data}  = yield call(totalSalesMonthStore, selected);        
+        console.log('select saga yield call'+JSON.stringify(data))    
+
+     //    yield put(actions.selectSuccessActionOwner(
+     //                // data[0].data
+     //                data
+     //            ));
+        yield put(actions.selectSuccessActionOwner(data));
 
     }catch(error){
         console.error('select saga error'+ error.response);
-        yield put(actions.selectFailureAction(error));       // axios에서 에러
+        yield put(actions.selectFailureActionOwner(error));       // axios에서 에러
     }
 }
 
 export function* watchSelect(){
-    yield takeEvery(actions.SELECT_REQUEST, select);
+    yield takeEvery(actions.ADMIN_SELECT_REQUEST, selectAdmin);
+    yield takeEvery(actions.OWNER_SELECT_REQUEST, selectOwner);
 }

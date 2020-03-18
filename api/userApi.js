@@ -101,46 +101,39 @@ router.get('/logout', (req, res)=> {              // post /api/logout
   // })
 });
      
+
+
                
-/*
-// * 기본 형태
-router.post("/testLogin", (req, res) => {   
-  // db select문 수행
+
+// [회원가입]-[이메일 중복확인]
+router.post("/existEmail", (req, res) => {  
+ 
+  let email = req.body.email;
   dbConn((err, connection) => {
-    connection.query("SELECT * FROM owner", (err, rows) => {
+    connection.query("SELECT ownerId FROM owner where ownerId = ?;", email, (err, rows) => {
       connection.release(); // 연결세션 반환.
       if (err) {
         throw err;
       }
-      return res.json( rows ); // 결과는 rows에 담아 전송 http://localhost:3000/api/testLogin 또는 5000번 포트
+      if(!rows.length){       // 존재하지 않는 아이디 -> 회원가입 가능
+        return res.send({ succ : true, massage : "가능"});
+      }else{ 
+        return res.send({ succ : false, massage : "이미존재하는 아이디입니다."});
+      }
+      // return exist;
     });
     if(err) throw err;
   });
 });
-*/
+
 
 
 // 회원가입 
-
-// query -> 매장id는 client에서 data삽입 전달
 // insert into owner(ownerId, name, password, phone, storeId)
 // values ('ccc@ccc.com','김일일', 'test01#', '010-000-0000', 0);
 // 회원가입 router
 
-// query : select storeId, name from store;
-router.post('/store', (req, res) => {
-  
-  dbConn((err, connection) => {
-    connection.query("SELECT storeId, name FROM store", (err, rows) => {
-      connection.release(); // 연결세션 반환.
-      if (err) {
-        throw err;
-      }
-      return res.send( rows ); 
-    });
-    if(err) throw err;
-  });
-})
+
 
 
 

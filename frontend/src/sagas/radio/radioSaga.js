@@ -11,10 +11,8 @@ function radioApi( category ){     // action에서 json key값을 name이라고 
 function* radio( payload ){
     try{
         const category = payload;
-        console.log('saga radio' + JSON.stringify(category));
         const { data } = yield call(radioApi, category);
         yield put(actions.radioSuccessAction(data));
-        console.log('saga radio after call' + JSON.stringify(data));
 
     }catch(error){
         console.error('radio saga error'+ error.response);

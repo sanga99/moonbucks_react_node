@@ -12,7 +12,7 @@ const radioReducer = (state = InitialState, { type, payload, error}) => {
                 selected : payload
             }
         case actions.RADIO_SUCCESS:
-            console.log('reducer'+payload);     // (주의)action(selectSuccessAction)에서 담는 변수명과 같아야한다!!! 
+            // console.log('reducer'+payload);     // (주의)action(selectSuccessAction)에서 담는 변수명과 같아야한다!!! 
             return {
                 ...state, 
                 result : payload

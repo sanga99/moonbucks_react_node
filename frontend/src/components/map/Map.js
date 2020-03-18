@@ -9,11 +9,7 @@ import './Map.css';
 
 class Map extends Component {
 
-    // map;
-    // marker;
-    // infowindow;
- 
-    constructor(props){
+  constructor(props){
       super(props);
       this.state = {
         map: null, 
@@ -33,7 +29,6 @@ class Map extends Component {
              .then(res => res.data)  
              .then(result => {
                  this.setState({ stores : result})
-                 console.log('Map api/storeAll'+JSON.stringify(result))
                 })
              .catch(err => console.log(err));
      
@@ -149,7 +144,6 @@ class Map extends Component {
             // 인포윈도우를 생성합니다
             this.infowindow = new kakao.maps.InfoWindow({
                 content: iwContent ,// 인포윈도우에 표시할 내용
-                // content : iwContent, // => api 다른한곳에서 가져오고 여기서는 이곳을 제외한 필요한 부분만 api에서 추출해오기
                 // removable : iwRemoveable     // 닫기
             });
                 // 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다

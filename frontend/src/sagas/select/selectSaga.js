@@ -43,7 +43,7 @@ function* selectAdmin( payload ){
 
         // const  { data }  = yield call(selectApi, selected);  // {data}로 감싸면 , status:200 등의 데이터없이 딱 원하는 데이터만 얻을수 있다.
         const  data   = yield call(selectAdminApi, selected);        // 하지만, axios.all에서 받아오니, {data}로 하면 데이터 안받아옴
-        console.log('select saga yield call'+JSON.stringify(data[0].data))    
+         //  console.log('select saga yield call'+JSON.stringify(data[0].data))    
 
         yield put(actions.selectSuccessActionAdmin(
                     data[0].data, data[1].data, data[2].data, data[3].data, data[4].data 
@@ -84,13 +84,10 @@ function selectOwnerApi(month){
 
 
 function* selectOwner( payload ){
-     console.log('사가 진입'+ JSON.stringify(payload))
     try{
         const selected = payload;
-        console.log('saga select' + JSON.stringify(selected));
 
         const data  = yield call(selectOwnerApi, selected);        
-        console.log('select saga yield call'+JSON.stringify(data))    
 
         yield put(actions.selectSuccessActionOwner(
                     data[0].data, data[1].data, data[2].data, data[3].data

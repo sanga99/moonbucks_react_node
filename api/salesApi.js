@@ -7,7 +7,7 @@ const dbConn = require('../mariaDBConn');
 //[admin]
 // [ 금월, 전월(해당매장)  1)MarkerClick  2)admin Side Select ]
 router.post("/salesTwoMonthStore", (req, res) => {
-  console.log('api확인'+ JSON.stringify(req.body.name))
+  
 let store = req.body.name;
 const sql = `select          
                 extract(month from sa.date) as month, sum(price) as total_sales 
@@ -84,7 +84,6 @@ const sql = `select
           if (err) {
             throw err;
           }
-          console.log('결과'+JSON.stringify(rows));
           return res.send( rows ); // 결과는 rows에 담아 전송
         });
         if(err) throw err;
@@ -191,7 +190,6 @@ router.post("/totalSalesMonthStroe", (req, res) => {
           if (err) {
             throw err;
           }
-          console.log('결과'+JSON.stringify(rows));
           return res.send( rows ); // 결과는 rows에 담아 전송
         });
         if(err) throw err;
@@ -221,7 +219,6 @@ router.post("/drinkSalesYearStore", (req, res) => {  // (임시 -id매장)
           if (err) {
             throw err;
           }
-          console.log('결과'+JSON.stringify(rows));
           return res.send( rows ); // 결과는 rows에 담아 전송
         });
         if(err) throw err;
@@ -248,7 +245,6 @@ router.post("/foodSalesYearStore", (req, res) => {  // (임시 -id매장)
           if (err) {
             throw err;
           }
-          console.log('결과'+JSON.stringify(rows));
           return res.send( rows ); // 결과는 rows에 담아 전송
         });
         if(err) throw err;
@@ -275,7 +271,6 @@ router.post("/goodsSalesYearStore", (req, res) => {  // (임시 -id매장)
           if (err) {
             throw err;
           }
-          console.log('결과'+JSON.stringify(rows));
           return res.send( rows ); // 결과는 rows에 담아 전송
         });
         if(err) throw err;
@@ -303,7 +298,6 @@ router.post("/totalSalesYearStore", (req, res) => {  // (임시 -id매장)
           if (err) {
             throw err;
           }
-          console.log('결과'+JSON.stringify(rows));
           return res.send( rows ); // 결과는 rows에 담아 전송
         });
         if(err) throw err;

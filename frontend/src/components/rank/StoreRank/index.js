@@ -1,1 +1,1 @@
-export { default } from './StoreRank';
+export { default } from './Template';

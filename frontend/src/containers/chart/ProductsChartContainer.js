@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import ProductsChart from '../../components/chart/ProductsChart';
 import axios from 'axios';
-import { number } from 'prop-types';
-import { setServers } from 'dns';
 
 
 class ProductsChartContainer extends Component {
@@ -17,13 +15,13 @@ class ProductsChartContainer extends Component {
     componentWillMount(){       // willMount에 해야 그래프가 그려지듯이 나옴(componentDidMount에서는 한번에 나타난다.)
 
         const DrinkRankStore = () => {     
-            return axios.post('/api/drinkSalesYearStroe')
+            return axios.post('/api/drinkSalesYearStore')
        }
         const FoodRankStore = () => {     
-            return  axios.post('/api/foodSalesYearStroe')
+            return  axios.post('/api/foodSalesYearStore')
        }
         const GoodsRankStore = () => {     
-            return axios.post('/api/goodsSalesYearStroe')
+            return axios.post('/api/goodsSalesYearStore')
        }
        
             axios.all([DrinkRankStore(), FoodRankStore(), GoodsRankStore()])

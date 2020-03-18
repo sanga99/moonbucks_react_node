@@ -58,7 +58,7 @@ class OwnerSelectContainer extends Component {
 }
 
 const mapStateToProps = state => {
-    console.log('maptoprops'+JSON.stringify(state.adminSelected))
+    // console.log('maptoprops'+JSON.stringify(state.adminSelected))
     return {
         content : state.selected.result,
     }

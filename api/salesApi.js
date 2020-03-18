@@ -198,9 +198,11 @@ router.post("/totalSalesMonthStroe", (req, res) => {
       });
     });
 
-    
+
+
+
 // [ Owner Chart 전체월 / drink 총매출액(id매장) ]
-router.post("/drinkSalesYearStroe", (req, res) => {  // (임시 -id매장)
+router.post("/drinkSalesYearStore", (req, res) => {  // (임시 -id매장)
   const sql = `select 
                    extract(month from sa.date) as name, sum(price) as price
                 from 
@@ -227,7 +229,7 @@ router.post("/drinkSalesYearStroe", (req, res) => {  // (임시 -id매장)
     });
 
 // [ Owner Chart 전체월 / food 총매출액(id매장) ]
-router.post("/foodSalesYearStroe", (req, res) => {  // (임시 -id매장)
+router.post("/foodSalesYearStore", (req, res) => {  // (임시 -id매장)
   const sql = `select 
                    extract(month from sa.date) as name, sum(price) as price
                 from 
@@ -254,7 +256,7 @@ router.post("/foodSalesYearStroe", (req, res) => {  // (임시 -id매장)
     });
 
 // [ Owner Chart 전체월 / goods 총매출액(id매장) ]
-router.post("/goodsSalesYearStroe", (req, res) => {  // (임시 -id매장)
+router.post("/goodsSalesYearStore", (req, res) => {  // (임시 -id매장)
   const sql = `select 
                    extract(month from sa.date) as name, sum(price) as price
                 from 
@@ -267,6 +269,34 @@ router.post("/goodsSalesYearStroe", (req, res) => {  // (임시 -id매장)
                 group by 
                   extract(month from sa.date);`;
       // db select문 수행
+      dbConn((err, connection) => {
+        connection.query( sql, (err, rows) => {
+          connection.release(); // 연결세션 반환.
+          if (err) {
+            throw err;
+          }
+          console.log('결과'+JSON.stringify(rows));
+          return res.send( rows ); // 결과는 rows에 담아 전송
+        });
+        if(err) throw err;
+      });
+    });
+
+
+    
+// [ Owner Chart 전체월 /  월별 총매출액(id매장) ]
+router.post("/totalSalesYearStore", (req, res) => {  // (임시 -id매장)
+  const sql = `select 
+                    extract(month from sa.date) as month, 
+                    sum(price) as price
+               from 
+                   sales as sa inner join product pr on sa.productId = pr.productId 
+               inner join 
+                   store as st on sa.storeId = st.storeId
+               where 
+                   st.name = 'test역삼DT점'
+               group by 
+                    extract(month from sa.date);`;
       dbConn((err, connection) => {
         connection.query( sql, (err, rows) => {
           connection.release(); // 연결세션 반환.

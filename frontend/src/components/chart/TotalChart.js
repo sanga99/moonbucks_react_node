@@ -3,6 +3,7 @@ import {
   BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
 
+
 const data = [
   {
     name: '1월', uv: 400
@@ -55,13 +56,13 @@ export default class TotalChart extends Component {
           <BarChart
             width={800}
             height={400}
-            data={data}
+            data={this.props.data}
             margin={{
               top: 5, right: 30, left: 20, bottom: 5,
             }}
           >
             <CartesianGrid strokeDasharray="1 1" />
-            <XAxis dataKey="name" 
+            <XAxis dataKey="month" 
                    tickLine={false}     // x축 표시로 튀어나오는 선 false
                    tickMargin={10}       // x축 선과 문자열 사이의 공간
                    fontSize={12}        // x축 문자열 크기
@@ -81,7 +82,7 @@ export default class TotalChart extends Component {
                   iconType='rect'
             />
             <Bar 
-                  dataKey="uv" 
+                  dataKey="price" 
                   name={"총매출(만단위)"}
                   fill="#F2CB61"
                   barSize={15}

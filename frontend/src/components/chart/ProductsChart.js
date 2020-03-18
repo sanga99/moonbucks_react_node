@@ -3,48 +3,9 @@ import {
   LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
 
-
-const data = [
-  {
-    name: '1월', drink: 400, food: 200, goods: 240,
-  },
-  {
-    name: '2월', drink: 300, food: 138, goods: 220,
-  },
-  {
-    name: '3월', drink: 200, food: 80, goods: 220,
-  },
-  {
-    name: '4월', drink: 270, food: 398, goods: 200,
-  },
-  {
-    name: '5월', drink: 180, food: 480, goods: 211,
-  },
-  {
-    name: '6월', drink: 230, food: 380, goods: 250,
-  },
-  {
-    name: '7월', drink: 340, food: 430, goods: 210,
-  },
-  {
-    name: '8월', drink: 340, food: 430, goods: 210,
-  },
-  {
-    name: '9월', drink: 340, food: 430, goods: 210,
-  },
-  {
-    name: '10월', drink: 340, food: 430, goods: 200,
-  },
-  {
-    name: '11월', drink: 340, food: 430, goods: 200,
-  },
-  {
-    name: '12월', drink: 340, food: 430, goods: 210,
-  },
-];
-
 export default class ProductsChart extends Component {
- 
+
+
     /*
     LinkChart : chart전체
     CartesianGrid : 차트 바탕 안내선
@@ -54,6 +15,8 @@ export default class ProductsChart extends Component {
     Line : 하나의 라인 
            activeDot={{ r: 5}} 속성값에 이것을 주면, 해당 라인에 마우스를 가져다 대었을 때 점크기가 숫자만큼 커진다 .
     */
+
+
 
   render() {
     const tooltipStyle = {
@@ -67,13 +30,13 @@ export default class ProductsChart extends Component {
       <LineChart
                 width={800}
                 height={400}
-                data={data}
+                data={this.props.data}
                 margin={{
                     top: 5, right: 30, left: 20, bottom: 5,
                 }}
       >
         <CartesianGrid strokeDasharray="1 1" />
-        <XAxis dataKey="name" 
+        <XAxis dataKey="month" 
                tickLine={false}     // x축 표시로 튀어나오는 선 false
                tickMargin={10}       // x축 선과 문자열 사이의 공간
                fontSize={12}        // x축 문자열 크기

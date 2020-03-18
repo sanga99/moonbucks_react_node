@@ -100,7 +100,7 @@ router.post("/ProductRank", (req, res) => {
   });
 
 
-// [Admin Select Side Select ]-[이번달 Drink 상품순위]-
+// [Admin Select Side Select ]-[이번달 Drink 상품순위]
 router.post("/drinkRankStore", (req, res) => {
 
   let store = req.body.name;
@@ -134,7 +134,7 @@ router.post("/drinkRankStore", (req, res) => {
             });
   });
 
-// [Admin Select Side Select ]-[이번달 Food 상품순위]-
+// [Admin Select Side Select ]-[이번달 Food 상품순위]
 router.post("/foodRankStore", (req, res) => {
 
   let store = req.body.name;
@@ -167,7 +167,7 @@ router.post("/foodRankStore", (req, res) => {
             });
   });
 
-// [Admin Select Side Select ]-[이번달 Drink 상품순위]-
+// [Admin Select Side Select ]-[이번달 Goods 상품순위]
 router.post("/goodsRankStore", (req, res) => {
 
   let store = req.body.name;
@@ -202,6 +202,100 @@ router.post("/goodsRankStore", (req, res) => {
 
 
 // [ owner ] 
+// [ Side Defaut]- [ 전체월 Drink순위-id매장] 
+router.post("/drinkRankStoreConstant", (req, res) => {  // - (임시)-매장명 인자 해결
+     const sql = `select 
+                    pr.name, sum(pr.price) as price
+               from 
+                    sales as sa inner join product pr on sa.productId = pr.productId
+               inner join 
+                    store as st on sa.storeId = st.storeId
+               where 
+                    st.name = 'test역삼DT점'
+               and 
+                    pr.category=0
+               group by 
+                    pr.productId
+               order by 
+                    price desc  
+               limit 3;`;
+          // db select문 수행
+          dbConn((err, connection) => {
+          connection.query( sql, (err, rows) => {
+               connection.release(); // 연결세션 반환.
+               if (err) {
+                    throw err;
+               }
+               return res.send( rows );
+          }); 
+          if(err) throw err;
+          });
+     });
+
+// [ Side Defaut]- [ 전체월 Food순위-id매장] 
+router.post("/foodRankStoreConstant", (req, res) => {  // - (임시)-매장명 인자 해결
+     const sql = `select 
+                    pr.name, sum(pr.price) as price
+               from 
+                    sales as sa inner join product pr on sa.productId = pr.productId
+               inner join 
+                    store as st on sa.storeId = st.storeId
+               where 
+                    st.name = 'test역삼DT점'
+               and 
+                    pr.category= 1
+               group by 
+                    pr.productId
+               order by 
+                    price desc  
+               limit 3;`;
+          // db select문 수행
+          dbConn((err, connection) => {
+          connection.query( sql, (err, rows) => {
+               connection.release(); // 연결세션 반환.
+               if (err) {
+                    throw err;
+               }
+               return res.send( rows );
+          }); 
+          if(err) throw err;
+          });
+     });
+
+// [ Side Defaut]- [ 전체월 Goods순위-id매장] 
+router.post("/goodsRankStoreConstant", (req, res) => {  // - (임시)-매장명 인자 해결
+     const sql = `select 
+                    pr.name, sum(pr.price) as price
+               from 
+                    sales as sa inner join product pr on sa.productId = pr.productId
+               inner join 
+                    store as st on sa.storeId = st.storeId
+               where 
+                    st.name = 'test역삼DT점'
+               and 
+                    pr.category= 2
+               group by 
+                    pr.productId
+               order by 
+                    price desc  
+               limit 3;`;
+          // db select문 수행
+          dbConn((err, connection) => {
+          connection.query( sql, (err, rows) => {
+               connection.release(); // 연결세션 반환.
+               if (err) {
+                    throw err;
+               }
+               return res.send( rows );
+          }); 
+          if(err) throw err;
+          });
+     });
+
+
+
+
+
 // [ Side Select ]- [ 월선택(option) Drink 순위- id매장]
 router.post("/drinkRankMonthStore", (req, res) => {
 

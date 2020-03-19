@@ -36,8 +36,16 @@ router.post('/storesName', (req, res) => {
 // [Register 전체 매장명 선택]
 router.post('/store', (req, res) => {
   
+  // [left join] ownerId(ownerTable)가 null인것만(매장과 연결안된 상태) 추출.
+  const sql = `SELECT 
+                  st.storeId, st.name
+               FROM 
+                  store as st left join owner as ow on st.storeId = ow.storeId
+                where 
+                    isnull(ow.ownerId) = 1;
+              `;
   dbConn((err, connection) => {
-    connection.query("SELECT storeId, name FROM store where isnull(ownerId)=1;", (err, rows) => {
+    connection.query( sql, (err, rows) => {
       connection.release(); // 연결세션 반환.
       if (err) {
         throw err;
@@ -53,7 +61,7 @@ router.post('/seletedStore', (req, res) => {
 
   let store = req.body.name;
   dbConn((err, connection) => { // isnull => null이면 1반환 / null이 아니면 0반환
-    connection.query("SELECT address, phone FROM store where  name = ? ;", store ,(err, rows) => {
+    connection.query("SELECT storeId, address, phone FROM store where  name = ? ;", store ,(err, rows) => {
       connection.release(); // 연결세션 반환.
       if (err) {
         throw err;

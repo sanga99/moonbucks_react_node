@@ -107,7 +107,7 @@ router.get('/logout', (req, res)=> {              // post /api/logout
 
 // [회원가입]-[이메일 중복확인]
 router.post("/existEmail", (req, res) => {  
- 
+  
   let email = req.body.email;
   dbConn((err, connection) => {
     connection.query("SELECT ownerId FROM owner where ownerId = ?;", email, (err, rows) => {
@@ -128,16 +128,28 @@ router.post("/existEmail", (req, res) => {
 
 
 
-// 회원가입 
-// insert into owner(ownerId, name, password, phone, storeId)
-// values ('ccc@ccc.com','김일일', 'test01#', '010-000-0000', 0);
-// 회원가입 router
+// [회원가입 Submit]
+// [Register 전체 매장명 선택]
+router.post('/register', (req, res) => {
 
-
-
-
-
-
+  const sql = `insert into 
+                    owner(storeId, ownerId, name, password, phone)
+                values 
+                    (?, ?, ?, ?, ?);    
+               `;  
+  const params = [req.body.storeId, req.body.email, req.body.username, req.body.password, req.body.phone];
+               //  (4,'ddd@ddd.com','김올올', 'test01#', '010-000-0000');
+  dbConn((err, connection) => {      
+    connection.query( sql, params, (err, rows) => {
+      connection.release(); // 연결세션 반환.
+      if (err) {
+        throw err;
+      }  
+      return res.send({succ : true}); 
+    });
+    if(err) throw err;
+  });
+})
 
 module.exports = router;
 

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import RegisterTemplate  from '../../components/user/RegisterTemplate/RegisterTemplate';
 import axios  from 'axios';
+import { withRouter} from 'react-router-dom';
 
 
 class RegisterContainer extends Component {
@@ -35,10 +36,8 @@ class RegisterContainer extends Component {
             {   "storeId": 1, "name": "test역삼DT점"  },
             {   "storeId": 2, "name": "test종로"     },
             {   "storeId": 3, "name": "test삼성"    }
-            ]
+            ] 
         */
-        
-
     }
 
 
@@ -48,12 +47,23 @@ class RegisterContainer extends Component {
         let val = e.target.value;
 
         if( CheckEmail(val)  && CheckPw(val) && CheckPw2(val) && CheckPhone(val) && this.state.selectedValue !=='default'){
-            alert('true999');
+            axios.post('/api/register', { 
+                "storeId" : this.state.selectedStore.storeId, 
+                "email" :  this.state.email,
+                "username" :  this.state.username, 
+                "password" :  this.state.password, 
+                "phone" : this.state.phone
+            })
+                .then(res => {
+                    if(res.data.succ){
+                       this.props.history.push('/adminHome')
+                    }
+                })     
         }else{
             if(this.state.selectedValue=='default'){
                 alert('매장을 선택해 주세요')
             }
-            alert('false999');
+            console.log('false Submit');
         }
     }
 
@@ -201,7 +211,7 @@ class RegisterContainer extends Component {
     }
 }
 
-export default RegisterContainer;
+export default withRouter(RegisterContainer);
 
 
 /*

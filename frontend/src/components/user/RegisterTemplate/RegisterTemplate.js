@@ -1,5 +1,5 @@
 import React, { Component} from 'react';
-import { $CombinedState } from 'redux';
+import { Link } from 'react-router-dom';
 // css
 
 class RegisterTemplate extends Component{
@@ -88,8 +88,9 @@ class RegisterTemplate extends Component{
                     </div>
                     <div className="form-group">
                         <button  onClick={handleSubmit} className="btn btn-primary">Register</button>
-                        <button className="btn btn-link">Cancle</button>
-                        {/* <Link to="/login" className="btn btn-link">Cancle</Link> */}
+                        {/* <button type="submit" onSubmit={handleSubmit} className="btn btn-primary">Register</button> */}
+                        {/* <button className="btn btn-link">Cancle</button> */}
+                        <Link to="/adminHome" className="btn btn-link">Cancle</Link>
                     </div>
                 </form>
             </div>

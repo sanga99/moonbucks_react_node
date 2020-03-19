@@ -83,7 +83,7 @@ module.exports = () => {
             if(password === dbuser.dbpw){
             // if(bcrypt.compareSync(password,dbuser.dbpw)){        // 비밀번호 복호화
                 return done(null, dbuser) ;     // -> userApi의 authenticate로 이동
-            }else{
+            }else{  
                 return done(null, false, {
                         message : '비밀번호가 맞지 않습니다.'
                 });

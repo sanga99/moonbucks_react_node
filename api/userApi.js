@@ -6,16 +6,6 @@ const passport = require('passport');
 const flash = require('connect-flash');
 const dbConn = require('../mariaDBConn');
 
-console.log('userApi.js진입');
-
-const dbUserTest = {
-  stestId : 'aaaa',
-  stestPw : 'bbbb'
-};
-
-
-
-
 
 /*
  위 코드 대신 커스텀 콜백을 사용(ajax라서 json응답을 줘야하기 때문에)
@@ -34,13 +24,15 @@ router.post('/login', (req, res, next) => {                                     
             req.flash('error')
              req.session.flash.error = info.message;
              console.log('error info'+JSON.stringify(req.session)); 
-             res.redirect('/login')
+             res.redirect('/adminHome')
+            //  res.redirect('/login')
     }                                   
-    if(err) { res.status(500).json(err); }
+    if(err) { res.status(500).json(err); } 
     if(!user) { console.log('userApi passport authenticate 유저없음');  
                 console.log(JSON.stringify(req.session));          // local에서 user매칭이 틀리면(비번틀림,회원아님) 이리로 들어온다.
                 // res.json(info.message)                                       // 하면, 아래 redirect로 안가고, api/login으로 넘어간다. 
-                return  res.redirect('/login');                                 // redirect를 사용하면, 3000포트(client)를 사용한다
+                return  res.redirect('/adminHome');                                 // redirect를 사용하면, 3000포트(client)를 사용한다
+                // return  res.redirect('/login');                                 // redirect를 사용하면, 3000포트(client)를 사용한다
                 //return res.status(401).json( { success : false, message : info.message } )     // info.message는 local에서 error시 정의했던 message내용
               }
                    
@@ -94,7 +86,8 @@ router.get('/loginError', (req, res) => {                          // (주의) c
 router.get('/logout', (req, res)=> {              // post /api/logout
   req.logout();                                   // 하면 로그아웃 되면 세션도 끊어준다. 
   req.session.destroy(function(err){               // 세션을 지우는 방법.
-    res.redirect('/login');
+    res.send({succ : true})
+    // res.redirect('/adminHome');
   });
   // req.session.save(function(){  // 현재의 세션 상태를 저장하고, redirect
   //   res.redirect('/login');

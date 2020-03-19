@@ -17,7 +17,13 @@ class RegisterContainer extends Component {
             password:'',
             password2:'',
             phone:'',
-            existSucc : ''
+            existSucc : '',
+            emailError1 : false,
+            emailError2: false,
+            pw1Error: false,
+            pw2Error: false,
+            phoneError: false,
+
         }
     }
 
@@ -81,7 +87,6 @@ class RegisterContainer extends Component {
                 this.setState({
                     selectedStore : res.data[0]
                 })
-            console.log('00000'+JSON.stringify(res.data[0]))
         })
 
     }
@@ -93,7 +98,9 @@ class RegisterContainer extends Component {
          const regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
          const check =  regExp.test(this.state.email) ? true : false; 
          if(!check){
-             alert('이메일 형식이 맞지않습니다.'+this.state.email);
+             this.setState({
+                 emailError1 : '이메일 형식이 아닙니다.'
+             })
             //  this.inputRef.current.focus();  => 작동은 되나, 다른칸으로 넘어갈수 없고, alert 2번 뜸.
              return false 
          }
@@ -105,6 +112,15 @@ class RegisterContainer extends Component {
                 this.setState({
                     existSucc : res.data.succ
                 })
+                if(!res.data.succ){
+                    this.setState({
+                        emailError2 : res.data.massage
+                    })
+                }
+            })
+            this.setState({
+                emailError1 : '',
+                emailError2 : ''
             })
             return this.state.existSucc;
             // return true
@@ -117,19 +133,29 @@ class RegisterContainer extends Component {
         const regExp = /^.*(?=^.{8,15}$)(?=.*\d)(?=.*[a-zA-Z])(?=.*[!@#$%^&+=]).*$/;
         const check =  regExp.test(this.state.password) ? true : false; 
          if(!check){
-             alert('비밀번호 형식이 맞지않습니다.');
+             this.setState({
+                 pw1Error : '비밀번호 형식이 맞지않습니다.'
+             })
             //  this.focus();
              return false 
          }else{
+             this.setState({
+                 pw1Error : ''
+             })
              return true
          }
     }
     CheckPw2 = () => {      
         if(this.state.password !== this.state.password2){
-            alert('비밀번호가 일치하지 않습니다.');
+            this.setState({
+                pw2Error : '비밀번호가 일치하지 않습니다.'
+            })
             // this.focus();
             return false;
         }else{
+            this.setState({
+                pw2Error : ''
+            })
             return true;
         }
     }
@@ -139,9 +165,15 @@ class RegisterContainer extends Component {
         const check =  regExp.test(this.state.phone) ? true : false; 
          if(!check){
              alert('전화번호 형식이 맞지 않습니다.');
+             this.setState({
+                 phoneError : '전화번호 형식이 맞지 않습니다.'
+             })
             //  this.focus();
              return false 
          }else{
+             this.setState({
+                 phoneError : ''
+             })
              return true
          }
     }
@@ -192,6 +224,12 @@ class RegisterContainer extends Component {
                 password={this.state.password}
                 password2={this.state.password2}
                 phone={this.state.phone}
+                // Error
+                emailError1={this.state.emailError1}
+                emailError2={this.state.emailError2}
+                pw1Error={this.state.pw1Error}
+                pw2Error={this.state.pw2Error}
+                phoneError={this.state.phoneError}
                 // handler
                 handleSubmit={this.handleSubmit}
                 handleChangeStore={this.handleChangeStore}

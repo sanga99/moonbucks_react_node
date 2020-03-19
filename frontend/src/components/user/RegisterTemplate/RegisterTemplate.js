@@ -10,7 +10,8 @@ class RegisterTemplate extends Component{
     
 
     render(){
-        const { username,  email, password, password2,  phone,  selectedValue, selectedStore,
+        const { username,  email, password, password2,  phone,  selectedValue, selectedStore, 
+                emailError1, emailError2, pw1Error, pw2Error, phoneError,
                  CheckEmail, ClickIsExistEmail, CheckPw, CheckPw2, CheckPhone, handleSubmit,
                  handleChangeStore, handleChangeOwner, handleChangeId, handleChangePw , handleChangePw2, handleChangeOwnerPhone
             } = this.props;
@@ -63,6 +64,11 @@ class RegisterTemplate extends Component{
                         <label>Email(ID)</label>
                         <input type="text" className="form-control email" name="email"
                                 value={email} required onChange={handleChangeId} onBlur={CheckEmail}/>
+                          <div> 
+                          { emailError1 ? <div className="err">{emailError1}</div> : '' }
+                          { emailError2 ? <div className="err">{emailError2}</div> : '' }
+                        </div>
+                        
                     </div>
                     <div className="form-group">
                         <span className="required">*</span>
@@ -71,6 +77,9 @@ class RegisterTemplate extends Component{
                                 value={password} required  onChange={handleChangePw} onBlur={CheckPw}
                                 placeholder="특수문자 / 문자 / 숫자 포함 형태의 8~15자리 이내"
                                 />
+                        <div>
+                           { pw1Error ? <div className="err">{pw1Error}</div> : '' }
+                        </div>
                     </div>
                     <div className="form-group">
                         <span className="required">*</span>
@@ -78,6 +87,9 @@ class RegisterTemplate extends Component{
                         <input type="text" className="form-control password2" name="password2"
                                  value={password2} required onChange={handleChangePw2} onBlur={CheckPw2}
                                  placeholder="비밀번호를 다시 입력해 주세요"/>
+                        <div>
+                           { pw2Error ? <div className="err">{pw2Error}</div> : '' }
+                        </div>
                     </div>
                     <div className="form-group">
                         <label>대표자 전화번호</label>
@@ -85,12 +97,15 @@ class RegisterTemplate extends Component{
                                 value={phone} onChange={handleChangeOwnerPhone} onBlur={CheckPhone}
                                 placeholder="010-xxxx-xxxx"
                                 />
+                         <div>
+                            { phoneError ? <div className="err">{phoneError}</div> : '' }
+                         </div>
                     </div>
                     <div className="form-group">
                         <button  onClick={handleSubmit} className="btn btn-primary">Register</button>
+                        <Link to="/adminHome" className="btn btn-link">Cancle</Link>
                         {/* <button type="submit" onSubmit={handleSubmit} className="btn btn-primary">Register</button> */}
                         {/* <button className="btn btn-link">Cancle</button> */}
-                        <Link to="/adminHome" className="btn btn-link">Cancle</Link>
                     </div>
                 </form>
             </div>

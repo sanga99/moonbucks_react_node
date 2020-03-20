@@ -19,46 +19,59 @@ router.post('/login', (req, res, next) => {                                     
    
   passport.authenticate('local', (err, user, info) => {                          // local.js에서 db매칭 성공 시의 done에서 온다.
     console.log('passport authenticate접근'+JSON.stringify(user));                // DB user
-    console.log('massgae'+JSON.stringify(info));                // DB user
+    console.log('massgae'+JSON.stringify(info));                                 // DB 매칭에서 에러시 에러 massage
     if (info) {                                                                  // info로 들어온 플래시 메세지 처리
             req.flash('error')
              req.session.flash.error = info.message;
              console.log('error info'+JSON.stringify(req.session)); 
-             res.redirect('/adminHome')
-            //  res.redirect('/login')
+            // (에러) res.redirect('/adminHome')                                         // 여기서 res.~~를 하면, if(!user)에서 res.~와 중복으로 에러난다. 
     }                                   
     if(err) { res.status(500).json(err); } 
     if(!user) { console.log('userApi passport authenticate 유저없음');  
                 console.log(JSON.stringify(req.session));          // local에서 user매칭이 틀리면(비번틀림,회원아님) 이리로 들어온다.
                 // res.json(info.message)                                       // 하면, 아래 redirect로 안가고, api/login으로 넘어간다. 
-                return  res.redirect('/adminHome');                                 // redirect를 사용하면, 3000포트(client)를 사용한다
-                // return  res.redirect('/login');                                 // redirect를 사용하면, 3000포트(client)를 사용한다
+                return  res.redirect('/adminHome');                              // redirect를 사용하면, 3000포트(client)를 사용한다
+                // return  res.redirect('/login');                                 
                 //return res.status(401).json( { success : false, message : info.message } )     // info.message는 local에서 error시 정의했던 message내용
               }
-                   
+                    
     req.login(user, (err) => {                                // => serialize로 이동  
         console.log('req.login진입 - 입력user === dbuser와 매칭 맞은 상태')
-        if(err) { 
+        if(err) {   
             console.log('userApi req.login Error'+err);
-            console.log('2222'+JSON.stringify(req.session));
+            console.log('req.login Error session확인'+JSON.stringify(req.session));
             return res.json({ Success : false, message : 'req.json 실패입니다.' }) 
                
         } 
-        // return res.redirect('/ownerHome')      
+        return res.redirect('/ownerHome')      
       }); 
     })(req, res, next);          // authenticate 반환 메서드에 이 인자를 넣어서 처리해야한다. 
-    return res.redirect('/ownerHome')   
-    // res.json(user);           // desialize에서 req.user를 -> req.login실행으로 들어와 -> return res.json(user)로 client에 응답
-                                              // req.login 안 끝에서 진행하면, DB의 user를 return 할 수 있으나, 
-});                                            // 거기서 진행하면 req.login가 이상하게 다시한번 실행됨.
+    // return res.redirect('/ownerHome')   
+    // res.json(user);
+    /* 
+      (주의!)
+      구조 : authenticate -> LocalStrategy -> serialize(session생성) ->  desrialize(sessoin에 user저장)에서 req.user를 -> req.login실행으로 들어와 -> return res.json(user)로 client에 응답
+      주의 : 
+      1) LocalStrategy에서 dbuser를 const 객체를 가져와 사용 시 
+          ->  여기서 return redirect를 해줘야 한다.  거기서 진행하면 req.login가 이상하게 다시한번 실행됨.
+      2) LocalStrategy에서 dbuser를 dbConn(DB연결) 해 사용 시 
+          -> req.login 내부(마지막)에서 return redirect를 해야한다.
+             여기서 하면 deserialize가 실행안됨(즉, user가 session에 저장안됨) 
+             참고) session.passport.user(deserialize done실행)에 저장된 것은, 외부에서 
+                  req.user로 꺼내 사용할 수 있다!!!
+      
+
+       */
+});                                          
+
             
-       
+     
        
    
 router.get('/user', (req, res) => {                          // (주의) client에서 요청시 접근
     console.log('get login'+JSON.stringify(req.user));      // session에 저장된 값   
     // res.json(req.user);      
-    if(!req.user) {
+    if(!req.user) {     
       res.redirect('/login');
     }
     else { 
@@ -99,10 +112,10 @@ router.get('/logout', (req, res)=> {              // post /api/logout
                
 
 // [회원가입]-[이메일 중복확인]
-router.post("/existEmail", (req, res) => {  
+router.post("/existEmail", (req, res) => {   
   
   let email = req.body.email;
-  dbConn((err, connection) => {
+  dbConn((err, connection) => { 
     connection.query("SELECT ownerId FROM owner where ownerId = ?;", email, (err, rows) => {
       connection.release(); // 연결세션 반환.
       if (err) {

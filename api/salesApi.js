@@ -146,17 +146,19 @@ router.post("/totalSales", (req, res) => {
 //[owner] 
 // 누적매출(/totalSalesStore) - (윗부분, id매장)
 // [Side Select Default ]
-router.post("/totalSalesConstantStore", (req, res) => {   // (임시) name인자를 받아온다면 위에 totalSalesStore로 연결하기 (이거 지우고)
+router.post("/totalSalesConstantStore", (req, res) => {   
+
+  const storeName = req.user.storeName;  
   const sql = `select 
                   sum(pr.price) as sum
                from 
                   sales as sa inner join product pr on sa.productId = pr.productId 
                   inner join store as st on sa.storeId = st.storeId
                 where 
-                  st.name = 'test역삼DT점'`;
+                  st.name = ?`;
       // db select문 수행
       dbConn((err, connection) => {
-        connection.query( sql, (err, rows) => {
+        connection.query( sql, storeName, (err, rows) => {
           connection.release(); // 연결세션 반환.
           if (err) {
             throw err;
@@ -171,7 +173,8 @@ router.post("/totalSalesConstantStore", (req, res) => {   // (임시) name인자
 // [ Owner Select Option 월별 총 매출액- id매장]
 router.post("/totalSalesMonthStroe", (req, res) => {
 
-  let month = req.body.month;   // (임시) -> st.name을 해당 ownerId의 해당하는 매장면 request 인자로 넘기기 
+  const params = [ req.user.storeName, req.body.month];
+  console.log('44444'+JSON.stringify(req.user.storeName)) 
   const sql = `select 
                     sum(pr.price) as sum
                from 
@@ -179,13 +182,13 @@ router.post("/totalSalesMonthStroe", (req, res) => {
                inner join 
                     store as st on sa.storeId = st.storeId
                where 
-                    st.name = 'test역삼DT점' 
+                    st.name = ?
                and 
                     month(sa.date) = ? 
               ;`;
       // db select문 수행
-      dbConn((err, connection) => {
-        connection.query( sql, month, (err, rows) => {
+      dbConn((err, connection) => { 
+        connection.query( sql, params, (err, rows) => {
           connection.release(); // 연결세션 반환.
           if (err) {
             throw err;
@@ -200,21 +203,23 @@ router.post("/totalSalesMonthStroe", (req, res) => {
 
 
 // [ Owner Chart 전체월 / drink 총매출액(id매장) ]
-router.post("/drinkSalesYearStore", (req, res) => {  // (임시 -id매장)
+router.post("/drinkSalesYearStore", (req, res) => {
+  
+  const storeName = req.user.storeName;
   const sql = `select 
                    extract(month from sa.date) as name, sum(price) as price
                 from 
                    sales as sa inner join product pr on sa.productId = pr.productId 
                    inner join store as st on sa.storeId = st.storeId
                 where
-                   st.name = 'test역삼DT점'
+                   st.name = ?
                 and 
                   pr.category = 0
                 group by 
                   extract(month from sa.date);`;
       // db select문 수행
       dbConn((err, connection) => {
-        connection.query( sql, (err, rows) => {
+        connection.query( sql, storeName, (err, rows) => {
           connection.release(); // 연결세션 반환.
           if (err) {
             throw err;
@@ -226,21 +231,23 @@ router.post("/drinkSalesYearStore", (req, res) => {  // (임시 -id매장)
     });
 
 // [ Owner Chart 전체월 / food 총매출액(id매장) ]
-router.post("/foodSalesYearStore", (req, res) => {  // (임시 -id매장)
+router.post("/foodSalesYearStore", (req, res) => {  
+
+  const storeName = req.user.storeName;
   const sql = `select 
                    extract(month from sa.date) as name, sum(price) as price
                 from 
                    sales as sa inner join product pr on sa.productId = pr.productId 
                    inner join store as st on sa.storeId = st.storeId
                 where
-                   st.name = 'test역삼DT점'
+                   st.name = ?
                 and 
                   pr.category = 1
                 group by 
                   extract(month from sa.date);`;
       // db select문 수행
       dbConn((err, connection) => {
-        connection.query( sql, (err, rows) => {
+        connection.query( sql, storeName, (err, rows) => {
           connection.release(); // 연결세션 반환.
           if (err) {
             throw err;
@@ -252,21 +259,23 @@ router.post("/foodSalesYearStore", (req, res) => {  // (임시 -id매장)
     });
 
 // [ Owner Chart 전체월 / goods 총매출액(id매장) ]
-router.post("/goodsSalesYearStore", (req, res) => {  // (임시 -id매장)
+router.post("/goodsSalesYearStore", (req, res) => { 
+
+  const storeName = req.user.storeName;
   const sql = `select 
                    extract(month from sa.date) as name, sum(price) as price
                 from 
                    sales as sa inner join product pr on sa.productId = pr.productId 
                    inner join store as st on sa.storeId = st.storeId
                 where
-                   st.name = 'test역삼DT점'
+                   st.name = ?
                 and 
                   pr.category = 2
                 group by 
                   extract(month from sa.date);`;
       // db select문 수행
       dbConn((err, connection) => {
-        connection.query( sql, (err, rows) => {
+        connection.query( sql, storeName, (err, rows) => {
           connection.release(); // 연결세션 반환.
           if (err) {
             throw err;
@@ -280,7 +289,9 @@ router.post("/goodsSalesYearStore", (req, res) => {  // (임시 -id매장)
 
     
 // [ Owner Chart 전체월 /  월별 총매출액(id매장) ]
-router.post("/totalSalesYearStore", (req, res) => {  // (임시 -id매장)
+router.post("/totalSalesYearStore", (req, res) => { 
+
+  const storeName = req.user.storeName;
   const sql = `select 
                     extract(month from sa.date) as month, 
                     sum(price) as price
@@ -289,11 +300,11 @@ router.post("/totalSalesYearStore", (req, res) => {  // (임시 -id매장)
                inner join 
                    store as st on sa.storeId = st.storeId
                where 
-                   st.name = 'test역삼DT점'
+                   st.name = ?
                group by 
                     extract(month from sa.date);`;
       dbConn((err, connection) => {
-        connection.query( sql, (err, rows) => {
+        connection.query( sql, storeName, (err, rows) => {
           connection.release(); // 연결세션 반환.
           if (err) {
             throw err;

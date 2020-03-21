@@ -203,7 +203,9 @@ router.post("/goodsRankStore", (req, res) => {
 
 // [ owner ] 
 // [ Side Defaut]- [ 전체월 Drink순위-id매장] 
-router.post("/drinkRankStoreConstant", (req, res) => {  // - (임시)-매장명 인자 해결
+router.post("/drinkRankStoreConstant", (req, res) => {  
+
+     const storeName = req.user.storeName;
      const sql = `select 
                     pr.name, sum(pr.price) as price
                from 
@@ -211,7 +213,7 @@ router.post("/drinkRankStoreConstant", (req, res) => {  // - (임시)-매장명 
                inner join 
                     store as st on sa.storeId = st.storeId
                where 
-                    st.name = 'test역삼DT점'
+                    st.name = ?
                and 
                     pr.category=0
                group by 
@@ -221,7 +223,7 @@ router.post("/drinkRankStoreConstant", (req, res) => {  // - (임시)-매장명 
                limit 3;`;
           // db select문 수행
           dbConn((err, connection) => {
-          connection.query( sql, (err, rows) => {
+          connection.query( sql, storeName, (err, rows) => {
                connection.release(); // 연결세션 반환.
                if (err) {
                     throw err;
@@ -233,7 +235,9 @@ router.post("/drinkRankStoreConstant", (req, res) => {  // - (임시)-매장명 
      });
 
 // [ Side Defaut]- [ 전체월 Food순위-id매장] 
-router.post("/foodRankStoreConstant", (req, res) => {  // - (임시)-매장명 인자 해결
+router.post("/foodRankStoreConstant", (req, res) => {  
+
+     const storeName = req.user.storeName;
      const sql = `select 
                     pr.name, sum(pr.price) as price
                from 
@@ -241,7 +245,7 @@ router.post("/foodRankStoreConstant", (req, res) => {  // - (임시)-매장명 �
                inner join 
                     store as st on sa.storeId = st.storeId
                where 
-                    st.name = 'test역삼DT점'
+                    st.name = ?
                and 
                     pr.category= 1
                group by 
@@ -251,7 +255,7 @@ router.post("/foodRankStoreConstant", (req, res) => {  // - (임시)-매장명 �
                limit 3;`;
           // db select문 수행
           dbConn((err, connection) => {
-          connection.query( sql, (err, rows) => {
+          connection.query( sql, storeName, (err, rows) => {
                connection.release(); // 연결세션 반환.
                if (err) {
                     throw err;
@@ -263,7 +267,9 @@ router.post("/foodRankStoreConstant", (req, res) => {  // - (임시)-매장명 �
      });
 
 // [ Side Defaut]- [ 전체월 Goods순위-id매장] 
-router.post("/goodsRankStoreConstant", (req, res) => {  // - (임시)-매장명 인자 해결
+router.post("/goodsRankStoreConstant", (req, res) => { 
+
+     const storeName = req.user.storeName;
      const sql = `select 
                     pr.name, sum(pr.price) as price
                from 
@@ -271,7 +277,7 @@ router.post("/goodsRankStoreConstant", (req, res) => {  // - (임시)-매장명 
                inner join 
                     store as st on sa.storeId = st.storeId
                where 
-                    st.name = 'test역삼DT점'
+                    st.name = ?
                and 
                     pr.category= 2
                group by 
@@ -281,7 +287,7 @@ router.post("/goodsRankStoreConstant", (req, res) => {  // - (임시)-매장명 
                limit 3;`;
           // db select문 수행
           dbConn((err, connection) => {
-          connection.query( sql, (err, rows) => {
+          connection.query( sql, storeName, (err, rows) => {
                connection.release(); // 연결세션 반환.
                if (err) {
                     throw err;
@@ -299,7 +305,7 @@ router.post("/goodsRankStoreConstant", (req, res) => {  // - (임시)-매장명 
 // [ Side Select ]- [ 월선택(option) Drink 순위- id매장]
 router.post("/drinkRankMonthStore", (req, res) => {
 
-     let month = req.body.month;   // (임시) -> st.name을 해당 ownerId의 해당하는 매장면 request 인자로 넘기기 
+     const params = [ req.user.storeName, req.body.month];
        const sql = `select 
                          pr.name as name, sum(pr.price) as price
                     from 
@@ -307,7 +313,7 @@ router.post("/drinkRankMonthStore", (req, res) => {
                     inner join 
                          store as st on sa.storeId = st.storeId
                     where 
-                         st.name = 'test역삼DT점'  
+                         st.name = ? 
                     and 
                          month(sa.date) = ? 
                     and 
@@ -319,7 +325,7 @@ router.post("/drinkRankMonthStore", (req, res) => {
                     limit 3;`;
            // db select문 수행
            dbConn((err, connection) => {
-               connection.query( sql, month, (err, rows) => {
+               connection.query( sql, params, (err, rows) => {
                    connection.release(); // 연결세션 반환.
                    if (err) {
                       throw err;
@@ -332,7 +338,7 @@ router.post("/drinkRankMonthStore", (req, res) => {
 
 router.post("/foodRankMonthStore", (req, res) => {
 
-     let month = req.body.month;   // (임시) -> st.name을 해당 ownerId의 해당하는 매장면 request 인자로 넘기기 
+       const params = [ req.user.storeName, req.body.month];
        const sql = `select 
                          pr.name as name, sum(pr.price) as price
                     from 
@@ -340,7 +346,7 @@ router.post("/foodRankMonthStore", (req, res) => {
                     inner join 
                          store as st on sa.storeId = st.storeId
                     where 
-                         st.name = 'test역삼DT점'  
+                         st.name = ?  
                     and 
                          month(sa.date) = ? 
                     and 
@@ -352,7 +358,7 @@ router.post("/foodRankMonthStore", (req, res) => {
                     limit 3;`;
            // db select문 수행
            dbConn((err, connection) => {
-               connection.query( sql, month, (err, rows) => {
+               connection.query( sql, params, (err, rows) => {
                    connection.release(); // 연결세션 반환.
                    if (err) {
                       throw err;
@@ -366,7 +372,7 @@ router.post("/foodRankMonthStore", (req, res) => {
 
 router.post("/goodsRankMonthStore", (req, res) => {
 
-     let month = req.body.month;   // (임시) -> st.name을 해당 ownerId의 해당하는 매장면 request 인자로 넘기기 
+       const params = [ req.user.storeName, req.body.month];
        const sql = `select 
                          pr.name as name, sum(pr.price) as price
                     from 
@@ -386,7 +392,7 @@ router.post("/goodsRankMonthStore", (req, res) => {
                     limit 3;`;
            // db select문 수행
            dbConn((err, connection) => {
-               connection.query( sql, month, (err, rows) => {
+               connection.query( sql, params, (err, rows) => {
                    connection.release(); // 연결세션 반환.
                    if (err) {
                       throw err;

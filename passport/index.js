@@ -80,8 +80,14 @@ module.exports = () => {
             console.log('indexuser확인'+JSON.stringify(req.body))     //{"userId":"입력id","password":"입력pw"}
            
         // dbuser
-        dbConn((err, connection) => {   
-            connection.query("select ownerId, password, name, storeId from owner where ownerId = ?;", username, (err, rows) => {
+        dbConn((err, connection) => {
+            const sql = `select 
+                            ow.ownerId as email, ow.password as password, ow.name as name, ow.storeId as storeId, st.name as storeName
+                         from 
+                            owner ow inner join store st on ow.storeId = st.storeId
+                        where 
+                            ownerId = ?;`;   
+            connection.query( sql , username, (err, rows) => {
             connection.release(); // 연결세션 반환.
             if (err) {
                 throw err; 

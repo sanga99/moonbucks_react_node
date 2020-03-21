@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { NotFoundPage, LoginPage, RegisterPage, AdminHomePage, OwnerHomePage} from './pages';
-import './App.css';
+import './styles/base.scss';
 
 class App extends Component {
 
@@ -13,7 +13,6 @@ class App extends Component {
         <main> 
           <Router>
             <Switch>
-              <Route path="/login" component={ LoginPage }/>
               <Route path="/register" component={ RegisterPage }/>
               <Route path="/adminHome" component={ AdminHomePage}/>
               <Route path="/ownerHome" component={ OwnerHomePage}/>
@@ -21,7 +20,7 @@ class App extends Component {
               {/* Not Found 파일 이것으로 해결하기
                  <Route component={NotFoundPage}/> */}
               {/* 아래는 확인용  */}
-              {/* <Route path="/map" component={Map}/> */}
+              {/* <Route path="/login" component={ LoginPage }/> */}
             </Switch>
           </Router>
         </main>

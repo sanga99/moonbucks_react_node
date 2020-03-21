@@ -8,7 +8,8 @@ class HeaderContainer extends Component {
     constructor(props){
         super(props);
         this.state={
-            name : '',
+            owner : '',
+            storeName : '',
             flash : '' 
         };
     }
@@ -16,10 +17,12 @@ class HeaderContainer extends Component {
 
     componentDidMount(){
         axios.get('/api/user') 
-             .then(res => res.data.name)  
-             .then(result => {
-                 this.setState({ name : result})
-                })
+             .then(res => {
+                 this.setState({
+                     owner : res.data.name, 
+                     storeName : res.data.storeName
+                 })
+             })  
              .catch(err => console.log(err));
 
 
@@ -38,7 +41,7 @@ class HeaderContainer extends Component {
                 .then(res => {
                     if(res.data.succ){
                         this.setState({
-                            name : false
+                            owner : false
                         })
                     }
                 })
@@ -52,14 +55,15 @@ class HeaderContainer extends Component {
         return ( 
                 <div>
                     <HeaderTemplate
-                        name={this.state.name}
+                        owner={this.state.owner}
+                        storeName={this.state.storeName}
                         clickLoginEvn={this.clickLoginEvn}
                         clickLogin={this.state.clickLogin}
                         clickLogout={this.clickLogout}
                     />
                     <div>
                     {
-                    this.state.name ? '' :
+                    this.state.owner ? '' :
                     <div style={{ background:'skyblue', height: '100px'}}>
                         <LoginPage 
                             error={this.state.flash.error}

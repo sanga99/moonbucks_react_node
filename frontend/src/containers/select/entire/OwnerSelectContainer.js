@@ -6,7 +6,7 @@ import SelectOption from '../../../components/side/option/ownerOption';
 // Default 
 import { SelectDefaultContent } from '../../../components/side/content/OwnerSelectContent'
 import EntireSalesContainer from '../../sales/thisStore/EntireSalesContainer';
-import ProductsPankContainer from '../../rank/thisStore/ProductsRankContainer'
+import ProductsRankContainer from '../../rank/thisStore/ProductsRankContainer'
 
 // Select Chage
 import { SelectContent } from '../../../components/side/content/OwnerSelectContent'
@@ -36,7 +36,7 @@ class OwnerSelectContainer extends Component {
         if(this.state.value=='choice'){
             templte =  <SelectDefaultContent
                             entireSales={<EntireSalesContainer/>} 
-                            productsPankContainer={<ProductsPankContainer/>}
+                            ProductsRankContainer={<ProductsRankContainer/>}
                        />
         }else{
             templte =  <SelectContent

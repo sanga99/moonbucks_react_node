@@ -7,9 +7,10 @@ const HeaderTemplate = (props) => {
     return(
         <div>
             <div style={{ background:'gray', height: '30px'}}>
-                { props.name ? 
+                { props.owner ? 
                         <div>
-                            <span>{props.name}</span><span>님, 환영합니다. </span> 
+                            <span>{props.storeName}점,</span>
+                            <span>{props.owner}</span><span>점주님, 반갑습니다. </span> 
                             <button onClick={props.clickLogout} className="btn btn-link">Logout</button>
                         </div>
                         : 

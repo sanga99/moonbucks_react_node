@@ -42,7 +42,7 @@ class LoginTemplate extends Component {
                     </form>
                 </div>
                 <div className={cx('description')}>
-                    <h4> 본 프로젝트는 <sapn>[본점] / [각 매장지점장]</sapn>계정으로 각기 로그인합니다.</h4>
+                    <h4> 본 프로젝트는 <span>[본점] / [각 매장지점장]</span>계정으로 각기 로그인합니다.</h4>
                     <div>
                         <div>test하실 수 있는 계정 </div>
                         <div>Actor1. [본점]:  <span>admin / admin123!</span> </div>

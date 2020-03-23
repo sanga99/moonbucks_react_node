@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import HeaderTemplate from '../../components/common/Header';
-import LoginPage from '../../components/user/LoginTemplate';
 
 
 class HeaderContainer extends Component {
@@ -16,7 +15,7 @@ class HeaderContainer extends Component {
 
 
     componentDidMount(){
-        axios.get('/api/user') 
+        axios.post('/api/user') 
              .then(res => {
                  this.setState({
                      owner : res.data.name, 
@@ -53,26 +52,16 @@ class HeaderContainer extends Component {
         
    
         return ( 
-                <div>
-                    <HeaderTemplate
-                        owner={this.state.owner}
-                        storeName={this.state.storeName}
-                        clickLoginEvn={this.clickLoginEvn}
-                        clickLogin={this.state.clickLogin}
-                        clickLogout={this.clickLogout}
-                    />
-                    <div>
-                    {
-                    this.state.owner ? '' :
-                    <div style={{ background:'skyblue', height: '100px'}}>
-                        <LoginPage 
-                            error={this.state.flash.error}
-                        />
-                    </div>
-                    }
-                    </div>
-                </div>
-                
+                <HeaderTemplate
+                    owner={this.state.owner}
+                    storeName={this.state.storeName}
+                    clickLoginEvn={this.clickLoginEvn}
+                    clickLogin={this.state.clickLogin}
+                    clickLogout={this.clickLogout}
+                    // login
+                    owner={this.state.owner}
+                    error={this.state.flash.error}
+                />
         );
     }
 }

@@ -68,7 +68,7 @@ router.post('/login', (req, res, next) => {                                     
      
        
    
-router.get('/user', (req, res) => {                          // (주의) client에서 요청시 접근
+router.post('/user', (req, res) => {                          // (주의) client에서 요청시 접근
     console.log('get login'+JSON.stringify(req.user));      // session에 저장된 값   
     // res.json(req.user);      
     if(!req.user) {     

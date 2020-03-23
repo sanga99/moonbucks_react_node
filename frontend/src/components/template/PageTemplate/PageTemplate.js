@@ -1,22 +1,26 @@
 import React from 'react';
 import HeaderContainer from '../../../containers/common/HeaderContainer'
-import FooterTemplate from '../../common/Footer'
-import HeaderTemplate from '../../common/Header';
+import classNames from 'classnames/bind';
+import styles from './PageTemplate.scss';
+// import FooterTemplate from '../../common/Footer'
+
+
+const cx = classNames.bind(styles);
 
 
 const PageTemplate = ({children}) => {    // children
 
     return(
-        <div style={{ display:'flex', flexDirection:'column'}}>
-            <header style={{  height:'50px', width:'100%'}}>
+        <div className={cx('page-template')} >
+            <header>
                 <HeaderContainer/>
             </header>
-            <main style={{ minheight:'100%'}}>
+            <main>
                 {children}
             </main>
-            <footer style={{ position:'fixed',bottom:'0px', height:'40px' }}>
+            {/* <footer>
                 <FooterTemplate/>
-            </footer>
+            </footer> */}
         </div>
     );
 };

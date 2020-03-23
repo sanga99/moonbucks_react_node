@@ -6,7 +6,7 @@ import './styles/base.scss';
 // 현재상황 :
 // yarn eject -> git discard (eject를 되돌리려 eject로 변화된 파일 되돌림) -> 문제발생!! client서버가 작동하지 않음
 // 해결 : 
-// -> github에서 clone으로 다시 파일 생성 -> git commit까지 잘 되는지 test중
+// -> github에서 clone으로 다시 파일 생성 -> git commit까지 잘 되는지 test중 -> 성공.
 
 class App extends Component {
 

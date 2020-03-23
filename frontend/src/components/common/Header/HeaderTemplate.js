@@ -1,30 +1,37 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import LoginPage from '../../user/LoginTemplate';
-//css
+import classNames from 'classnames/bind';
+import styles from './Header.scss';
+
+const cx = classNames.bind(styles);
 
 const HeaderTemplate = (props) => {
     return(
-        <div>
-            <div style={{ background:'gray', height: '30px'}}>
+        <div className={cx('header-template')}>
+            <div className={cx('header-bar')}>
                 { props.owner ? 
-                        <div>
-                            <span>{props.storeName}점,</span>
+                        <div className={cx('text')}>
+                            <b>{props.storeName}</b>
                             <span>{props.owner}</span><span>점주님, 반갑습니다. </span> 
-                            <button onClick={props.clickLogout} className="btn btn-link">Logout</button>
+                            <button className={cx('button log')} onClick={props.clickLogout}>Logout</button>
                         </div>
-                        : 
-                        <div>
-                            <span><Link to="/register" className="btn btn-link">Register</Link></span>
-                            {/* <span><button className="btn btn-link" onClick={props.clickLoginEvn}>Login</button></span> */}
-                         </div>
+                        : <div></div>
                 }
-                <div style={{ alignContent : 'right'}}>
-                    <span>클릭해 주셔서 감사합니다. </span>
-                    <a href="#"><button>NOTION 포트폴리오 보러가기</button></a>
-                    <a href="#"><button>github</button></a>
+                <div>
+                    <span className={cx('text')}>클릭해 주셔서 감사합니다. </span>
+                    <a href="#"><button className={cx('button side')}>NOTION 포트폴리오 보러가기</button></a>
+                    <a href="#"><button className={cx('button side')}>github</button></a>
                 </div>
             </div>
+                {
+                props.owner ? <div></div> :
+                <div className={cx('header-login')}>
+                    <LoginPage 
+                        error={props.error}
+                    />
+                </div>
+                }
         </div>
        
 

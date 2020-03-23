@@ -20,11 +20,12 @@ class OwnerMainAllTemplate extends Component {
     componentDidMount(){
         axios.post('/api/user') 
         .then(res => {
-            if(res.data.email){
+            console.log('333333')
+            // if(res.data.email){
                 this.setState({
                     blur : 'entire user'
                 })
-            }
+            // }
         })  
         .catch(err => console.log(err));
     }
@@ -34,7 +35,8 @@ class OwnerMainAllTemplate extends Component {
     render(){
 
         return (
-                <div className={cx(this.state.blur)}>
+                // <div className={cx(this.state.blur)}>
+                <div className={cx('entire')}> 
                     <article>
                         <SideContainer />
                     </article> 

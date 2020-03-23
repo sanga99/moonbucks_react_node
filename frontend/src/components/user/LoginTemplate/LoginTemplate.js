@@ -42,9 +42,10 @@ class LoginTemplate extends Component {
                     </form>
                 </div>
                 <div className={cx('description')}>
-                    <h4> 본 프로젝트는 <span>[본점] / [각 매장지점장]</span>계정으로 각기 로그인합니다.</h4>
-                    <div>
-                        <div>test하실 수 있는 계정 </div>
+                    <h5> 본 프로젝트는 <span>[본점] / [각 매장지점장]</span>계정으로 각기 로그인합니다.</h5>
+                    <div className={cx('content first')}>단, 프로젝트용(둘러보기) 편리함을 위해 하나의 계정으로 연동이 가능합니다. </div>
+                    <div className={cx('content second')}>
+                        {/* <div>test 계정 </div> */}
                         <div>Actor1. [본점]:  <span>admin / admin123!</span> </div>
                         <div>Actor2. [종각점 지점장]: <span>test@google.com / test123!</span> </div>
                     </div>

@@ -29,9 +29,9 @@ class StoreRankContainer extends Component {
     render() {
         return (
             <Template
-                first={JSON.stringify(this.state.first)}
-                second={JSON.stringify(this.state.second)}
-                third={JSON.stringify(this.state.third)}
+                first={JSON.stringify(this.state.first).replace(/\"/gi, "")}
+                second={JSON.stringify(this.state.second).replace(/\"/gi, "")}
+                third={JSON.stringify(this.state.third).replace(/\"/gi, "")}
             />
         );
     }

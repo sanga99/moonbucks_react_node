@@ -5,9 +5,9 @@ import styles from './Content.scss';
 const cx = classNames.bind(styles);
 
 const SelectContent = (props) => {
-        return (
-                <div>
-                     {/* 금월,전월,누적 매출(전매장) */}
+        return (       // admin side select(매장선택)
+                <div>   
+                     {/* 금월,전월,누적 매출(해당매장) */}
                      <div>
                         <div className={cx('sales')}>
                            <span>금월매출 : </span>
@@ -28,21 +28,22 @@ const SelectContent = (props) => {
                               </span>
                         </div>
                      </div>
-                        {/* Drink순위  (임시) */}
+                        {/* 이번달, 해당매장  */}
+                        {/* Drink순위  */}
                         <div className={cx('category-rank')}>
                               <h4>Drink</h4>
                               <ol>
                                     <li>  
-                                          {/* <span>{props.storeData.drinkRank ? JSON.stringify(props.storeData.drinkRank[0].name).replace(/\"/gi, "") : '' }</span> */}
-                                          {/* <span>({props.storeData.drinkRank ? JSON.stringify(props.storeData.drinkRank[0].price) : '' })</span> */}
+                                          <span>{props.storeData.drinkRank ? JSON.stringify(props.storeData.drinkRank[0].name).replace(/\"/gi, "") : '' }</span>
+                                          <span>({props.storeData.drinkRank ? JSON.stringify(props.storeData.drinkRank[0].price) : '' })</span>
                                     </li>
                                     <li>  
-                                          {/* <span>{props.storeData.drinkRank ? JSON.stringify(props.storeData.drinkRank[1].name).replace(/\"/gi, "") : '' }</span> */}
-                                          {/* <span>({props.storeData.drinkRank ? JSON.stringify(props.storeData.drinkRank[1].price) : '' })</span> */}
+                                          <span>{props.storeData.drinkRank ? JSON.stringify(props.storeData.drinkRank[1].name).replace(/\"/gi, "") : '' }</span>
+                                          <span>({props.storeData.drinkRank ? JSON.stringify(props.storeData.drinkRank[1].price) : '' })</span>
                                     </li>
                                     <li>  
-                                          {/* <span>{props.storeData.drinkRank ? JSON.stringify(props.storeData.drinkRank[2].name).replace(/\"/gi, "") : '' }</span> */}
-                                          {/* <span>({props.storeData.drinkRank ? JSON.stringify(props.storeData.drinkRank[2].price) : '' })</span> */}
+                                          <span>{props.storeData.drinkRank ? JSON.stringify(props.storeData.drinkRank[2].name).replace(/\"/gi, "") : '' }</span>
+                                          <span>({props.storeData.drinkRank ? JSON.stringify(props.storeData.drinkRank[2].price) : '' })</span>
                                     </li>
                               </ol>
                         </div>
@@ -55,12 +56,12 @@ const SelectContent = (props) => {
                                           <span>({props.storeData.foodRank ? JSON.stringify(props.storeData.foodRank[0].price) : '' })</span>
                                     </li>
                                     <li>  
-                                          {/* <span>{props.storeData.drinkRank ? JSON.stringify(props.storeData.drinkRank[1].name).replace(/\"/gi, "") : '' }</span> */}
-                                          {/* <span>({props.storeData.drinkRank ? JSON.stringify(props.storeData.drinkRank[1].price) : '' })</span> */}
+                                          <span>{props.storeData.foodRank ? JSON.stringify(props.storeData.foodRank[1].name).replace(/\"/gi, "") : '' }</span>
+                                          <span>({props.storeData.foodRank ? JSON.stringify(props.storeData.foodRank[1].price) : '' })</span>
                                     </li>
                                     <li>  
-                                          {/* <span>{props.storeData.drinkRank ? JSON.stringify(props.storeData.drinkRank[2].name).replace(/\"/gi, "") : '' }</span> */}
-                                          {/* <span>({props.storeData.drinkRank ? JSON.stringify(props.storeData.drinkRank[2].price) : '' })</span> */}
+                                          <span>{props.storeData.foodRank ? JSON.stringify(props.storeData.foodRank[2].name).replace(/\"/gi, "") : '' }</span>
+                                          <span>({props.storeData.foodRank ? JSON.stringify(props.storeData.foodRank[2].price) : '' })</span>
                                     </li>
                               </ol>
                         </div>
@@ -73,12 +74,12 @@ const SelectContent = (props) => {
                                           <span>({props.storeData.GoodsRank ? JSON.stringify(props.storeData.GoodsRank[0].price) : '' })</span>
                                     </li>
                                     <li>  
-                                          {/* <span>{props.storeData.drinkRank ? JSON.stringify(props.storeData.drinkRank[1].name).replace(/\"/gi, "") : '' }</span> */}
-                                          {/* <span>({props.storeData.drinkRank ? JSON.stringify(props.storeData.drinkRank[1].price) : '' })</span> */}
+                                          <span>{props.storeData.GoodsRank ? JSON.stringify(props.storeData.GoodsRank[1].name).replace(/\"/gi, "") : '' }</span>
+                                          <span>({props.storeData.GoodsRank ? JSON.stringify(props.storeData.GoodsRank[1].price) : '' })</span>
                                     </li>
                                     <li>  
-                                          {/* <span>{props.storeData.drinkRank ? JSON.stringify(props.storeData.drinkRank[2].name).replace(/\"/gi, "") : '' }</span> */}
-                                          {/* <span>({props.storeData.drinkRank ? JSON.stringify(props.storeData.drinkRank[2].price) : '' })</span> */}
+                                          <span>{props.storeData.GoodsRank ? JSON.stringify(props.storeData.GoodsRank[2].name).replace(/\"/gi, "") : '' }</span>
+                                          <span>({props.storeData.GoodsRank ? JSON.stringify(props.storeData.GoodsRank[2].price) : '' })</span>
                                     </li>
                               </ol>
                         </div>

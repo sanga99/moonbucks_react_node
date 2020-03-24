@@ -24,7 +24,7 @@ class AdminSelectContainer extends Component {
             value : 'choice', 
             sales : [],
             storesRank : [],
-            checkedOption : 'Food', // (임시)
+            checkedOption : 'Drink',
         }
     }
 

@@ -5,7 +5,7 @@ const SelectDefaultContent = (props) => {
             <div>
                   {/* 누적매출(전월,id매장) */}
                <div>{props.entireSales}</div>
-                  {/* Drink순위  (임시) */}
+                  {/* Drink순위 */}
                <div>{props.ProductsRankContainer}</div>
              </div>
         );

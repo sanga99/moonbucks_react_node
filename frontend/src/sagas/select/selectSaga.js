@@ -58,19 +58,19 @@ function* selectAdmin( payload ){
 
 
 // [owner]
-const totalSalesMonthStore = (month) => {      //  (임시) - 나중에 매장명(name)도 인자로 넘기기
+const totalSalesMonthStore = (month) => {       
      return axios.post('/api/totalSalesMonthStroe', month)
 }
 
-const drinkRankMonthStore = (month) => {      //  (임시) - 나중에 매장명(name)도 인자로 넘기기
+const drinkRankMonthStore = (month) => {      
      return axios.post('/api/drinkRankMonthStore', month)
 }
 
-const foodRankMonthStore = (month) => {      //  (임시) - 나중에 매장명(name)도 인자로 넘기기
+const foodRankMonthStore = (month) => {     
      return axios.post('/api/foodRankMonthStore', month)
 }
 
-const goodsRankMonthStore = (month) => {      //  (임시) - 나중에 매장명(name)도 인자로 넘기기
+const goodsRankMonthStore = (month) => {     
      return axios.post('/api/goodsRankMonthStore', month)
 }
 

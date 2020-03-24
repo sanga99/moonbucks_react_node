@@ -174,7 +174,6 @@ router.post("/totalSalesConstantStore", (req, res) => {
 router.post("/totalSalesMonthStroe", (req, res) => {
 
   const params = [ req.user.storeName, req.body.month];
-  console.log('44444'+JSON.stringify(req.user.storeName)) 
   const sql = `select 
                     sum(pr.price) as sum
                from 

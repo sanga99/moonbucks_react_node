@@ -47,7 +47,7 @@ class LoginTemplate extends Component {
                     <div className={cx('content second')}>
                         {/* <div>test 계정 </div> */}
                         <div>Actor1. [본점]:  <span>admin / admin123!</span> </div>
-                        <div>Actor2. [종각점 지점장]: <span>test@google.com / test123!</span> </div>
+                        <div>Actor2. [역삼점 지점장]: <span>test@google.com / test123!</span> </div>
                     </div>
                 </div>
             </div>

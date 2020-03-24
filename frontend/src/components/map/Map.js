@@ -174,39 +174,43 @@ class Map extends Component {
  
                   return function (){
 
+                    markerClickSalesTotal(store.name)
+                            .then(res => {
+                              let template = 
+                              '<br/><div><span><b>누적매출 : '+res[0].sum+'</b></span></div>';
+                              document.getElementById('total').innerHTML = JSON.stringify(template).replace(/\"/gi, "");
+                            });
+
+
+
                     markerClickSalesMonth(store.name)
                             .then(res => {
                               let template = 
                               '<div><span><b>금월매출 : '+res[0].total_sales+'</b></span></div>'+
-                              '<div><span><b>전월매출 : '+res[1].total_sales+'</b></span></div>';
+                              '<div><span><b>전월매출 : '+res[1].total_sales+'</b></span></div><br/>';
                               document.getElementById('sales').innerHTML = JSON.stringify(template).replace(/\"/gi, "");
                             });
 
 
-                    markerClickSalesTotal(store.name)
-                            .then(res => {
-                              let template = 
-                              '<div><span><b>누적매출 : '+res[0].sum+'</b></span></div><br/><br/>';
-                              document.getElementById('total').innerHTML = JSON.stringify(template).replace(/\"/gi, "");
-                            });
-
-                    markerClickProduct(store.name)  // (임시)
+                    markerClickProduct(store.name)  
                             .then(res => {        
-                              let template = 
-                              `데이터 삽입 후 변경필요
-                              <ol><li> ${res[0].name}</li><li> ${res[1].name}</li><li> ${res[1].name}</li></ol><br/>`;
+                              let template =  
+                              `<b>[ 이번 달 전체상품 순위 ]</b>`+
+                              `<div><span>1. ${res[0].name}</span></div>`+
+                              `<div><span>2. ${res[1].name}</span></div>`+
+                              `<div><span>3. ${res[2].name}</span></div><br/>`;
                               document.getElementById('rank').innerHTML = JSON.stringify(template).replace(/\"/gi, "");
                             });
-
-
-                    markerClickCategory(store.name) // (임시)
+ 
+ 
+                    markerClickCategory(store.name) 
                             .then(res => {
-                              let template = 
-                              `데이터 삽입 후 변경 필요
-                              <div><span><b>Drink : ${res[0].price}</b></span></div>
-                              <div><span><b>Food : ${res[0].price}</b></span></div>
-                              <div><span><b>Goods : ${res[1].price}</b></span></div>`;
-                              document.getElementById('rank').innerHTML = JSON.stringify(template).replace(/\"/gi, "");
+                              let template =
+                              `<br/><b>[ 이번 달 category별 매출 ]</b>`+
+                              `<div><span><b>Drink : ${res[0].price}</b></span></div>`+
+                              `<div><span><b>Food : ${res[1].price}</b></span></div>`+
+                              `<div><span><b>Goods : ${res[2].price}</b></span></div>`;
+                              document.getElementById('category_sales').innerHTML = JSON.stringify(template).replace(/\"/gi, "");
                             });
    
 
@@ -256,11 +260,11 @@ class Map extends Component {
                       <b className="bord">마커를 클릭</b>해 주세요<br/>
                   </div>
                   <div>
-                  <div  id="sales" className="sales"></div>
-                  <div  id="total" className="total"></div>
+                    <div  id="total" className="total"></div>
+                    <div  id="sales" className="sales" ></div>
                   </div>
-                  <div id="rank" className="rank"></div>
-                  <div id="category_sales" className="category_sales"></div>
+                    <div id="rank" className="rank"></div>
+                    <div id="category_sales" className="category_sales"></div>
               </ul> 
         </div>
        </div>

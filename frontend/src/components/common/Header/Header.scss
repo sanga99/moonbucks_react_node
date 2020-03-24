@@ -9,6 +9,11 @@
     display: flex;
     justify-content: space-between;
 
+    .text {
+      .store-name {
+        color: blue;
+      }
+    }
     .button {
        @include button-default();
         

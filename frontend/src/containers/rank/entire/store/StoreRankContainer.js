@@ -9,7 +9,7 @@ class StoreRankContainer extends Component {
         this.state={
             first : '',
             second : '',
-            third : '임시-storeRankContainer'
+            third : ''
         }
     }
 
@@ -20,7 +20,7 @@ class StoreRankContainer extends Component {
             this.setState({
                 first : res.data[0].name,
                 second : res.data[1].name,
-                // third : res.data[3].name   // (임시)
+                third : res.data[2].name  
             });
         })
     }

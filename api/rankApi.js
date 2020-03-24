@@ -62,15 +62,45 @@ router.post("/StoresRankMonth", (req, res) => {
         });
   });
 
+  // [Admin Select Side default]-[이번달 전체매장 카테고리(d)별 상품순위-(d(0)는 파라미터로 전달되지 않아 따로 빼줌) ]
+router.post("/ProductRankDrink", (req, res) => {
+
+    const sql = `select 
+                    pr.name as name, sum(pr.price) as price
+                 from 
+                    sales as sa inner join product pr on sa.productId = pr.productId
+                 where 
+                    month(sa.date)= month(now())
+                 and 
+                    pr.category= 0
+                 group by
+                     pr.productId
+                order by  
+                    price
+                 limit 3;
+                    `;
+        // db select문 수행
+        dbConn((err, connection) => {
+        connection.query( sql, (err, rows) => {
+            connection.release(); // 연결세션 반환.
+            if (err) {
+            throw err;
+            }
+            return res.send( rows );
+        });
+        if(err) throw err;
+        });
+  });
 
 
-// [Admin Select Side default]-[이번달 전체매장 카테고리(d/f/g)별 상품순위 ]
+// [Admin Select Side default]-[이번달 전체매장 카테고리(f/g)별 상품순위-(d(0)는 파라미터로 전달되지 않아 따로 빼줌) ]
 router.post("/ProductRank", (req, res) => {
 
   let category = req.body.category;   // [ 0(drink)/ 1(food)/ 2(goods)]
-  if(category=='Drink'){category = 0;}
-  else if(category=='Food'){category = 1;}
+  if(category=='Food'){category = 1;}
   else if(category=='Goods'){category = 2;}
+  //   if(category=='Drink'){category = 0;}    // Error) 0이 파라미터로 전달되지 않음.
+  
 
     const sql = `select 
                     pr.name as name, sum(pr.price) as price
@@ -380,7 +410,7 @@ router.post("/goodsRankMonthStore", (req, res) => {
                     inner join 
                          store as st on sa.storeId = st.storeId
                     where 
-                         st.name = 'test역삼DT점'  
+                         st.name = ?  
                     and 
                          month(sa.date) = ? 
                     and 

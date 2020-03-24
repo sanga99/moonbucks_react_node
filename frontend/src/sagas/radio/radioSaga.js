@@ -4,7 +4,12 @@ import * as actions from '../../actions/radio.action';
 
 
 function radioApi( category ){     // action에서 json key값을 name이라고 줌, 여기는 상관없음(쿼리문 ?인자에서 res.data.name을 찾도록 돼있음)
-    return axios.post('/api/ProductRank', category )
+    if(category == 'Drink'){
+         return axios.post('/api/ProductRankDrink');
+
+    }else{
+        return axios.post('/api/ProductRank', category  );
+    }
 }
 
 

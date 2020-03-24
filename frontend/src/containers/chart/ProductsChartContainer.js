@@ -33,11 +33,11 @@ class ProductsChartContainer extends Component {
 
                         num.forEach(i => {      // month는 mun의 값들이 한 인덱스씩 반복문으로 들어온 값
                             this.setState({
-                                ...this.state.data,         // (임시)
-                                data : this.state.data.concat({ month: i, drink : drink.data[0].price, food : food.data[0].price, goods :goods.data[0].price})
-                                // data : this.state.data.concat({ name: i, drink : drink.data[i].price, food : food.data[i].price, goods :goods.data[i].price})
+                                ...this.state.data,         
+                                data : this.state.data.concat({ month: i, drink : drink.data[i].price, food : food.data[i].price, goods :goods.data[i].price})
                             })
                         })
+
 
                     })).catch((err) => {
                         console.error(err)
@@ -52,7 +52,6 @@ class ProductsChartContainer extends Component {
     render() {
         return (
             <div>
-                <div>데이터인절트{JSON.stringify(this.state.data)}</div>
                 <ProductsChart
                         data={this.state.data}
                 />

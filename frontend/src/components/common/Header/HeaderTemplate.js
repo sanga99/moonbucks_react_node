@@ -8,11 +8,11 @@ const cx = classNames.bind(styles);
 
 const HeaderTemplate = (props) => {
     return(
-        <div className={cx('header-template')}>
+        <div className={cx('header-template')} >
             <div className={cx('header-bar')}>
                 { props.owner ? 
                         <div className={cx('text')}>
-                            <b>{props.storeName}</b>
+                            <b><span className={cx('store-name')}>{props.storeName}</span>점. </b>
                             <span>{props.owner}</span><span>점주님, 반갑습니다. </span> 
                             <button className={cx('button log')} onClick={props.clickLogout}>Logout</button>
                         </div>

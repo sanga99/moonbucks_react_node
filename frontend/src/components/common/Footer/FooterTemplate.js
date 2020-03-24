@@ -1,12 +1,15 @@
-import React from 'react';
-//css
+// import React from 'react';
+// import classNames from 'classnames/bind';
+// import styles from './Footer.scss' 
 
-const FooterTemplate = () => {
-    return(
-        <div>
-            푸터  component
-        </div>
-    );
-};
+// const cx = classNames.bind(styles);
 
-export default FooterTemplate;
+// const FooterTemplate = () => {
+//     return(
+//         <div className={cx('footer')}>
+//             푸터  component
+//         </div>
+//     );
+// };
+
+// export default FooterTemplate;

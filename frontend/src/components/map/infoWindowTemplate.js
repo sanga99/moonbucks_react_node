@@ -1,4 +1,8 @@
 import React from 'react';
+import classNames from 'classnames/bind';
+import styles from './infoWindow.scss';
+
+const cx = classNames.bind(styles);
 
 
 export function infoWindowTemplate (store) { 
@@ -12,32 +16,31 @@ export function infoWindowTemplate (store) {
     else { park = "미운영" }
 
     return (`
-    <div style={{padding:}}>
-        <header>
-            <a><strong>${store.name}</strong></a> 
+    <div style=" padding: 8px; height: 200px; width: 220px;">
+        <header style="margin: 5px 0px 10px 0px;">
+            <a><strong style="font-size: 13px;">${store.name}</strong></a> 
         </header>
         <container>
-        <aside  className="gray">
-            <span>매장규모 :</span>
-            <span>${store.size}</span>/<span>${store.floor}</span>
-        </aside>  
         <main>
-            <section className="gray">
-                    <div>${store.utilization}</div>
-                    <div>${store.introduction}</div>
-                <div>
-                    <div>phone : ${store.phone}</div>
-                    <div>주소 : ${store.address}</div>
+                <div style="margin: 3px 0px;">
+                <b>매장규모 : </b>
+                    <span>${store.size} </span> / <span> ${store.floor} 층</span>
                 </div>
+                <div style="margin: 3px 0px;"><b>이용조건 : </b> ${store.utilization}</div>
+                <div style="margin: 3px 0px;"> <b>매장소개 : </b> ${store.introduction}</div>
                 <div>
-                    <span>Drive Thru : ${driveThru}</span> /
-                    <span>주차 : ${park}</span>
+                    <div style="margin: 3px 0px;"><b>phone : </b> ${store.phone}</div>
+                    <div style="margin: 3px 0px;"><b>주소 : </b> ${store.address}</div>
                 </div>
-                <div>
+                <div style="margin: 3px 0px;">
+                    <span><b>Drive Thru : </b> ${driveThru}</span> /
+                    <span><b>주차 : </b> ${park}</span>
+                </div>
+                <div style="margin: 3px 0px;">
+                    <b>운영</b>
                     <span>${store.open}</span> ~ <span>${store.close}</span>
                     <span>${store.holiday}</span>
                 </div>
-            </section>
         </main>
         </container>
     </div>

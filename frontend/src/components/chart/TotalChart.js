@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {
-  BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
+  BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
 import classNames from 'classnames/bind';
 import styles from './Chart.scss';

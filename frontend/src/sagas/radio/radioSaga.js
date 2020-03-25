@@ -1,10 +1,11 @@
-import { call, put, takeEvery, delay } from 'redux-saga/effects';
+import { call, put, takeEvery } from 'redux-saga/effects';
+// import { call, put, takeEvery, delay } from 'redux-saga/effects';
 import axios from 'axios';
 import * as actions from '../../actions/radio.action';
 
 
 function radioApi( category ){     // action에서 json key값을 name이라고 줌, 여기는 상관없음(쿼리문 ?인자에서 res.data.name을 찾도록 돼있음)
-    if(category == 'Drink'){
+    if(category === 'Drink'){
          return axios.post('/api/ProductRankDrink');
 
     }else{

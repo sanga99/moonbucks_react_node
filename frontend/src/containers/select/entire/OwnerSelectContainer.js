@@ -33,7 +33,7 @@ class OwnerSelectContainer extends Component {
 
     render() {
         let templte = null;
-        if(this.state.value=='choice'){
+        if(this.state.value==='choice'){
             templte =  <SelectDefaultContent
                             entireSales={<EntireSalesContainer/>} 
                             ProductsRankContainer={<ProductsRankContainer/>}

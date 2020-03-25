@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import LoginPage from '../../user/LoginTemplate';
 import classNames from 'classnames/bind';
 import styles from './Header.scss';

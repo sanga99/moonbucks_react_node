@@ -34,15 +34,15 @@ const SelectContent = (props) => {
                               <h4>Drink</h4>
                               <ol>
                                     <li>  
-                                          <span>{props.storeData.drinkRank ? JSON.stringify(props.storeData.drinkRank[0].name).replace(/\"/gi, "") : '' }</span>
+                                          <span>{props.storeData.drinkRank ? JSON.stringify(props.storeData.drinkRank[0].name).replace(/"/gi, "") : '' }</span>
                                           <span>({props.storeData.drinkRank ? JSON.stringify(props.storeData.drinkRank[0].price) : '' })</span>
                                     </li>
                                     <li>  
-                                          <span>{props.storeData.drinkRank ? JSON.stringify(props.storeData.drinkRank[1].name).replace(/\"/gi, "") : '' }</span>
+                                          <span>{props.storeData.drinkRank ? JSON.stringify(props.storeData.drinkRank[1].name).replace(/"/gi, "") : '' }</span>
                                           <span>({props.storeData.drinkRank ? JSON.stringify(props.storeData.drinkRank[1].price) : '' })</span>
                                     </li>
                                     <li>  
-                                          <span>{props.storeData.drinkRank ? JSON.stringify(props.storeData.drinkRank[2].name).replace(/\"/gi, "") : '' }</span>
+                                          <span>{props.storeData.drinkRank ? JSON.stringify(props.storeData.drinkRank[2].name).replace(/"/gi, "") : '' }</span>
                                           <span>({props.storeData.drinkRank ? JSON.stringify(props.storeData.drinkRank[2].price) : '' })</span>
                                     </li>
                               </ol>
@@ -52,15 +52,15 @@ const SelectContent = (props) => {
                               <h4>Food</h4>
                               <ol>
                                     <li>  
-                                          <span>{props.storeData.foodRank ? JSON.stringify(props.storeData.foodRank[0].name).replace(/\"/gi, ""): '' }</span>
+                                          <span>{props.storeData.foodRank ? JSON.stringify(props.storeData.foodRank[0].name).replace(/"/gi, ""): '' }</span>
                                           <span>({props.storeData.foodRank ? JSON.stringify(props.storeData.foodRank[0].price) : '' })</span>
                                     </li>
                                     <li>  
-                                          <span>{props.storeData.foodRank ? JSON.stringify(props.storeData.foodRank[1].name).replace(/\"/gi, "") : '' }</span>
+                                          <span>{props.storeData.foodRank ? JSON.stringify(props.storeData.foodRank[1].name).replace(/"/gi, "") : '' }</span>
                                           <span>({props.storeData.foodRank ? JSON.stringify(props.storeData.foodRank[1].price) : '' })</span>
                                     </li>
                                     <li>  
-                                          <span>{props.storeData.foodRank ? JSON.stringify(props.storeData.foodRank[2].name).replace(/\"/gi, "") : '' }</span>
+                                          <span>{props.storeData.foodRank ? JSON.stringify(props.storeData.foodRank[2].name).replace(/"/gi, "") : '' }</span>
                                           <span>({props.storeData.foodRank ? JSON.stringify(props.storeData.foodRank[2].price) : '' })</span>
                                     </li>
                               </ol>
@@ -70,15 +70,15 @@ const SelectContent = (props) => {
                               <h4>Goods</h4>
                               <ol>
                                     <li>  
-                                          <span>{props.storeData.GoodsRank ? JSON.stringify(props.storeData.GoodsRank[0].name).replace(/\"/gi, "") : '' }</span>
+                                          <span>{props.storeData.GoodsRank ? JSON.stringify(props.storeData.GoodsRank[0].name).replace(/"/gi, "") : '' }</span>
                                           <span>({props.storeData.GoodsRank ? JSON.stringify(props.storeData.GoodsRank[0].price) : '' })</span>
                                     </li>
                                     <li>  
-                                          <span>{props.storeData.GoodsRank ? JSON.stringify(props.storeData.GoodsRank[1].name).replace(/\"/gi, "") : '' }</span>
+                                          <span>{props.storeData.GoodsRank ? JSON.stringify(props.storeData.GoodsRank[1].name).replace(/"/gi, "") : '' }</span>
                                           <span>({props.storeData.GoodsRank ? JSON.stringify(props.storeData.GoodsRank[1].price) : '' })</span>
                                     </li>
                                     <li>  
-                                          <span>{props.storeData.GoodsRank ? JSON.stringify(props.storeData.GoodsRank[2].name).replace(/\"/gi, "") : '' }</span>
+                                          <span>{props.storeData.GoodsRank ? JSON.stringify(props.storeData.GoodsRank[2].name).replace(/"/gi, "") : '' }</span>
                                           <span>({props.storeData.GoodsRank ? JSON.stringify(props.storeData.GoodsRank[2].price) : '' })</span>
                                     </li>
                               </ol>

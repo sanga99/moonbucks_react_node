@@ -69,7 +69,7 @@ class AdminSelectContainer extends Component {
 
     render() {
         let templte = null;
-        if(this.state.value=='choice'){
+        if(this.state.value ==='choice'){
             templte =  <SelectDefaultContent
                             towSales={<TwoMonthSalesContainer/>}
                             entireSales={<EntireSalesContainer/>}

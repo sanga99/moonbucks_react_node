@@ -178,7 +178,7 @@ class Map extends Component {
                             .then(res => {
                               let template = 
                               '<br/><div><span><b>누적매출 : '+res[0].sum+'</b></span></div>';
-                              document.getElementById('total').innerHTML = JSON.stringify(template).replace(/\"/gi, "");
+                              document.getElementById('total').innerHTML = JSON.stringify(template).replace(/"/gi, "");
                             });
 
 
@@ -188,7 +188,7 @@ class Map extends Component {
                               let template = 
                               '<div><span><b>금월매출 : '+res[0].total_sales+'</b></span></div>'+
                               '<div><span><b>전월매출 : '+res[1].total_sales+'</b></span></div><br/>';
-                              document.getElementById('sales').innerHTML = JSON.stringify(template).replace(/\"/gi, "");
+                              document.getElementById('sales').innerHTML = JSON.stringify(template).replace(/"/gi, "");
                             });
 
 
@@ -199,7 +199,7 @@ class Map extends Component {
                               `<div><span>1. ${res[0].name}</span></div>`+
                               `<div><span>2. ${res[1].name}</span></div>`+
                               `<div><span>3. ${res[2].name}</span></div><br/>`;
-                              document.getElementById('rank').innerHTML = JSON.stringify(template).replace(/\"/gi, "");
+                              document.getElementById('rank').innerHTML = JSON.stringify(template).replace(/"/gi, "");
                             });
  
  
@@ -210,7 +210,7 @@ class Map extends Component {
                               `<div><span><b>Drink : ${res[0].price}</b></span></div>`+
                               `<div><span><b>Food : ${res[1].price}</b></span></div>`+
                               `<div><span><b>Goods : ${res[2].price}</b></span></div>`;
-                              document.getElementById('category_sales').innerHTML = JSON.stringify(template).replace(/\"/gi, "");
+                              document.getElementById('category_sales').innerHTML = JSON.stringify(template).replace(/"/gi, "");
                             });
    
 
@@ -239,36 +239,36 @@ class Map extends Component {
         render(props) {
 
           const style={
-              width:'100%', 
+              width:'95%', 
               height:'100%',
       
           };
       
         return (  
-               
-          <div className="map_wrap">
-            <div id="map" style={style}></div>
-            <div id="menu_wrap" className="bg_white" > 
-              <div id="storeName" className="storeName">
-                  Moobucks 매장
-              </div>
-             <hr/>
-              <ul id="storeInfo" className="storeInfo">
-                  <div id="default" className="default">
-                      <div style={{ margin: '5px 0px', fontSize: '14px'}}>이용해 주셔서 감사합니다. </div>
-                      해당 매장의 상세한 통계를 <br/>보시고 싶으시다면,<br/> 
-                      <b className="bord">마커를 클릭</b>해 주세요<br/>
+          <div>
+              <div className="map_wrap">
+                <div id="map" style={style}></div>
+                <div id="menu_wrap" className="bg_white" > 
+                  <div id="storeName" className="storeName">
+                      Moobucks 매장
                   </div>
-                  <div>
-                    <div  id="total" className="total"></div>
-                    <div  id="sales" className="sales" ></div>
+                <hr/>
+                    <ul id="storeInfo" className="storeInfo">
+                        <div id="default" className="default">
+                            <div style={{ margin: '5px 0px', fontSize: '14px'}}>이용해 주셔서 감사합니다. </div>
+                            해당 매장의 상세한 통계를 <br/>보시고 싶으시다면,<br/> 
+                            <b className="bord">마커를 클릭</b>해 주세요<br/>
+                        </div>
+                        <div>
+                          <div  id="total" className="total"></div>
+                          <div  id="sales" className="sales" ></div>
+                        </div>
+                          <div id="rank" className="rank"></div>
+                          <div id="category_sales" className="category_sales"></div>
+                    </ul> 
                   </div>
-                    <div id="rank" className="rank"></div>
-                    <div id="category_sales" className="category_sales"></div>
-              </ul> 
-        </div>
-       </div>
- 
+                </div>
+            </div>
         );
     }
 }

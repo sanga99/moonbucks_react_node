@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { NotFoundPage, LoginPage, RegisterPage, AdminHomePage, OwnerHomePage} from './pages';
+import { NotFoundPage, RegisterPage, AdminHomePage, OwnerHomePage} from './pages';
 import './styles/base.scss';
 // yarn eject는 함부로 사용하지 말것. -> (주의)한번 사용하면 되돌릴 수 없다!!
 // 현재상황 :
@@ -24,8 +24,6 @@ class App extends Component {
               <Route path="/not" component={NotFoundPage}/>
               {/* Not Found 파일 이것으로 해결하기
                  <Route component={NotFoundPage}/> */}
-              {/* 아래는 확인용  */}
-              {/* <Route path="/login" component={ LoginPage }/> */}
             </Switch>
           </Router>
         </main>

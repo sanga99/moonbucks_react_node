@@ -1,18 +1,12 @@
-import React from 'react';
-import classNames from 'classnames/bind';
-import styles from './infoWindow.scss';
-
-const cx = classNames.bind(styles);
-
 
 export function infoWindowTemplate (store) { 
 
     let driveThru, park = '';
 
-    if(store.drive_thru == 0) { driveThru = "운영"}
+    if(store.drive_thru === 0) { driveThru = "운영"}
     else { driveThru = "미운영" }
 
-    if(store.park == 0) { park = "운영"}
+    if(store.park === 0) { park = "운영"}
     else { park = "미운영" }
 
     return (`

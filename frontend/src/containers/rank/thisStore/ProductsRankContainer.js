@@ -14,9 +14,10 @@ import axios from 'axios';
         }   
     }
 
-    componentDidMount(){
+    // componentDidMount(){
+        componentWillReceiveProps(){
 
-        if(this.props.user){    // 미로그인 -> 요청X
+        // if(this.props.user){    // 미로그인 -> 요청X  ( => componentWillReceiveProps로 변경)
             axios.post('/api/drinkRankStoreConstant')
             .then(res => {
                 this.setState({
@@ -37,7 +38,7 @@ import axios from 'axios';
                     goods : res.data
                 });
             })
-        }
+        // }
 
     }
 

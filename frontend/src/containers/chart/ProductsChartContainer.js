@@ -12,9 +12,10 @@ class ProductsChartContainer extends Component {
         }
     }
 
-    componentWillMount(){       // willMount에 해야 그래프가 그려지듯이 나옴(componentDidMount에서는 한번에 나타난다.)
+    // componentWillMount(){                 // willMount에 해야 그래프가 그려지듯이 나옴(componentDidMount에서는 한번에 나타난다.)
+    componentWillReceiveProps(){            
         
-        if(this.props.user){    // 미로그인 시 데이터 요청X
+        // if(this.props.user){              // 미로그인 시 데이터 요청X   ( => componentWillReceiveProps로 변경)  
 
                 const DrinkRankStore = () => {     
                     return axios.post('/api/drinkSalesYearStore')
@@ -44,7 +45,7 @@ class ProductsChartContainer extends Component {
                             })).catch((err) => {
                                 console.error(err)
                             })
-            } // end if user
+            // } // end if user
         }
 
 

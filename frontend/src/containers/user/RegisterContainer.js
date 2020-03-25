@@ -9,7 +9,7 @@ class RegisterContainer extends Component {
     constructor(props){
         super(props);
         this.state ={
-            username :'',
+            ownername : undefined,
             storeOption: [],             // 매장명들(select options)
             selectedValue: 'default',    // select 초기값 지정(option중 value='default'인것이 초기값)
             selectedStore : '',          // 선택한 매장 가져온 정보
@@ -18,6 +18,7 @@ class RegisterContainer extends Component {
             password2:'',
             phone:'',
             existSucc : '',
+            nameError : false,
             emailError1 : false,
             emailError2: false,
             pw1Error: false,
@@ -32,7 +33,6 @@ class RegisterContainer extends Component {
         axios.post('/api/store')        // (주의) 서버에서 꼭!! res.send로 보내야함 (res.json은 {"~","~"}세부내용이 jsx에서 추출이 안된다.)
         .then(res => res.data)
         .then(result => {
-            console.log(result)
             this.setState({
                 storeOption : result       
             })
@@ -49,14 +49,14 @@ class RegisterContainer extends Component {
 
     handleSubmit = (e) => { 
         e.preventDefault();
-        const { CheckEmail, CheckPw, CheckPw2, CheckPhone} = this;
+        const { CheckName, CheckEmail, CheckPw, CheckPw2, CheckPhone} = this;
         let val = e.target.value;
 
-        if( CheckEmail(val)  && CheckPw(val) && CheckPw2(val) && CheckPhone(val) && this.state.selectedValue !=='default'){
+        if( CheckName(val) && CheckEmail(val)  && CheckPw(val) && CheckPw2(val) && CheckPhone(val) && this.state.selectedValue !=='default'){
             axios.post('/api/register', { 
                 "storeId" : this.state.selectedStore.storeId, 
                 "email" :  this.state.email,
-                "username" :  this.state.username, 
+                "username" :  this.state.ownername, 
                 "password" :  this.state.password, 
                 "phone" : this.state.phone
             })
@@ -66,7 +66,7 @@ class RegisterContainer extends Component {
                     }
                 })     
         }else{
-            if(this.state.selectedValue=='default'){
+            if(this.state.selectedValue==='default'){
                 alert('매장을 선택해 주세요')
             }
             console.log('false Submit');
@@ -89,6 +89,18 @@ class RegisterContainer extends Component {
                 })
         })
 
+    }
+
+    CheckName = (e) => {
+        if(this.state.ownername===undefined){
+            this.setState({
+                nameError : '대표자명을 입력해주세요' 
+            })
+            return false;
+        }
+        else{
+            return true;
+        }
     }
 
 
@@ -164,7 +176,6 @@ class RegisterContainer extends Component {
         const regExp = /^\d{3}-\d{3,4}-\d{4}$/;
         const check =  regExp.test(this.state.phone) ? true : false; 
          if(!check){
-             alert('전화번호 형식이 맞지 않습니다.');
              this.setState({
                  phoneError : '전화번호 형식이 맞지 않습니다.'
              })
@@ -180,7 +191,7 @@ class RegisterContainer extends Component {
 
     handleChangeOwner = (e) => {
         this.setState({
-            username : e.target.value
+            ownername : e.target.value
         });
     }
 
@@ -216,7 +227,7 @@ class RegisterContainer extends Component {
         return (
             <RegisterTemplate
                 // data
-                username={this.state.username}
+                ownername={this.state.ownername}
                 storeOption={this.state.storeOption}
                 selectedValue={this.state.selectedValue}    // 선택한 매장
                 selectedStore={this.state.selectedStore}      // 선택한 매장의 정보
@@ -225,6 +236,7 @@ class RegisterContainer extends Component {
                 password2={this.state.password2}
                 phone={this.state.phone}
                 // Error
+                nameError={this.state.nameError}
                 emailError1={this.state.emailError1}
                 emailError2={this.state.emailError2}
                 pw1Error={this.state.pw1Error}

@@ -30,10 +30,8 @@ class HeaderContainer extends Component {
              .then(res => res.data)  
              .then(result => {
                  this.setState({ flash : result})       //  { "error" : "에러 메세지 내용"}
-                 console.log('client'+JSON.stringify(result));
                 })
-             .catch(err => console.log(JSON.stringify(err)))
-     }
+    }
 
 
      clickLogout = () => {

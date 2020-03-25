@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import HeaderTemplate from '../../components/common/Header';
+import { withRouter} from 'react-router-dom';
 
 
 class HeaderContainer extends Component {
@@ -17,6 +18,7 @@ class HeaderContainer extends Component {
     componentDidMount(){
         axios.post('/api/user') 
              .then(res => {
+                console.log('222222')
                  this.setState({
                      owner : res.data.name, 
                      storeName : res.data.storeName
@@ -42,6 +44,7 @@ class HeaderContainer extends Component {
                         this.setState({
                             owner : false
                         })
+                        this.props.history.push('/adminHome');
                     }
                 })
      }
@@ -53,7 +56,6 @@ class HeaderContainer extends Component {
    
         return ( 
                 <HeaderTemplate
-                    owner={this.state.owner}
                     storeName={this.state.storeName}
                     clickLoginEvn={this.clickLoginEvn}
                     clickLogin={this.state.clickLogin}
@@ -66,4 +68,11 @@ class HeaderContainer extends Component {
     }
 }
 
-export default HeaderContainer;
+export default withRouter(HeaderContainer);
+/*
+-> client 부분 method로 redirect 하기
+
+[ withRouter - this.props.history.push('/url') ]
+하위 컴포넌트의 경우에는 history를 접근할 수 없어 상위 컴포넌트의 Router의 history 객체와 연결시켜준다
+참고: http://kimch3617.tistory.com/entry/React-Router-v4-리다이렉트-하기 [코드 저장소]
+*/

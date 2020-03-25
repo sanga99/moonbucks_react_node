@@ -10,7 +10,7 @@ const OwnerSelectOption  =(props) => {
     return (
         <div className={cx('option')}>
             <div className={cx('header')}>
-                <Link className={cx('actor-button')} to="/adminHome">본사 입장 보러가기</Link>
+                <Link className={cx('actor-button')} to="/adminHome">본사(Admin) 입장 보러가기</Link>
                 <br/><br/><b>[Owner]-[우리매장 통계]</b>
             </div>
             <select value={props.value} onChange={props.handleChange}>

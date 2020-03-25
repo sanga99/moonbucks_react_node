@@ -4,7 +4,7 @@ import React from 'react';
 
 const OwnerMainTemplate = (props) => {
     return( 
-        <div className="main" style={{ justifyContent:'space-between'}}>
+        <div className="main" style={{ marginLeft :'80px'}}>
             {props.productsChart}   
             {props.totalChart}   
         </div>  

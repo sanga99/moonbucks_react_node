@@ -31,7 +31,7 @@ export default class ProductsChart extends Component {
 
     return (
       <div>
-          <div className={'title-chart'}>2020's category별 총매출</div>
+          <div className={cx('title-chart')}>2020's category별 총매출</div>
              {/* 제목 : <Product> 월별 매출 현황   주석 : (만단위)  legend top여분 글씨체, 글씨크기 */}
           <LineChart
                     width={800}

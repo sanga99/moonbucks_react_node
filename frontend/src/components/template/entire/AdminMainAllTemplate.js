@@ -18,7 +18,6 @@ class AdminMainAllTemplate extends Component {
     componentDidMount(){
         axios.post('/api/user') 
         .then(res => {
-            console.log('11111')
             if(res.data.email){
                 this.setState({
                     blur : 'entire user'

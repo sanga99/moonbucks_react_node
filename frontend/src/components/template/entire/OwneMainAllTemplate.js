@@ -21,7 +21,6 @@ class OwnerMainAllTemplate extends Component {
     componentDidMount(){
         axios.post('/api/user') 
         .then(res => {
-            console.log('333333')
             if(res.data.email){
                 this.setState({
                     blur : 'entire user',

@@ -18,7 +18,6 @@ class HeaderContainer extends Component {
     componentDidMount(){
         axios.post('/api/user') 
              .then(res => {
-                console.log('222222')
                  this.setState({
                      owner : res.data.name, 
                      storeName : res.data.storeName

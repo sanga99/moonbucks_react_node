@@ -13,7 +13,8 @@ class OwnerMainAllTemplate extends Component {
     constructor(props){
         super(props);
         this.state = {
-            blur : 'entire default'
+            blur : 'entire default',
+            user : false
         }
     }
 
@@ -23,7 +24,8 @@ class OwnerMainAllTemplate extends Component {
             console.log('333333')
             if(res.data.email){
                 this.setState({
-                    blur : 'entire user'
+                    blur : 'entire user',
+                    user : true
                 })
             }
         })  
@@ -38,12 +40,18 @@ class OwnerMainAllTemplate extends Component {
                 <div className={cx(this.state.blur)}>
                 {/* // <div className={cx('entire')}>  */}
                     <article>
-                        <SideContainer />
+                        <SideContainer 
+                                user={this.state.user}
+                        />
                     </article> 
                     <main>
                         <MainTemplate
-                                productsChart={<ProductsChart/>}
-                                totalChart={<TotalChart/>}
+                                productsChart={<ProductsChart
+                                                     user={this.state.user}
+                                                />}
+                                totalChart={<TotalChart
+                                                     user={this.state.user}
+                                            />}
                         />
                     </main>
                  </div> 

@@ -13,12 +13,15 @@ class TotalChartContainer extends Component {
     }
 
     componentWillMount(){
-        axios.post('/api/totalSalesYearStore')
-                .then(res => {
-                    this.setState({
-                        data : res.data
+
+        if(this.props.user){  // 미로그인 시 데이터 요청X
+            axios.post('/api/totalSalesYearStore')
+                    .then(res => {
+                        this.setState({
+                            data : res.data
+                        })
                     })
-                })
+        } // end if
     }
 
     render() {

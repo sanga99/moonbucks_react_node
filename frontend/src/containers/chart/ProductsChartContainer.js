@@ -13,35 +13,38 @@ class ProductsChartContainer extends Component {
     }
 
     componentWillMount(){       // willMount에 해야 그래프가 그려지듯이 나옴(componentDidMount에서는 한번에 나타난다.)
+        
+        if(this.props.user){    // 미로그인 시 데이터 요청X
 
-        const DrinkRankStore = () => {     
-            return axios.post('/api/drinkSalesYearStore')
-       }
-        const FoodRankStore = () => {     
-            return  axios.post('/api/foodSalesYearStore')
-       }
-        const GoodsRankStore = () => {     
-            return axios.post('/api/goodsSalesYearStore')
-       }
-       
-            axios.all([DrinkRankStore(), FoodRankStore(), GoodsRankStore()])
-                    .then(axios.spread((...req) => {
-                        const  drink = req[0];
-                        const  food = req[1];
-                        const  goods = req[2];
-                        let num = [1,2,3,4,5,6,7,8,9,10,11,12];
-
-                        num.forEach(i => {      // month는 mun의 값들이 한 인덱스씩 반복문으로 들어온 값
-                            this.setState({
-                                ...this.state.data,         
-                                data : this.state.data.concat({ month: i, drink : drink.data[i].price, food : food.data[i].price, goods :goods.data[i].price})
+                const DrinkRankStore = () => {     
+                    return axios.post('/api/drinkSalesYearStore')
+                }
+                const FoodRankStore = () => {     
+                    return  axios.post('/api/foodSalesYearStore')
+                }
+                const GoodsRankStore = () => {     
+                    return axios.post('/api/goodsSalesYearStore')
+                }
+            
+                    axios.all([DrinkRankStore(), FoodRankStore(), GoodsRankStore()])
+                            .then(axios.spread((...req) => {
+                                const  drink = req[0];
+                                const  food = req[1];
+                                const  goods = req[2];
+                                let num = [1,2,3,4,5,6,7,8,9,10,11,12];
+        
+                                num.forEach(i => {      // month는 mun의 값들이 한 인덱스씩 반복문으로 들어온 값
+                                    this.setState({
+                                        ...this.state.data,         
+                                        data : this.state.data.concat({ month: i, drink : drink.data[i].price, food : food.data[i].price, goods :goods.data[i].price})
+                                    })
+                                })
+        
+        
+                            })).catch((err) => {
+                                console.error(err)
                             })
-                        })
-
-
-                    })).catch((err) => {
-                        console.error(err)
-                    })
+            } // end if user
         }
 
 

@@ -12,12 +12,15 @@ class EntireSalesContainer extends Component {
 
     componentDidMount(){
         // Owner Side Default
-         axios.post('/api/totalSalesConstantStore')
-            .then(res => {
-                this.setState({
-                    entireSales : res.data
-                });
-            })
+
+        if(this.props.user){        // 미로그인 -> 요청X
+            axios.post('/api/totalSalesConstantStore')
+               .then(res => {
+                   this.setState({
+                       entireSales : res.data
+                   });
+               })
+        }
     }
 
 

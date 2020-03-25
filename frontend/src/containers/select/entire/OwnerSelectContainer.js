@@ -35,8 +35,12 @@ class OwnerSelectContainer extends Component {
         let templte = null;
         if(this.state.value==='choice'){
             templte =  <SelectDefaultContent
-                            entireSales={<EntireSalesContainer/>} 
-                            ProductsRankContainer={<ProductsRankContainer/>}
+                            entireSales={<EntireSalesContainer
+                                                        user={this.props.user}
+                                          />} 
+                            ProductsRankContainer={<ProductsRankContainer
+                                                        user={this.props.user}
+                                                    />}
                        />
         }else{
             templte =  <SelectContent

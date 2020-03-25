@@ -16,26 +16,29 @@ import axios from 'axios';
 
     componentDidMount(){
 
-        axios.post('/api/drinkRankStoreConstant')
-        .then(res => {
-            this.setState({
-                drink : res.data
-            });
-        })
+        if(this.props.user){    // 미로그인 -> 요청X
+            axios.post('/api/drinkRankStoreConstant')
+            .then(res => {
+                this.setState({
+                    drink : res.data
+                });
+            })
+    
+            axios.post('/api/foodRankStoreConstant')
+            .then(res => {
+                this.setState({
+                    food : res.data
+                });
+            })
+    
+            axios.post('/api/goodsRankStoreConstant')
+            .then(res => {
+                this.setState({
+                    goods : res.data
+                });
+            })
+        }
 
-        axios.post('/api/foodRankStoreConstant')
-        .then(res => {
-            this.setState({
-                food : res.data
-            });
-        })
-
-        axios.post('/api/goodsRankStoreConstant')
-        .then(res => {
-            this.setState({
-                goods : res.data
-            });
-        })
     }
 
 

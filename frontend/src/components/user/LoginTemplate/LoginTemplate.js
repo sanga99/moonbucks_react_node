@@ -35,7 +35,7 @@ class LoginTemplate extends Component {
                             <input type="password" 
                                     className="form-control"
                                     name="password"
-                                    placeholder=" test01# 입니다. "
+                                    placeholder=" test123! 입니다. "
                             />
                         </div>
                     </div>
@@ -43,11 +43,10 @@ class LoginTemplate extends Component {
                 </div>
                 <div className={cx('description')}>
                     <h5> 본 프로젝트는 <span>[본점] / [각 매장지점장]</span>계정으로 각기 로그인합니다.</h5>
-                    <div className={cx('content first')}>단, 프로젝트용(둘러보기) 편리함을 위해 하나의 계정으로 연동이 가능합니다. </div>
+                    <div className={cx('content first')}>단, 프로젝트용(둘러보기) 편리함을 위해 하나의 계정으로 연동됩니다. </div>
                     <div className={cx('content second')}>
                         {/* <div>test 계정 </div> */}
-                        <div>Actor1. [본점]:  <span>admin / admin123!</span> </div>
-                        <div>Actor2. [역삼점 지점장]: <span>test@google.com / test123!</span> </div>
+                        <div>Test계정 [역삼점 지점장]: <span>test@google.com / test123!</span> </div>
                     </div>
                 </div>
             </div>

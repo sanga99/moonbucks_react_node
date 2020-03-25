@@ -12,7 +12,7 @@ const HeaderTemplate = (props) => {
                 { props.owner ? 
                         <div className={cx('text')}>
                             <b><span className={cx('store-name')}>{props.storeName}</span>점. </b>
-                            <span>{props.owner}</span><span>점주님, 반갑습니다. </span> 
+                            <span><b>{props.owner}</b></span><span>점주님, 반갑습니다. </span> 
                             <button className={cx('button log')} onClick={props.clickLogout}>Logout</button>
                         </div>
                         : <div></div>

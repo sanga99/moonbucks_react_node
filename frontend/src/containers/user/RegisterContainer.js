@@ -240,7 +240,6 @@ class RegisterContainer extends Component {
                 handleChangeOwnerPhone={this.handleChangeOwnerPhone}
                 // check blur - focus를 잃으면 이벤트 발생 (ch.focusout은 포커스를 잃은 모든 input-text에서 이벤트가 발생한다.)
                 CheckEmail={this.CheckEmail}
-                handleIsExistEmail
                 CheckPw={this.CheckPw}
                 CheckPw2={this.CheckPw2}
                 CheckPhone={this.CheckPhone}

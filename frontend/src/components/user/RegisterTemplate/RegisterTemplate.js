@@ -12,7 +12,7 @@ class RegisterTemplate extends Component{
     render(){
         const { username,  email, password, password2,  phone,  selectedValue, selectedStore, 
                 emailError1, emailError2, pw1Error, pw2Error, phoneError,
-                 CheckEmail, ClickIsExistEmail, CheckPw, CheckPw2, CheckPhone, handleSubmit,
+                 CheckEmail, CheckPw, CheckPw2, CheckPhone, handleSubmit,
                  handleChangeStore, handleChangeOwner, handleChangeId, handleChangePw , handleChangePw2, handleChangeOwnerPhone
             } = this.props;
 

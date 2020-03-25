@@ -19,11 +19,11 @@ class AdminMainAllTemplate extends Component {
         axios.post('/api/user') 
         .then(res => {
             console.log('11111')
-            // if(res.data.email){
+            if(res.data.email){
                 this.setState({
                     blur : 'entire user'
                 })
-            // }
+            }
         })  
         .catch(err => console.log(err));
     }
@@ -32,8 +32,8 @@ class AdminMainAllTemplate extends Component {
     render(){
         
         return (
-            // <div className={cx(this.state.blur)}>
-             <div className={cx('entire')}> 
+            <div className={cx(this.state.blur)}>
+             {/* <div className={cx('entire')}>  */}
                 <article>
                     <SideContainer/>
                 </article> 

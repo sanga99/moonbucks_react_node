@@ -72,7 +72,7 @@ router.post('/user', (req, res) => {                          // (주의) client
     console.log('get login'+JSON.stringify(req.user));      // session에 저장된 값   
     // res.json(req.user);      
     if(!req.user) {     
-      res.redirect('/login');
+      res.redirect('/adminHome');
     }
     else { 
       return res.json(req.user)

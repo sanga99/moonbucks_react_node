@@ -17,7 +17,7 @@ class LoginTemplate extends Component {
                         <h2>Login</h2>
                         <div className="button-group">
                                 <input className={cx('log')} type="submit" value="Login" />
-                                <Link className={cx('register')} to="/register">Register</Link>
+                                <Link className={cx('register')} to="/register">회원가입</Link>
                         </div>
                     </div>
                     <div className={cx('err')}>{this.props.error}</div> 

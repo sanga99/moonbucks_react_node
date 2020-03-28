@@ -21,3 +21,12 @@
     min-width: 80%;
   }
 }
+
+@include media('<medium') {
+  .entire {
+    display: inline;
+  }
+  main {
+    width: 100%;
+  }
+}

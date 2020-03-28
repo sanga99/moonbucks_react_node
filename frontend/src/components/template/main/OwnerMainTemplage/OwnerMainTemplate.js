@@ -1,10 +1,13 @@
 import React from 'react';
-//css
+import classNames from 'classnames/bind';
+import styles from './OwnerMain.scss';
+
+const cx = classNames.bind(styles);
 
 
 const OwnerMainTemplate = (props) => {
     return( 
-        <div className="main" style={{ marginLeft :'80px'}}>
+        <div className={cx('main')}>
             {props.productsChart}   
             {props.totalChart}   
         </div>  

@@ -57,3 +57,9 @@
     padding: 4px;
     font-size: 13px;
 }
+
+@media (max-width: 768px) {
+    #menu_wrap {
+        width: 46%;
+    }
+}

@@ -5,15 +5,27 @@
   padding: 10px;
   background-color: lightgray;
 
+  @include media('>large') {
+    .header-bar {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
   .header-bar {
-    display: flex;
-    justify-content: space-between;
 
     .text {
       .store-name {
         color: blue;
       }
     }
+   
+    @include media('<medium') {
+      .none {
+        display: none;
+      }
+    }
+    
+     
     .button {
        @include button-default();
         

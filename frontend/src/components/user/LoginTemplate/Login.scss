@@ -93,4 +93,15 @@
           }
       }
     }
+
+    @include media('<medium') {
+      .register {
+        display: none;
+      }
+
+      .description {
+        display: none;
+      }
+    }
+
 }

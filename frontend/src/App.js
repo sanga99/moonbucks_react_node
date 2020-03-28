@@ -21,9 +21,7 @@ class App extends Component {
               <Route path="/register" component={ RegisterPage }/>
               <Route path="/adminHome" component={ AdminHomePage}/>
               <Route path="/ownerHome" component={ OwnerHomePage}/>
-              <Route path="/not" component={NotFoundPage}/>
-              {/* Not Found 파일 이것으로 해결하기
-                 <Route component={NotFoundPage}/> */}
+              <Route component={NotFoundPage}/>
             </Switch>
           </Router>
         </main>

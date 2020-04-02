@@ -5,7 +5,7 @@
 ================================
 
 * * *
-#### * Notion포트폴리오(chrome): <https://www.notion.so/Portfolio-772ed24acfc14bf1a1d9e40a89edcf6e>
+#### * Notion포트폴리오(chrome에서 작동): <https://www.notion.so/Portfolio-772ed24acfc14bf1a1d9e40a89edcf6e>
 #### * 개인 포트폴리오 : <https://moonbucks-react-node.herokuapp.com/adminHome>
    
 

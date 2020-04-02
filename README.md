@@ -2,9 +2,10 @@
 
 ※ [개인 프로젝트] 
 프로젝트명 : Moonbucks_react_node
-client : create-react-app
-server : node.js express
-DB : MariaDB 
+================================
+#### client : create-react-app
+#### server : node.js express
+#### DB : MariaDB 
 
 
 [프로젝트소개]

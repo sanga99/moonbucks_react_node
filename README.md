@@ -4,18 +4,19 @@
 프로젝트명 : Moonbucks_react_node
 ================================
 
+* * 
 #### * Notion포트폴리오(chrome): <https://www.notion.so/Portfolio-772ed24acfc14bf1a1d9e40a89edcf6e>
 #### * 개인 포트폴리오 : <https://moonbucks-react-node.herokuapp.com/adminHome>
    
 
 
-* * *
+* * 
 #### client : create-react-app
 #### server : node.js express
 #### DB : MariaDB 
     
 
-* * * 
+* * 
 #### [프로젝트소개]      
 스타벅스같은 체인점 카페들을 모티브 삼아, 체인점 시스템에서 [본점]과 [지점들]에서 각 통계치를 관제할 수 있는 사이트.
 
@@ -29,7 +30,7 @@ Actor2 : 매장 지점장.
         
         
          
-* * *
+* * 
 #### [사용기술]
 **[  front-end ]**    
  create-react-app,  react-redux, redux-saga, axios,  react-router-dom
@@ -51,7 +52,7 @@ Server : node ( port : 5000 )
 
 
 
-* * *
+* * 
 #### [대표기능]
 *[ client ]
 1. axios

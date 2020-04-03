@@ -16,6 +16,7 @@
     height:500px;
 }
 
+
 #menu_wrap {
     position:absolute;
     top:0;
@@ -63,4 +64,14 @@
     #menu_wrap {
         width: 46%;
     }
+}
+
+.vidio {
+    margin: 30px 0px 0px 20px;
+}
+
+.text {
+    color: gray;
+    font-size: 14px;
+    margin: 10px;
 }

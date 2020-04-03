@@ -5,13 +5,14 @@
 
     .login-template {
     padding: 0px 20px 0px 20px;
-    width: 500px;
+    width: 50%;
     
     .header {
         height: 70px;
         display: flex;
-        justify-content: space-between;
-
+        @include media('>large') {
+          justify-content: space-between;
+        }
         .button-group {
         margin: 20px 40px 20px 0px;
 
@@ -59,6 +60,11 @@
                 margin: 0px 10px;
             }
         }
+
+        @include media('<small') {
+          flex-direction: column;
+        }
+       
     }
 
     }  // end login-template
@@ -95,6 +101,11 @@
     }
 
     @include media('<medium') {
+      .header {
+        h2 {
+          margin-right: 10px;
+        }
+      }
       .register {
         display: none;
       }

@@ -2,9 +2,10 @@
 @import '~include-media/dist/include-media';
 
 $breakpoints: (
-    small : 378px,
-    medium: 768px,
-    large: 1024px,
+    // small : 378px,
+    small : 381px,  // 380
+    medium: 769px,  // 768
+    large: 1023px,  // 1024
     huge: 1200px
 );
 

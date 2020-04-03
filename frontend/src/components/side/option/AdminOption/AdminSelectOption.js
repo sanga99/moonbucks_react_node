@@ -11,7 +11,7 @@ const AdminSelectOption = (props) =>  {
      return (
         <div className={cx('option')}>
             <div className={cx('header')}>
-                <Link className={cx('actor-button')} to="/ownerHome" >매장주(역삼점) 입장 보러가기</Link>
+                <Link className={cx('actor-button')} to="/ownerHome" >매장주입장 보러가기</Link>
                 <br/><br/><b>[Admin]-[전체지점 통계]</b>
             </div>
            <select value={props.value} onChange={props.handleChange}>

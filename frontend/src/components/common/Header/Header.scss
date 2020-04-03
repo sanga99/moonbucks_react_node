@@ -2,6 +2,7 @@
 
 
 .header-template {
+  width: 100%;
   padding: 10px;
   background-color: lightgray;
 
@@ -54,9 +55,18 @@
   }
 
   .header-login {
-    height: 150px;
+    height: 180px;
     margin-top: 10px;
     background: darkseagreen;
     border-style: ridge;
   }
+
+
+  @include media('<small') {
+    .header-login {
+      height: 200px;
+    }
+  }
+
+
 }

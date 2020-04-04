@@ -8,11 +8,13 @@
 .pnp.js
 
 # database
-/.database.json
+./database.json
 
 #map
-/.MapApi.text
+./MapApi.text
 
+#map mp4
+./frontend/src/components/common/map/.mp4
 
 # testing
 /coverage

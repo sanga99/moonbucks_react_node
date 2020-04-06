@@ -6,7 +6,7 @@
 
 * * *
 #### * Notion포트폴리오(chrome에서 작동): <https://www.notion.so/Portfolio-772ed24acfc14bf1a1d9e40a89edcf6e>
-#### * 개인 포트폴리오 : <https://moonbucks-react-node.herokuapp.com/adminHome>
+#### * 개인 프로젝트 : <http://15.165.159.219:3000/adminHome>
    
 
 
@@ -14,6 +14,7 @@
 #### client : create-react-app
 #### server : node.js express
 #### DB : MariaDB 
+#### 배포 : AWS, Heroku
     
 
 * * *

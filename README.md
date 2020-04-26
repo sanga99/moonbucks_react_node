@@ -38,14 +38,13 @@ Actor2 : 매장 지점장.
 
 **[ back-end ]**    
  node.js , Express, concurrently, body-parser,
- passport, passport-local, cookie-parser, express-session, dotenv
- cors
+ passport, passport-local, cookie-parser, express-session, cors
 
 **[ API ]**     
 kakoMap API(지도), recharts(차트)
 
 **[ DB  &  기타 ]**     
-proxy, fs, git, redux-devtools-extends, maraiDB
+proxy, fs, git, redux-devtools-extends, mariaDB
 
 **[ Port ]**     
 Client : React ( port : 3000 )
@@ -57,7 +56,7 @@ Server : node ( port : 5000 )
 #### [대표기능]
 *[ client ]
 1. axios
-2. React REdux + Redux saga
+2. React Redux + Redux saga
 3. Map API (kakao Map API)
 4. Chart API (rechart API)
 5. 미로그인 : 화면 blur처리 -> 로그인 : blur제거
@@ -67,14 +66,13 @@ Server : node ( port : 5000 )
 1. Passport - login
 2. Express Router
 3. Maria DB Connect
-4. Git ( reflog / stash )
    
 *[ DB ]
 1. DB 설계 정규화 ( 3정규화 적용 )
 2. sequence 부여
 3. EXTRACT(MONTH FROM data)
 4. inner join / left join
-5. graoup by / with rollup
+5. group by / with rollup
 6. month(now()) / data(now(), interval -1 month)
 
 

@@ -6,7 +6,7 @@
 
 * * *
 #### * Notion포트폴리오(chrome에서 작동): <https://www.notion.so/Portfolio-772ed24acfc14bf1a1d9e40a89edcf6e>
-#### * 개인 프로젝트 : <http://15.165.159.219:3000/adminHome>
+#### * 개인 프로젝트 : <http://15.165.159.219:3000/adminHome>  (현재 미가동)
    
 
 
